@@ -15,7 +15,7 @@
 date-input-polyfill {
   @include reset();
   position: absolute !important;
-  border: 1px solid #c0c0c0 !important;
+  border: 1px solid #c0c0c0;
   text-align: center;
   z-index: 1;
   
