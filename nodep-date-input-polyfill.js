@@ -185,7 +185,10 @@ class Picker {
         // When clicking on a day in the days table.
         aCell.addEventListener(`click`, ()=> {
           // Mark the dey with `selected` css class.
-          this.thePicker.querySelector(`.selected`).className = ``;
+          const curSel = this.thePicker.querySelector(`.selected`);
+          if(curSel) {
+            curSel.className = ``;
+          }
           aCell.className = `selected`;
 
           this.pickerDate.setDate(parseInt(aCell.innerHTML));
