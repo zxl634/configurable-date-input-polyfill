@@ -17,9 +17,6 @@ Add to your project:
 * **Script Tag:** Copy `nodep-date-input-polyfill.dist.js` from `node_modules` and
 include it anywhere in your HTML.
 
-then add to your JS (if using browserify): require('nodep-date-input-polyfill'); 
-(Or with `<script src="nodep-date-input-polyfill.dist.js"></script>`)
-
 ## Contributing
 
 ### Local Development
