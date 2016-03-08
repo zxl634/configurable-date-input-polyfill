@@ -17,9 +17,13 @@ Add to your project:
 * **Script Tag:** Copy `nodep-date-input-polyfill.dist.js` from `node_modules` and
 include it anywhere in your HTML.
 
-## Styling
-[These are the default styles](https://github.com/brianblakely/nodep-date-input-polyfill/blob/master/nodep-date-input-polyfill.scss),
+## Features
+* **Easily Stylable:** [These are the default styles](https://github.com/brianblakely/nodep-date-input-polyfill/blob/master/nodep-date-input-polyfill.scss),
 which you may overwrite with your own.
+
+* **Polyfills `valueAsDate` and `valueAsNumber`:**
+[Learn more about these properties.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#property-valueasdate)
+They behave as getters and setters.
 
 ## Contributing
 
