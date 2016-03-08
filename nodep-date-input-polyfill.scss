@@ -17,13 +17,21 @@ date-input-polyfill {
   position: absolute !important;
   border: 1px solid #c0c0c0;
   text-align: center;
+  cursor: default;
   z-index: 1;
-  
+
+  &[data-open="false"] {
+    display: none;
+  }
+  &[data-open="true"] {
+    display: block;
+  }
+
   select, table, th, td {
     @include reset();
     border: 0;
   }
-  select {  
+  select {
     margin: 3px 5px;
     border: 1px solid #c0c0c0;
   }
@@ -34,11 +42,15 @@ date-input-polyfill {
     text-align: center;
   }
 
-  td {
+  td[data-day] {
     cursor: pointer;
+
+    &:hover {
+      background: #E0E0E0;
+    }
   }
-  
-  .selected {
+
+  [data-selected] {
     font-weight: bold;
   }
 }
