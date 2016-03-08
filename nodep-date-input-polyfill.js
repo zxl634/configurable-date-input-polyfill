@@ -334,9 +334,14 @@ class Input {
   static addPickerToDateInputs() {
     // Get and loop all the input[type="date"]s in the page that do not have `[data-has-picker]` yet.
     const dateInputs = document.querySelectorAll(`input[type="date"]:not([data-has-picker])`);
+    const length = dateInputs.length;
 
-    for(let input of dateInputs) {
-      new Input(input);
+    if(!length) {
+      return false;
+    }
+
+    for(let i = 0; i < length; ++i) {
+      new Input(dateInputs[i]);
     }
   }
 }
