@@ -1,12 +1,12 @@
-const webpack = require(`webpack`);
+var webpack = require('webpack');
 
 module.exports = {
-  entry: `./nodep-date-input-polyfill.js`,
+  entry: './nodep-date-input-polyfill.js',
 
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       mangle: {
-        except: [`$super`, `$`, `exports`, `require`]
+        except: ['$super', '$', 'exports', 'require']
       },
       compress: {
         warnings: false
@@ -15,7 +15,7 @@ module.exports = {
   ],
 
   resolve: {
-    extensions: [``, `.js`]
+    extensions: ['', '.js']
   },
 
   module: {
@@ -23,27 +23,27 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules)/,
-        loader: `babel`,
+        loader: 'babel',
         query: {
-          plugins: [`transform-runtime`],
-          presets: [`es2015`, `stage-3`],
+          plugins: ['transform-runtime'],
+          presets: ['es2015', 'stage-3'],
           cacheDirectory: true
         }
       },
       {
         test: /\.css$/,
-        loader: `style!css`
+        loader: 'style!css'
       },
       {
         test: /\.scss$/,
-        loader: `style!css!sass`
+        loader: 'style!css!sass'
       }
     ]
   },
 
-  // devtool: `cheap-module-eval-source-map`,
+  // devtool: 'cheap-module-eval-source-map',
   output: {
-    path: process.cwd()+`/`,
-    filename: `nodep-date-input-polyfill.dist.js`
+    path: process.cwd()+'/',
+    filename: 'nodep-date-input-polyfill.dist.js'
   }
 };
