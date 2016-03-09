@@ -182,10 +182,25 @@ class Picker {
     this.input.focus();
     this.hide();
 
-    // Make AngularJS see the change.
-    const fakeEvent = document.createEvent(`KeyboardEvent`);
-    fakeEvent.initEvent(`change`, true, false);
-    this.input.dispatchEvent(fakeEvent);
+    // Dispatch DOM events to the input.
+    let inputEvent;
+    let changeEvent;
+    
+    // Modern event creation.
+    try {
+      inputEvent = new Event('input');
+      changeEvent = new Event('change');
+    }
+    // Old-fashioned way.
+    catch(e) {
+      inputEvent = document.createEvent('KeyboardEvent');
+      inputEvent.initEvent('input', true, false);
+      changeEvent = document.createEvent('KeyboardEvent');
+      changeEvent.initEvent('change', true, false);
+    }
+    
+    this.input.dispatchEvent(inputEvent);
+    this.input.dispatchEvent(changeEvent);
   }
 
   refreshDaysMatrix() {
