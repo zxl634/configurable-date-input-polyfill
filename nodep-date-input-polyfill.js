@@ -166,7 +166,9 @@ class Picker {
   // Match picker date with input date.
   sync() {
     if(this.input.valueAsDate) {
-      this.date = this.input.valueAsDate;
+      this.date = Input.absoluteDate(this.input.valueAsDate);
+    } else {
+      this.date = new Date();
     }
 
     this.year.value = this.date.getFullYear();
@@ -199,7 +201,7 @@ class Picker {
     ).getDate(); // Get days in month (1-31).
 
     // The input's current date.
-    const selDate = this.input.valueAsDate || this.date;
+    const selDate = Input.absoluteDate(this.input.valueAsDate) || this.date;
 
     // Are we in the input's currently-selected month and year?
     // Or just browsing?
@@ -273,14 +275,10 @@ class Input {
             }
 
             const val = this.element.value.split(/\D/);
-            return new Date(val[0], --val[1], val[2]);
+            return new Date(`${val[0]}-${`0${val[1]}`.slice(-2)}-${`0${val[2]}`.slice(-2)}`);
           },
           set: val=> {
-            const day = `0${val.getDate()}`.slice(-2),
-                month = `0${val.getMonth() + 1}`.slice(-2),
-                datestr = `${val.getFullYear()}-${month}-${day}`;
-
-            this.element.value = datestr;
+            this.element.value = val.toISOString().slice(0,10);
           }
         },
         'valueAsNumber': {
@@ -289,16 +287,10 @@ class Input {
               return NaN;
             }
 
-            const val = this.element.value.split(/\D/);
-            return new Date(val[0], --val[1], val[2]).getTime();
+            return this.element.valueAsDate.getTime();
           },
           set: val=> {
-            const date = new Date(val),
-                day = `0${date.getDate()}`.slice(-2),
-                month = `0${date.getMonth() + 1}`.slice(-2),
-                datestr = `${date.getFullYear()}-${month}-${day}`;
-
-            this.element.value = datestr;
+            this.element.valueAsDate = new Date(val);
           }
         }
       }
@@ -343,6 +335,10 @@ class Input {
     for(let i = 0; i < length; ++i) {
       new Input(dateInputs[i]);
     }
+  }
+
+  static absoluteDate(date) {
+    return date && new Date(date.getTime() + date.getTimezoneOffset()*60*1000);
   }
 }
 
