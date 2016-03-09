@@ -139,11 +139,11 @@ class Picker {
     const rekt = element.getBoundingClientRect();
     this.container.style.top = `${
       rekt.top + rekt.height
-      + document.documentElement.scrollTop + document.body.scrollTop
+      + (document.documentElement.scrollTop || document.body.scrollTop)
     }px`;
     this.container.style.left = `${
       rekt.left
-      + document.documentElement.scrollLeft + document.body.scrollLeft
+      + (document.documentElement.scrollLeft || document.body.scrollLeft)
     }px`;
 
     this.show();
