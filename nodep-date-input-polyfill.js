@@ -59,7 +59,16 @@ class Picker {
     this.today = document.createElement(`button`);
     this.today.textContent = `Today`;
     this.today.addEventListener(`click`, ()=> {
-      this.date = new Date();
+      const today = new Date();
+      this.date = new Date(
+        `${
+          today.getFullYear()
+        }/${
+          `0${today.getMonth()+1}`.slice(-2)
+        }/${
+          `0${today.getDate()}`.slice(-2)
+        }`
+      );
       this.setInput();
     });
     this.container.appendChild(this.today);
@@ -180,25 +189,27 @@ class Picker {
   setInput() {
     this.input.valueAsDate = this.date;
     this.input.focus();
-    this.hide();
+    setTimeout(()=> { // IE wouldn't hide, so in a timeout you go.
+      this.hide();
+    }, 100);
 
     // Dispatch DOM events to the input.
     let inputEvent;
     let changeEvent;
-    
+
     // Modern event creation.
     try {
-      inputEvent = new Event('input');
-      changeEvent = new Event('change');
+      inputEvent = new Event(`input`);
+      changeEvent = new Event(`change`);
     }
     // Old-fashioned way.
     catch(e) {
-      inputEvent = document.createEvent('KeyboardEvent');
-      inputEvent.initEvent('input', true, false);
-      changeEvent = document.createEvent('KeyboardEvent');
-      changeEvent.initEvent('change', true, false);
+      inputEvent = document.createEvent(`KeyboardEvent`);
+      inputEvent.initEvent(`input`, true, false);
+      changeEvent = document.createEvent(`KeyboardEvent`);
+      changeEvent.initEvent(`change`, true, false);
     }
-    
+
     this.input.dispatchEvent(inputEvent);
     this.input.dispatchEvent(changeEvent);
   }
@@ -216,12 +227,12 @@ class Picker {
     ).getDate(); // Get days in month (1-31).
 
     // The input's current date.
-    const selDate = Input.absoluteDate(this.input.valueAsDate) || this.date;
+    const selDate = Input.absoluteDate(this.input.valueAsDate) || false;
 
     // Are we in the input's currently-selected month and year?
-    // Or just browsing?
     const selMatrix =
-      year === selDate.getFullYear()
+      selDate
+      && year === selDate.getFullYear()
       && month === selDate.getMonth();
 
     // Populate days matrix.
@@ -321,8 +332,12 @@ class Input {
     this.element.addEventListener(`mouseup`, showPicker);
 
     // Update the picker if the date changed manually in the input.
-    this.element.addEventListener(`keyup`, ()=> {
+    this.element.addEventListener(`keydown`, e=> {
       thePicker.sync();
+
+      if(e.keyCode === 27) {
+        thePicker.hide();
+      }
     });
   }
 
