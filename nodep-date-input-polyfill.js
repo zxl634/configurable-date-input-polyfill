@@ -193,25 +193,7 @@ class Picker {
       this.hide();
     }, 100);
 
-    // Dispatch DOM events to the input.
-    let inputEvent;
-    let changeEvent;
-
-    // Modern event creation.
-    try {
-      inputEvent = new Event(`input`);
-      changeEvent = new Event(`change`);
-    }
-    // Old-fashioned way.
-    catch(e) {
-      inputEvent = document.createEvent(`KeyboardEvent`);
-      inputEvent.initEvent(`input`, true, false);
-      changeEvent = document.createEvent(`KeyboardEvent`);
-      changeEvent.initEvent(`change`, true, false);
-    }
-
-    this.input.dispatchEvent(inputEvent);
-    this.input.dispatchEvent(changeEvent);
+    this.pingInput();
   }
 
   refreshDaysMatrix() {
@@ -265,6 +247,28 @@ class Picker {
     }
 
     this.days.innerHTML = matrixHTML.join(``);
+  }
+
+  pingInput() {
+    // Dispatch DOM events to the input.
+    let inputEvent;
+    let changeEvent;
+
+    // Modern event creation.
+    try {
+      inputEvent = new Event(`input`);
+      changeEvent = new Event(`change`);
+    }
+    // Old-fashioned way.
+    catch(e) {
+      inputEvent = document.createEvent(`KeyboardEvent`);
+      inputEvent.initEvent(`input`, true, false);
+      changeEvent = document.createEvent(`KeyboardEvent`);
+      changeEvent.initEvent(`change`, true, false);
+    }
+
+    this.input.dispatchEvent(inputEvent);
+    this.input.dispatchEvent(changeEvent);
   }
 
   static createRangeSelect(min, max, namesArray) {
@@ -340,12 +344,18 @@ class Input {
           thePicker.hide();
           break;
         case 38:
-          date.setDate(this.element.valueAsDate.getDate() + 1);
-          this.element.valueAsDate = date;
+          if(this.element.valueAsDate) {
+            date.setDate(this.element.valueAsDate.getDate() + 1);
+            this.element.valueAsDate = date;
+            thePicker.pingInput();
+          }
           break;
         case 40:
-          date.setDate(this.element.valueAsDate.getDate() - 1);
-          this.element.valueAsDate = date;
+          if(this.element.valueAsDate) {
+            date.setDate(this.element.valueAsDate.getDate() - 1);
+            this.element.valueAsDate = date;
+            thePicker.pingInput();
+          }
           break;
         default:
           break;

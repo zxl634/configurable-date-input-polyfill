@@ -11,6 +11,12 @@
     <p>
       normal:
       <input type="date" />
+      <script>
+        var theDate = document.querySelector('input[type="date"]');
+        theDate.addEventListener('change', function() {
+          console.log('blank date input:', theDate.value);
+        });
+      </script>
     </p>
 
     <p>
