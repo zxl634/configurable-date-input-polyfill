@@ -333,11 +333,25 @@ class Input {
 
     // Update the picker if the date changed manually in the input.
     this.element.addEventListener(`keydown`, e=> {
-      thePicker.sync();
+      const date = new Date();
 
-      if(e.keyCode === 27) {
-        thePicker.hide();
+      switch(e.keyCode) {
+        case 27:
+          thePicker.hide();
+          break;
+        case 38:
+          date.setDate(this.element.valueAsDate.getDate() + 1);
+          this.element.valueAsDate = date;
+          break;
+        case 40:
+          date.setDate(this.element.valueAsDate.getDate() - 1);
+          this.element.valueAsDate = date;
+          break;
+        default:
+          break;
       }
+
+      thePicker.sync();
     });
   }
 
