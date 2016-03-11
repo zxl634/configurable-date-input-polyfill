@@ -26,7 +26,7 @@ which you may override with your own.
 They behave as getters and setters.
 
 * **Keyboard Shortcuts:** `Esc` will hide the datepicker. `Up/Down` will
-decrement/increment the date by one day.
+increment/decrement the date by one day.
 
 ## Contributing
 
