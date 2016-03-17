@@ -31,7 +31,7 @@ increment/decrement the date by one day.
 ## Contributing
 
 ### Local Development
-Run `webpack-dev-server --host $IP --port $PORT`
+Run `npm start`
 
 ### Build
-Run `webpack --devtool=none`
+Run `npm run build`

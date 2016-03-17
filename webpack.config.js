@@ -41,7 +41,7 @@ module.exports = {
     ]
   },
 
-  // devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   output: {
     path: process.cwd()+'/',
     filename: 'nodep-date-input-polyfill.dist.js'

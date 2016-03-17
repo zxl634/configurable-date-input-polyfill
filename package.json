@@ -39,5 +39,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.3.19"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --host $IP --port $PORT",
+    "build": "webpack --devtool=none"
   }
 }
