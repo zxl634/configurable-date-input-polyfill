@@ -31,7 +31,7 @@ increment/decrement the date by one day.
 ## Contributing
 
 ### Local Development
-Run `npm start`
+Run `npm start` or, for Cloud9 IDE users: `npm run start-c9`
 
 ### Build
 Run `npm run build`
