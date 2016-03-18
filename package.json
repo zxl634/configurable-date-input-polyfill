@@ -41,7 +41,8 @@
     "babel-runtime": "^6.3.19"
   },
   "scripts": {
-    "start": "webpack-dev-server --host $IP --port $PORT",
+    "start": "webpack-dev-server",
+    "start-c9": "webpack-dev-server --host $IP --port $PORT",
     "build": "webpack --devtool=none"
   }
 }
