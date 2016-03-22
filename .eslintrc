@@ -7,8 +7,14 @@
       "VariableDeclarator": {"var": 2, "let": 2, "const": 3},
       "SwitchCase": 1
     }],
+    "semi": ["error", "always", {
+      "omitLastInOneLineBlock": true
+    }],
     "no-unused-vars": "off",
     "quotes": ["error", "backtick"],
+    "no-console": ["warn", {
+      "allow": ["warn", "error"]
+    }],
     "no-console": "warn",
     "no-var": "error",
     "object-shorthand": "error",
