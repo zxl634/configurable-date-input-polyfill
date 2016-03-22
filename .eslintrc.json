@@ -10,6 +10,15 @@
     "semi": ["error", "always", {
       "omitLastInOneLineBlock": true
     }],
+    "keyword-spacing": ["error", {
+      "before": true,
+      "after": false,
+      "overrides": {
+        "else": {
+          "after": true
+        }
+      }
+    }],
     "no-unused-vars": "off",
     "quotes": ["error", "backtick"],
     "no-console": ["warn", {
