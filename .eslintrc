@@ -21,16 +21,11 @@
     "browser": true,
     "es6": true,
     "commonjs": true,
-    "jquery": true,
     "node": true
   },
   "parserOptions": {
     "ecmaVersion": 7,
     "sourceType": "module",
     "impliedStrict": true
-  },
-  "globals": {
-    "angular": true,
-    "kendo": true
   }
 }
