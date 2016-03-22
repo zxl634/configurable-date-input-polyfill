@@ -1,29 +1,36 @@
 {
   "extends": "eslint:recommended",
-  
+
   "rules": {
-    "strict": [0, "global"],
-    "global-strict": 0,
-    "indent": [1, 2, {"VariableDeclarator": 2}],
-    "no-unused-vars": 0,
-    "new-cap": 0,
-    "quotes": [2, "backtick"],
-    "no-console": 1,
-    "no-var": 2,
-    "object-shorthand": 2
+    "strict": ["off", "global"],
+    "indent": ["warn", 2, {
+      "VariableDeclarator": {"var": 2, "let": 2, "const": 3},
+      "SwitchCase": 2
+    }],
+    "no-unused-vars": "off",
+    "quotes": ["error", "backtick"],
+    "no-console": "warn",
+    "no-var": "error",
+    "object-shorthand": "error",
+    "prefer-const": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "prefer-template": "error"
   },
-  
   "env": {
     "browser": true,
     "es6": true,
+    "commonjs": true,
+    "jquery": true,
     "node": true
   },
-  
-  "ecmaFeatures": {
-    "modules": true
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "impliedStrict": true
   },
-  
   "globals": {
-    "$": true
+    "angular": true,
+    "kendo": true
   }
 }
