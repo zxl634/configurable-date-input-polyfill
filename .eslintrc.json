@@ -16,6 +16,21 @@
       "overrides": {
         "else": {
           "after": true
+        },
+        "import": {
+          "after": true
+        },
+        "export": {
+          "after": true
+        },
+        "from": {
+          "after": true
+        },
+        "try": {
+          "after": true
+        },
+        "return": {
+          "after": true
         }
       }
     }],
