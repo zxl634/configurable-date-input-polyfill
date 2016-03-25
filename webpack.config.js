@@ -44,6 +44,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   output: {
     path: process.cwd()+'/',
-    filename: 'nodep-date-input-polyfill.dist.js'
+    filename: 'nodep-date-input-polyfill.dist.js',
+    libraryTarget: 'umd'
   }
 };
