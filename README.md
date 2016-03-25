@@ -30,6 +30,11 @@ They behave as getters and setters.
 * **Keyboard Shortcuts:** `Esc` will hide the datepicker. `Up/Down` will
 increment/decrement the date by one day.
 
+* **Localization:** Specify the datepicker's locale by setting the
+`lang` attribute of the `input` element.  The default locale is `en`.
+
+    `<input type="date" lang="en" />`
+
 ## Contributing
 
 ### Local Development
