@@ -17,6 +17,8 @@ Add to your project:
 * **Script Tag:** Copy `nodep-date-input-polyfill.dist.js` from `node_modules` and
 include it anywhere in your HTML.
 
+* This package also supports **AMD**.
+
 ## Features
 * **Easily Stylable:** [These are the default styles](https://github.com/brianblakely/nodep-date-input-polyfill/blob/master/nodep-date-input-polyfill.scss),
 which you may override with your own.
