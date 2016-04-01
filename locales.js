@@ -28,6 +28,7 @@ const locales = {
       `December`
     ]
   },
+  /* Simplified Chinese */
   'zh_zh-CN': {
     days: [
       `星期天`,
@@ -53,7 +54,8 @@ const locales = {
       `十二月`
     ]
   },
-  'zh_zh-Hans-CN': {
+  /* Simplified Chinese, informal*/
+  'zh-Hans_zh-Hans-CN': {
     days: [
       `周日`,
       `周一`,
@@ -78,6 +80,7 @@ const locales = {
       `十二月`
     ]
   },
+  /* Traditional Chinese */
   'zh-Hant_zh-Hant-TW': {
     days: [
       `週日`,
