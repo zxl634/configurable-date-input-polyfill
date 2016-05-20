@@ -1,4 +1,4 @@
-import { thePicker } from './picker.js';
+import thePicker from './picker.js';
 import locales from './locales.js';
 import dateFormat from './dateformat.js';
 
