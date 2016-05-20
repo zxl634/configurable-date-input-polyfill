@@ -52,7 +52,7 @@ export default class Input {
     // Open the picker when the input get focus,
     // also on various click events to capture it in all corner cases.
     const showPicker = ()=> {
-      thePicker.attachTo(this.element);
+      thePicker.attachTo(this.element, this.localeText);
     };
     this.element.addEventListener(`focus`, showPicker);
     this.element.addEventListener(`mousedown`, showPicker);
