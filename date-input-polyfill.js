@@ -1,4 +1,4 @@
-import './nodep-date-input-polyfill.scss';
+import './date-input-polyfill.scss';
 import Input from './input.js';
 
 // Run the above code on any <input type="date"> in the document, also on dynamically created ones.

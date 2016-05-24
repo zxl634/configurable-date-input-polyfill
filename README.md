@@ -1,26 +1,26 @@
-# nodep-date-input-polyfill
+# date-input-polyfill
 Just include this simple script and IE, Firefox, and OS X Safari will support `<input type="date">`, without any dependencies, not even jQuery!
 
 Support dynamically created inputs, so can be used in single page applications.
 
-Forked from [html5-simple-date-input-polyfill](https://www.npmjs.com/package/html5-simple-date-input-polyfill). Continuing as a separate project.
+Forked from [nodep-date-input-polyfill](https://github.com/brianblakely/nodep-date-input-polyfilll). Continuing as a separate project.
 
 ## Install
-`npm install --save nodep-date-input-polyfill`
+`npm install --save date-input-polyfill`
 
 Add to your project:
 
-* **Webpack/Browserify:** `require('nodep-date-input-polyfill');`
+* **Webpack/Browserify:** `require('date-input-polyfill');`
 
-    or alongside **Babel:** `import 'nodep-date-input-polyfill';`
+    or alongside **Babel:** `import 'date-input-polyfill';`
 
-* **Script Tag:** Copy `nodep-date-input-polyfill.dist.js` from `node_modules` and
+* **Script Tag:** Copy `date-input-polyfill.dist.js` from `node_modules` and
 include it anywhere in your HTML.
 
 * This package also supports **AMD**.
 
 ## Features
-* **Easily Stylable:** [These are the default styles](https://github.com/brianblakely/nodep-date-input-polyfill/blob/master/nodep-date-input-polyfill.scss),
+* **Easily Stylable:** [These are the default styles](https://github.com/jcgertig/date-input-polyfill/blob/master/date-input-polyfill.scss),
 which you may override with your own.
 
 * **Polyfills `valueAsDate` and `valueAsNumber`:**
