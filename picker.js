@@ -18,7 +18,7 @@ class Picker {
     this.year = document.createElement(`select`);
     Picker.createRangeSelect(
       this.year,
-      this.date.getFullYear() - 80,
+      1890, // oldest person alive born in 1894
       this.date.getFullYear() + 20
     );
     this.year.className = `yearSelect`;
