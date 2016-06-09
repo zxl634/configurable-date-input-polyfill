@@ -23,14 +23,14 @@ export default class Input {
       this.element,
       {
         'valueAsDate': {
-          get: ()=> {
+          get: () => {
             if(!this.element.value) {
               return null;
             }
 
             return new Date(Date.parse(this.element.value));
           },
-          set: val=> {
+          set: val => {
             this.element.value = dateFormat(val, this.format);
           }
         },
@@ -51,18 +51,20 @@ export default class Input {
 
     // Open the picker when the input get focus,
     // also on various click events to capture it in all corner cases.
-    const showPicker = ()=> {
-      thePicker.attachTo(this.element, this.localeText);
+    const showPicker = (e) => {
+      const elm = this.element;
+      elm.locale = this.localeText;
+      const didAttach = thePicker.attachTo(elm);
     };
     this.element.addEventListener(`focus`, showPicker);
-    this.element.addEventListener(`mousedown`, showPicker);
     this.element.addEventListener(`mouseup`, showPicker);
 
     // Update the picker if the date changed manually in the input.
-    this.element.addEventListener(`keydown`, e=> {
+    this.element.addEventListener(`keydown`, e => {
       const date = new Date();
 
       switch(e.keyCode) {
+        case 9:
         case 27:
           thePicker.hide();
           break;
@@ -84,6 +86,10 @@ export default class Input {
           break;
       }
 
+      thePicker.sync();
+    });
+
+    this.element.addEventListener(`keyup`, e => {
       thePicker.sync();
     });
   }
@@ -119,6 +125,20 @@ export default class Input {
   static addPickerToDateInputs() {
     // Get and loop all the input[type="date"]s in the page that do not have `[data-has-picker]` yet.
     const dateInputs = document.querySelectorAll(`input[type="date"]:not([data-has-picker])`);
+    const length = dateInputs.length;
+
+    if(!length) {
+      return false;
+    }
+
+    for(let i = 0; i < length; ++i) {
+      new Input(dateInputs[i]);
+    }
+  }
+
+  static addPickerToOtherInputs() {
+    // Get and loop all the input[type="text"] class date-polyfill in the page that do not have `[data-has-picker]` yet.
+    const dateInputs = document.querySelectorAll(`input[type="text"].date-polyfill:not([data-has-picker])`);
     const length = dateInputs.length;
 
     if(!length) {

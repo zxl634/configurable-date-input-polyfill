@@ -1,8 +1,8 @@
 class Picker {
   constructor() {
     // This is a singleton.
-    if(thePicker) {
-      return thePicker;
+    if(window.thePicker) {
+      return window.thePicker;
     }
 
     this.date = new Date();
@@ -87,28 +87,39 @@ class Picker {
     this.hide();
     document.body.appendChild(this.container);
 
-    // Close the picker when clicking outside of a date input or picker.
-    document.addEventListener(`click`, e=> {
-      let el = e.target;
-      let isPicker = el === this.container;
-
-      while(!isPicker && (el = el.parentNode)) {
-        isPicker = el === this.container;
+    this.removeClickOut = e => {
+      if(this.isOpen) {
+        let el = e.target;
+        let isPicker = el === this.container || el === this.input;
+        while(!isPicker && (el = el.parentNode)) {
+          isPicker = el === this.container;
+        }
+        ((e.target.getAttribute(`type`) !== `date` && !isPicker) || !isPicker)
+          && this.hide();
       }
+    };
 
-      e.target.getAttribute(`type`) !== `date` && !isPicker
-        && this.hide();
-    });
+    this.removeBlur = e => {
+      if(this.isOpen) {
+        this.hide();
+      }
+    };
   }
 
   // Hide.
   hide() {
     this.container.setAttribute(`data-open`, this.isOpen = false);
+    // Close the picker when clicking outside of a date input or picker.
+    document.removeEventListener(`mousedown`, this.removeClickOut);
   }
 
   // Show.
   show() {
     this.container.setAttribute(`data-open`, this.isOpen = true);
+    // Close the picker when clicking outside of a date input or picker.
+    setTimeout(()=>{
+      document.addEventListener(`mousedown`, this.removeClickOut);
+    }, 500);
   }
 
   // Position picker below element. Align to element's left edge.
@@ -117,28 +128,25 @@ class Picker {
     this.container.style.top = `${
       rekt.top + rekt.height
       + (document.documentElement.scrollTop || document.body.scrollTop)
+      + 3
     }px`;
     this.container.style.left = `${
       rekt.left
       + (document.documentElement.scrollLeft || document.body.scrollLeft)
     }px`;
-
     this.show();
   }
 
   // Initiate I/O with given date input.
-  attachTo(input, locale) {
-    if(
-      input === this.input
-      && this.isOpen
-    ) {
+  attachTo(input) {
+    if(input === this.input && this.isOpen) {
       return false;
     }
 
     this.input = input;
-    this.input.locale = locale;
     this.sync();
     this.goto(this.input);
+    return true;
   }
 
   // Match picker date with input date.
@@ -284,6 +292,6 @@ class Picker {
   }
 }
 
-const thePicker = new Picker();
+window.thePicker = new Picker();
 
-export default thePicker;
+export default window.thePicker;
