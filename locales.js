@@ -5,13 +5,13 @@
 const locales = {
   'en_en-US_en-UK': {
     days: [
-      `Sun`,
-      `Mon`,
-      `Tue`,
-      `Wed`,
-      `Thu`,
-      `Fri`,
-      `Sat`
+      `Su`,
+      `Mo`,
+      `Tu`,
+      `We`,
+      `Th`,
+      `Fr`,
+      `Sa`
     ],
     months: [
       `January`,

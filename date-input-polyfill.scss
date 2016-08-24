@@ -22,12 +22,14 @@ date-input-polyfill {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   overflow: hidden;
+  display: block;
 
   &[data-open="false"] {
-    display: none;
+    visibility: hidden;
+    z-index: -100 !important;
   }
   &[data-open="true"] {
-    display: block;
+    visibility: visible;
   }
 
   select, table, th, td {
@@ -42,14 +44,25 @@ date-input-polyfill {
     border-bottom: 1px solid #DADFE1;
     height: 24px;
     vertical-align: top;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  .monthSelect-wrapper {
+    width: 55%;
+    display: inline-block;
+  }
+
+  .yearSelect-wrapper {
+    width: 25%;
+    display: inline-block;
   }
 
   select {
-    width: 55%;
+    width: 100%;
 
     &:first-of-type {
       border-right: 1px solid #DADFE1;
-      width: 25%;
       border-radius: 5px 0 0 0;
       -moz-border-radius: 5px 0 0 0;
       -webkit-border-radius: 5px 0 0 0;
@@ -73,14 +86,19 @@ date-input-polyfill {
     -moz-border-radius: 0 0 5px 5px;
     -webkit-border-radius: 0 0 5px 5px;
     overflow: hidden;
+    max-width: 280px;
+    width: 280px;
   }
+
   th, td {
     width: 32px;
     padding: 4px;
     text-align: center;
+    box-sizing: content-box;
   }
   td[data-day] {
     cursor: pointer;
+
 
     &:hover {
       background: #DADFE1;

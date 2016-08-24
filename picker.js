@@ -26,7 +26,10 @@ class Picker {
       this.date.setYear(this.year.value);
       this.refreshDaysMatrix();
     });
-    this.container.appendChild(this.year);
+    const yearWrapper = document.createElement(`span`);
+    yearWrapper.className = `yearSelect-wrapper`;
+    yearWrapper.appendChild(this.year);
+    this.container.appendChild(yearWrapper);
 
     // Month picker.
     this.month = document.createElement(`select`);
@@ -35,7 +38,10 @@ class Picker {
       this.date.setMonth(this.month.value);
       this.refreshDaysMatrix();
     });
-    this.container.appendChild(this.month);
+    const monthWrapper = document.createElement(`span`);
+    monthWrapper.className = `monthSelect-wrapper`;
+    monthWrapper.appendChild(this.month);
+    this.container.appendChild(monthWrapper);
 
     // Today button.
     this.today = document.createElement(`button`);
@@ -111,6 +117,7 @@ class Picker {
     this.container.setAttribute(`data-open`, this.isOpen = false);
     // Close the picker when clicking outside of a date input or picker.
     document.removeEventListener(`mousedown`, this.removeClickOut);
+    document.removeEventListener(`touchstart`, this.removeClickOut);
   }
 
   // Show.
@@ -119,10 +126,11 @@ class Picker {
     // Close the picker when clicking outside of a date input or picker.
     setTimeout(()=>{
       document.addEventListener(`mousedown`, this.removeClickOut);
+      document.addEventListener(`touchstart`, this.removeClickOut);
     }, 500);
   }
 
-  // Position picker below element. Align to element's left edge.
+  // Position picker below element. Align to element's right edge.
   goto(element) {
     const rekt = element.getBoundingClientRect();
     this.container.style.top = `${
@@ -130,8 +138,26 @@ class Picker {
       + (document.documentElement.scrollTop || document.body.scrollTop)
       + 3
     }px`;
+
+    const contRekt = this.container.getBoundingClientRect();
+    const width = contRekt.width ? contRekt.width : 280;
+
+    const classWithOutPos = () => {
+      return this.container.className
+        .replace(`polyfill-left-aligned`, ``)
+        .replace(`polyfill-right-aligned`, ``)
+        .replace(/\s+/g,` `).trim();
+    };
+
+    let base = rekt.right - width;
+    if(rekt.right < width) {
+      base = rekt.left;
+      this.container.className = `${classWithOutPos()} polyfill-left-aligned`;
+    } else {
+      this.container.className = `${classWithOutPos()} polyfill-right-aligned`;
+    }
     this.container.style.left = `${
-      rekt.left
+      base
       + (document.documentElement.scrollLeft || document.body.scrollLeft)
     }px`;
     this.show();
