@@ -155,8 +155,7 @@ const locales = {
       `Outubro`,
       `Novembro`,
       `Dezembro`
-    ],
-    todayLabel: `Hoje`
+    ]
   },
   'test_test-TEST': {
     days: [
