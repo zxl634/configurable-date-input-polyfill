@@ -132,6 +132,32 @@ const locales = {
       `Dezember`
     ]
   },
+  'pt_pt-BR': {
+    days: [
+      `Seg`,
+      `Ter`,
+      `Qua`,
+      `Qui`,
+      `Sex`,
+      `Sáb`,
+      `Dom`
+    ],
+    months: [
+      `Janeiro`,
+      `Fevereiro`,
+      `Março`,
+      `Abril`,
+      `Maio`,
+      `Junho`,
+      `Julho`,
+      `Agosto`,
+      `Setembro`,
+      `Outubro`,
+      `Novembro`,
+      `Dezembro`
+    ],
+    todayLabel: `Hoje`
+  },
   'test_test-TEST': {
     days: [
       `Foo`,
