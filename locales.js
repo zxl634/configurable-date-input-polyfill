@@ -155,7 +155,8 @@ const locales = {
       `Outubro`,
       `Novembro`,
       `Dezembro`
-    ]
+    ],
+    today: "Hoje"
   },
   'test_test-TEST': {
     days: [
