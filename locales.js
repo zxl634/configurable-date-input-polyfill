@@ -134,13 +134,13 @@ const locales = {
   },
   'pt_pt-BR': {
     days: [
+      `Dom`,
       `Seg`,
       `Ter`,
       `Qua`,
       `Qui`,
       `Sex`,
-      `Sáb`,
-      `Dom`
+      `Sáb`
     ],
     months: [
       `Janeiro`,
