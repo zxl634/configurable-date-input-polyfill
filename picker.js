@@ -206,6 +206,8 @@ class Picker {
 
     this.locale = this.input.locale;
 
+    this.today.textContent = this.locale.today || `Today`;
+
     const daysHeadHTML = [`<tr>`];
     for(let i = 0, len = this.locale.days.length; i < len; ++i) {
       daysHeadHTML.push(`<th scope="col">${this.locale.days[i]}</th>`);
