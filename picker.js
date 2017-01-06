@@ -170,6 +170,7 @@ class Picker {
     }
 
     this.input = input;
+    this.refreshLocale();
     this.sync();
     this.goto(this.input);
     return true;
