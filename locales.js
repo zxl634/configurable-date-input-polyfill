@@ -160,6 +160,33 @@ const locales = {
     today: `Vandaag`,
     format: `D/M/Y`
   },
+  /* Portuguese */
+  'pt_pt-BR': {
+    days: [
+      `Dom`,
+      `Seg`,
+      `Ter`,
+      `Qua`,
+      `Qui`,
+      `Sex`,
+      `Sáb`
+    ],
+    months: [
+      `Janeiro`,
+      `Fevereiro`,
+      `Março`,
+      `Abril`,
+      `Maio`,
+      `Junho`,
+      `Julho`,
+      `Agosto`,
+      `Setembro`,
+      `Outubro`,
+      `Novembro`,
+      `Dezembro`
+    ],
+    today: "Hoje"
+  },
   'test_test-TEST': {
     days: [
       `Foo`,
