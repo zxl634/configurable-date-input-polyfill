@@ -132,6 +132,61 @@ const locales = {
       `Dezember`
     ]
   },
+  /* Dutch */
+  'nl_nl-NL_nl-BE': {
+    days: [
+      `Zondag`,
+      `Maandag`,
+      `Dinsdag`,
+      `Woensdag`,
+      `Donderdag`,
+      `Vrijdag`,
+      `Zaterdag`
+    ],
+    months: [
+      `Januari`,
+      `Februari`,
+      `Maart`,
+      `April`,
+      `Mei`,
+      `Juni`,
+      `Juli`,
+      `Augustus`,
+      `September`,
+      `Oktober`,
+      `November`,
+      `December`
+    ],
+    today: `Vandaag`,
+    format: `D/M/Y`
+  },
+  /* Portuguese */
+  'pt_pt-BR': {
+    days: [
+      `Dom`,
+      `Seg`,
+      `Ter`,
+      `Qua`,
+      `Qui`,
+      `Sex`,
+      `Sáb`
+    ],
+    months: [
+      `Janeiro`,
+      `Fevereiro`,
+      `Março`,
+      `Abril`,
+      `Maio`,
+      `Junho`,
+      `Julho`,
+      `Agosto`,
+      `Setembro`,
+      `Outubro`,
+      `Novembro`,
+      `Dezembro`
+    ],
+    today: "Hoje"
+  },
   'test_test-TEST': {
     days: [
       `Foo`,
