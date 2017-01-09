@@ -27,6 +27,7 @@ date-input-polyfill {
   &[data-open="false"] {
     visibility: hidden;
     z-index: -100 !important;
+    top: 0;
   }
   &[data-open="true"] {
     visibility: visible;

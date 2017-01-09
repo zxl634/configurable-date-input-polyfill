@@ -116,6 +116,7 @@ class Picker {
   hide() {
     this.container.setAttribute(`data-open`, this.isOpen = false);
     // Close the picker when clicking outside of a date input or picker.
+    if(this.input) { this.input.blur() }
     document.removeEventListener(`mousedown`, this.removeClickOut);
     document.removeEventListener(`touchstart`, this.removeClickOut);
   }
