@@ -190,13 +190,13 @@ const locales = {
   /* French */
   'fr_fr-FR_fr-BE': {
     days: [
-      `Dimanche`,
-      `Lundi`,
-      `Mardi`,
-      `Mercredi`,
-      `Jeudi`,
-      `Vendredi`,
-      `Samedi`
+      `Di`,
+      `Lu`,
+      `Ma`,
+      `Me`,
+      `Je`,
+      `Ve`,
+      `Sa`
     ],
     months: [
       `Janvier`,
