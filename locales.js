@@ -187,6 +187,34 @@ const locales = {
     ],
     today: "Hoje"
   },
+  /* French */
+  'fr_fr-FR_fr-BE': {
+    days: [
+      `Di`,
+      `Lu`,
+      `Ma`,
+      `Me`,
+      `Je`,
+      `Ve`,
+      `Sa`
+    ],
+    months: [
+      `Janvier`,
+      `Février`,
+      `Mars`,
+      `Avril`,
+      `Mai`,
+      `Juin`,
+      `Juillet`,
+      `Août`,
+      `Septembre`,
+      `Octobre`,
+      `Novembre`,
+      `Décembre`
+    ],
+    today: `Aujourd'hui`,
+    format: `D/M/Y`
+  },
   'test_test-TEST': {
     days: [
       `Foo`,
