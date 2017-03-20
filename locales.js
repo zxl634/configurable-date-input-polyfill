@@ -215,6 +215,34 @@ const locales = {
     today: `Aujourd'hui`,
     format: `D/M/Y`
   },
+  /* Spanish */
+  'es_es-VE': {
+    days: [
+      `Do`,
+      `Lu`,
+      `Ma`,
+      `Mi`,
+      `Ju`,
+      `Vi`,
+      `Sa`
+    ],
+    months: [
+      `Enero`,
+      `Febrero`,
+      `Marzo`,
+      `Abril`,
+      `Mayo`,
+      `Junio`,
+      `Julio`,
+      `Agosto`,
+      `Septiembre`,
+      `Octubre`,
+      `Noviembre`,
+      `Diciembre`
+    ],
+    today: `Hoy`,
+    format: `D/M/Y`
+  },
   'test_test-TEST': {
     days: [
       `Foo`,
