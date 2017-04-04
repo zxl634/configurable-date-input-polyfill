@@ -13,8 +13,8 @@ export default class Input {
       || `en`;
 
     this.format =
-      this.element.getAttribute(`date-format`)
-      || document.body.getAttribute(`date-format`)
+      this.element.getAttribute(`data-date-format`)
+      || document.body.getAttribute(`data-date-format`)
       || `yyyy-mm-dd`;
 
     this.localeText = this.getLocaleText();
