@@ -40,6 +40,7 @@ increment/decrement the date by one day.
 [Available options list.](https://github.com/felixge/node-dateformat#mask-options)
 
     `<input type="date" date-format="mm/dd/yyyy" />`
+    
     `<input type="date" data-date-format="mm/dd/yyyy" />`
 
 
