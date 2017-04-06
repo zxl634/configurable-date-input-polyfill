@@ -12,8 +12,9 @@ export default class Input {
       || document.body.getAttribute(`lang`)
       || `en`;
 
-    this.format =
-      this.element.getAttribute(`data-date-format`)
+    this.format = this.element.getAttribute('date-format')
+      || document.body.getAttribute('date-format')
+      || this.element.getAttribute(`data-date-format`)
       || document.body.getAttribute(`data-date-format`)
       || `yyyy-mm-dd`;
 
