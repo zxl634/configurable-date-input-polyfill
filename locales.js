@@ -268,7 +268,7 @@ const locales = {
       `November`,
       `December`
     ],
-    today: `Today`,
+    today: `I dag`,
     format: `dd/MM-YYYY`
   },
   'test_test-TEST': {
