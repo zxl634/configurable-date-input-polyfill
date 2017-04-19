@@ -243,6 +243,34 @@ const locales = {
     today: `Hoy`,
     format: `D/M/Y`
   },
+  /* Danish */
+  'da_da-dk': {
+    days: [
+      `Søndag`,
+      `Mandag`,
+      `Tirsdag`,
+      `Onsdag`,
+      `Torsdag`,
+      `Fredag`,
+      `Lørdag`
+    ],
+    months: [
+      `Januar`,
+      `Februar`,
+      `Marts`,
+      `April`,
+      `Maj`,
+      `Juni`,
+      `Juli`,
+      `August`,
+      `September`,
+      `Oktober`,
+      `November`,
+      `December`
+    ],
+    today: `Today`,
+    format: `dd/MM-YYYY`
+  },
   'test_test-TEST': {
     days: [
       `Foo`,
