@@ -28,8 +28,14 @@ export default class Input {
             if(!this.element.value) {
               return null;
             }
+            const format = this.format || 'yyyy-mm-dd';
+            const parts = this.element.value.match(/(\d+)/g);
+            let i = 0, fmt = {};
 
-            return new Date(Date.parse(this.element.value));
+            format.replace(/(yyyy|dd|mm)/g, part=> {
+              fmt[part] = i++;
+            });
+            return new Date(parts[fmt['yyyy']], parts[fmt['mm']]-1, parts[fmt['dd']]);
           },
           set: val => {
             this.element.value = dateFormat(val, this.format);
