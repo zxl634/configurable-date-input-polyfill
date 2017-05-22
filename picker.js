@@ -129,6 +129,12 @@ class Picker {
       document.addEventListener(`mousedown`, this.removeClickOut);
       document.addEventListener(`touchstart`, this.removeClickOut);
     }, 500);
+
+    // when used in a single-page app  or otherwise,
+    // hide datepicker when the browser's back button is pressed
+    window.onpopstate = () => {
+      this.hide();
+    }
   }
 
   // Position picker below element. Align to element's right edge.
