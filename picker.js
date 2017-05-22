@@ -114,9 +114,6 @@ class Picker {
 
   // Hide.
   hide() {
-    // clear interval when datepicker is hides.
-    clearInterval(compareHrefInterval);
-
     this.container.setAttribute(`data-open`, this.isOpen = false);
     // Close the picker when clicking outside of a date input or picker.
     if(this.input) { this.input.blur() }
@@ -135,13 +132,9 @@ class Picker {
 
     // when used in a single-page app  or otherwise,
     // hide datepicker when the browser's back button is pressed
-    let currentPage = window.location.href;
-    compareHrefInterval = setInterval(() => {
-      console.log('in setinterval');
-      if (currentPage != window.location.href) {
-        thePicker.hide();
-      }
-    }, 100);
+    window.onpopstate = () => {
+      this.hide();
+    }
   }
 
   // Position picker below element. Align to element's right edge.
