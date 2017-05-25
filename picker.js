@@ -185,7 +185,8 @@ class Picker {
 
   // Match picker date with input date.
   sync() {
-    if(this.input.valueAsDate) {
+    // fixes bug where an empty calendar appears if year is missing from keyboard input
+    if (!isNaN(Date.parse(this.input.valueAsDate))) {
       this.date = Picker.absoluteDate(this.input.valueAsDate);
     } else {
       this.date = new Date();

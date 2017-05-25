@@ -86,6 +86,12 @@ export default class Input {
         default:
           break;
       }
+
+      thePicker.sync();
+    });
+
+    this.element.addEventListener(`keyup`, e => {
+      thePicker.sync();
     });
   }
 
