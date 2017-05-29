@@ -271,6 +271,34 @@ const locales = {
     today: `I dag`,
     format: `dd/MM-YYYY`
   },
+  /* Swedish (Sweden) */
+    'sv_sv-SE': {
+        days: [
+            `Söndag`,
+            `Måndag`,
+            `Tisdag`,
+            `Onsdag`,
+            `Torsdag`,
+            `Fredag`,
+            `Lördag`
+        ],
+        months: [
+            `Januari`,
+            `Februari`,
+            `Mars`,
+            `April`,
+            `Maj`,
+            `Juni`,
+            `Juli`,
+            `Augusti`,
+            `September`,
+            `Oktober`,
+            `November`,
+            `December`
+        ],
+        today: `Idag`,
+        format: `YYYY-MM-dd`
+    },
   'test_test-TEST': {
     days: [
       `Foo`,
