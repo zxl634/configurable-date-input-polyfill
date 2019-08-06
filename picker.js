@@ -172,11 +172,13 @@ class Picker {
 
   // Initiate I/O with given date input.
   attachTo(input) {
+
     if(input === this.input && this.isOpen) {
       return false;
     }
 
     this.input = input;
+
     this.refreshLocale();
     this.sync();
     this.goto(this.input);
@@ -238,12 +240,40 @@ class Picker {
     // as well as on which weekdays they lie.
     const year = this.date.getFullYear(); // Get the year (2016).
     const month = this.date.getMonth(); // Get the month number (0-11).
-    const startDay = new Date(year, month, 1).getDay(); // First weekday of month (0-6).
+
+    let startDay = new Date(year, month, 1).getDay(); // First weekday of month (0-6).
     const maxDays = new Date(
       this.date.getFullYear(),
       month + 1,
       0
     ).getDate(); // Get days in month (1-31).
+
+      if(this.input.getAttribute('data-matrix-format') === 'eu') {
+          //update startDay to EU format
+          switch (startDay) {
+              case 0:
+                  startDay = 6;
+                  break;
+              case 1:
+                  startDay = 0;
+                  break;
+              case 2:
+                  startDay = 1;
+                  break;
+              case 3:
+                  startDay = 2;
+                  break;
+              case 4:
+                  startDay = 3;
+                  break;
+              case 5:
+                  startDay = 4;
+                  break;
+              case 6:
+                  startDay = 5;
+                  break;
+          }
+      }
 
     // The input's current date.
     const selDate = Picker.absoluteDate(this.input.valueAsDate) || false;
@@ -275,6 +305,7 @@ class Picker {
       // Populate day number.
       const dayNum = i + 1 - startDay;
       const selected = selMatrix && selDate.getDate() === dayNum;
+
 
       matrixHTML.push(
         `<td data-day ${selected ? `data-selected` : ``}>
@@ -325,7 +356,7 @@ class Picker {
   }
 
   static absoluteDate(date) {
-    return date && new Date(date.getTime() + date.getTimezoneOffset()*60*1000);
+    return date && new Date(date.getTime());
   }
 }
 
