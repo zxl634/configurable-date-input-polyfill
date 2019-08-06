@@ -44,6 +44,16 @@ increment/decrement the date by one day.
     `<input type="date" data-date-format="mm/dd/yyyy" />`
 
 
+* **Week Matrix Formatting:** Specify the Format of the Week Matrix. With the
+`data-matrix-format` attribute you can change the Day Starting the Week.  The default value is `us` starting the Week with Sunday. 
+Possible Values:
+    
+    `<input type="date" data-matrix-format="eu" />`
+    
+    Default:
+    
+    `<input type="date" data-matrix-format="us" />`
+
 ## Contributing
 
 ### Local Development
