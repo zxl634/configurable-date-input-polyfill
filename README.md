@@ -1,12 +1,12 @@
-# date-input-polyfill
+# configurable-date-input-polyfill
 Just include this simple script and IE, Firefox, and OS X Safari will support `<input type="date">`, without any dependencies, not even jQuery!
 
 Support dynamically created inputs, so can be used in single page applications.
 
-Forked from [nodep-date-input-polyfill](https://github.com/brianblakely/nodep-date-input-polyfilll). Continuing as a separate project.
+Forked from [date-input-polyfill](https://github.com/jcgertig/date-input-polyfill). Continuing as a separate project.
 
 ## Install
-`npm install --save date-input-polyfill`
+`npm install --save configurable-date-input-polyfill`
 
 Add to your project:
 
@@ -36,7 +36,7 @@ increment/decrement the date by one day.
     `<input type="date" lang="en" />`
 
 * **Formatting:** Specify the display format by setting either the
-`date-format` or `data-date-format` attribute of the `input` element.  The default format is `yyyy-mm-dd`.
+`date-format` or `data-date-format` attribute of the `input` element.  The default format is `yyyy-mm-dd`. 
 [Available options list.](https://github.com/felixge/node-dateformat#mask-options)
 
     `<input type="date" date-format="mm/dd/yyyy" />`
