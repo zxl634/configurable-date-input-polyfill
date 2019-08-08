@@ -5,9 +5,10 @@
   "main": "date-input-polyfill.dist.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Kreutzer-DE/date-input-polyfill.git"
+    "url": "https://github.com/KreutzerCode/configurable-date-input-polyfill.git"
   },
-  "bugs": "https://github.com/Kreutzer-DE/date-input-polyfill/issues",
+  "homepage": "https://github.com/KreutzerCode/configurable-date-input-polyfill.git#readme",
+  "bugs": "https://github.com/KreutzerCode/configurable-date-input-polyfill.git/issues",
   "keywords": [
     "html5",
     "light",
