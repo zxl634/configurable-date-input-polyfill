@@ -40,8 +40,7 @@ module.exports = {
       }
     ]
   },
-
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'hidden-source-map',
   output: {
     path: process.cwd()+'/',
     filename: 'date-input-polyfill.dist.js',
