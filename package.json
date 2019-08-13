@@ -17,7 +17,9 @@
     "type",
     "date",
     "datepicker",
-    "polyfill"
+    "polyfill",
+    "europe",
+    "timezone"
   ],
   "analyze": true,
   "license": "MIT",
