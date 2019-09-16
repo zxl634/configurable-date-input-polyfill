@@ -1,49 +1,31 @@
-var webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
-  entry: './date-input-polyfill.js',
-
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      mangle: {
-        except: ['$super', '$', 'exports', 'require']
-      },
-      compress: {
-        warnings: false
-      }
-    })
-  ],
-
-  resolve: {
-    extensions: ['', '.js']
-  },
-
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        loader: 'babel',
-        query: {
-          plugins: ['transform-runtime'],
-          presets: ['es2015', 'stage-3'],
-          cacheDirectory: true
-        }
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css'
-      },
-      {
-        test: /\.scss$/,
-        loader: 'style!css!sass'
-      }
-    ]
-  },
-  devtool: 'hidden-source-map',
-  output: {
-    path: process.cwd()+'/',
-    filename: 'date-input-polyfill.dist.js',
-    libraryTarget: 'umd'
-  }
+    entry: {
+        app: './configurable-date-input-polyfill.js'
+    },
+    output: {
+        filename: 'configurable-date-input-polyfill.dist.js',
+        path: path.resolve(__dirname, '')
+    },
+    mode: 'development',
+    module: {
+        rules: [
+            {
+                test: /\.js$/, // include .js files
+                exclude:path.resolve(__dirname, "node_modules"), // exclude any and all files in the node_modules folder
+                use: [{
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }]
+            },
+            {
+                test:/\.(s*)css$/,
+                exclude:path.resolve(__dirname, "node_modules"), // exclude any and all files in the node_modules folder
+                use:['style-loader','css-loader', 'sass-loader']
+            }
+        ]
+    },
 };
