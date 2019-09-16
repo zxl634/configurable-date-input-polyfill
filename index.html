@@ -1,62 +1,56 @@
 <!DOCTYPE html>
-<html style="height: 100%;">
-  <head>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
-    <title>Polyfill Test</title>
-    <meta name="description" content="Polyfill Test">
+    <title>Polyfill Datepicker Demo</title>
+    <meta name="description" content="Polyfill Demo">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-  </head>
-  <body style="width: 200%; height: 200%;">
+</head>
+<body>
 
-    <p>
-      normal:
-      <input type="date" />
-      <script>
-        var theDate = document.querySelector('input[type="date"]');
-        theDate.addEventListener('change', function() {
-          console.log('blank date input:', theDate.value);
-        });
-      </script>
-    </p>
+<p>
+    normal:
+    <input title="normal" type="date" />
+</p>
 
-    <p>
-      with value:
-      <input type="date" value="2015-03-28" lang="test" />
-    </p>
+<p>
+    with value:
+    <input title="with-value" type="date" value="2015-03-28" />
+</p>
 
-    <p>
-      with format ("date-format"):
-      <input type="date" lang="test" date-format="mm/dd/yyyy" />
-    </p>
+<p>
+    with format ("date-format"):
+    <input title="date-format" type="date" date-format="mm/dd/yyyy" />
+</p>
 
-    <p>
-      with format ("data-date-format"):
-      <input type="date" lang="test" data-date-format="mm/dd/yyyy" />
-    </p>
+<p>
+    with format ("data-date-format"):
+    <input title="data-date-format" type="date" data-date-format="mm/dd/yyyy" />
+</p>
 
-    <p>
-      text class with format:
-      <input class="date-polyfill" type="text" lang="test" date-format="mm/dd/yyyy" />
-    </p>
+<p>
+    text class with format:
+    <input title="text-class" class="date-polyfill" type="text" date-format="mm/dd/yyyy" />
+</p>
 
-    <p>
-      with europe (german) format:
-      <input type="date" lang="de" data-date-format="dd-mm-yyyy" data-matrix-format="eu"/>
-    </p>
+<p>
+    text class with format german:
+    <input title="europe-format" class="date-polyfill" type="text" lang="de" data-date-format="dd.mm.yyyy" data-matrix-format="eu"/>
+</p>
 
-
-    <p id="dynamic" style="margin-top: 25%; margin-left: 25%;">
-      dynamically created:
-      <script>
+<p id="dynamic">
+    dynamically created:
+    <script>
         setTimeout(function() {
-          var input = document.createElement("input");
-          input.setAttribute("type", "date");
-          document.getElementById("dynamic").appendChild(input);
+            var input = document.createElement("input");
+            input.setAttribute("type", "date");
+            document.getElementById("dynamic").appendChild(input);
         }, 2000);
-      </script>
-    </p>
+    </script>
+</p>
 
-    <script src="date-input-polyfill.dist.js"></script>
+<script src="configurable-date-input-polyfill.dist.js"></script>
 
-  </body>
+</body>
 </html>
