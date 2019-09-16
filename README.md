@@ -3,11 +3,11 @@ Just include this simple script and IE, Firefox, and OS X Safari will support `<
 
 The last Date-Input-Polyfill you will ever need. A fancy and lightweight date input with a high number of configuration options for all needs. Supports European and American formatting and many other localizations.
 
-Forked from [configurable-date-input-polyfill](https://github.com/KreutzerCode/configurable-date-input-polyfill). Continuing as a separate project.
+Forked from [date-input-polyfill](https://github.com/jcgertig/date-input-polyfill). Continuing as a separate project.
 
 ## Features
 
-* Easily Stylable. [These are the default styles](https://github.com/KreutzerCode/configurable-date-input-polyfill),
+* Easily Stylable. [These are the default styles](https://github.com/KreutzerCode/configurable-date-input-polyfill/blob/master/configurable-date-input-polyfill.scss),
 which you may override with your own.
 * Accessibility friendly with Keyboard Shortcuts. `Esc` will hide the datepicker. `Up/Down` will
 increment/decrement the date by one day.
