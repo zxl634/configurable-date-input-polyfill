@@ -1,0 +1,271 @@
+date-input-polyfill {
+  width: auto;
+  height: auto;
+  background-color: white;
+  -webkit-box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.81);
+  -moz-box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.81);
+  box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.81);
+  position: absolute;
+  font-family: Arial;
+
+  .date-select-header {
+    position: relative;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    text-align: center;
+    line-height: 40px;
+
+    .date-header-button {
+      padding: 5px 25px 5px 5px;
+      border: solid 1px #a5a5a5;
+      background-color: white;
+      min-width: 150px;
+      width: auto;
+      max-width: 180px;
+      height: 28px;
+      border-radius: 5px;
+      cursor: pointer;
+      position: relative;
+      line-height: 15px;
+    }
+
+    .date-header-button-active:after {
+      content: "<";
+      display: inline-block;
+      position: absolute;
+      right: 10px;
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      font-size: 18px;
+      top: 6px;
+    }
+
+    .date-header-button-inactive:after {
+      content: "<";
+      display: inline-block;
+      position: absolute;
+      right: 10px;
+      -webkit-transform: rotate(-90deg);
+      -moz-transform: rotate(-90deg);
+      -o-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+      transform: rotate(-90deg);
+      font-size: 18px;
+      top: 6px;
+    }
+  }
+
+  .day-matrix-wrapper {
+    position: relative;
+    float: left;
+    background-color: white;
+    min-width: 240px;
+    width: auto;
+    height: 195px;
+    padding: 0 10px 10px 10px;
+
+    table {
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+
+      thead {
+        color: #b4b4b4;
+        pointer-events: none;
+      }
+      td {
+        border: solid 1px white;
+
+        &.current-day {
+          border: solid 1px grey;
+          background-color: grey;
+          border-radius: 5px;
+        }
+
+        &[data-selected] {
+          font-weight: bold;
+          border: solid 1px #a2d8f6;
+          background-color: #a2d8f6;
+          border-radius: 5px;
+          color: white;
+          &:hover {
+            border: solid 1px #a2d8f6;
+            background-color: #a2d8f6;
+          }
+        }
+
+        &.prev-month, &.next-month {
+          color: lightgrey;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: #dadada;
+          border-radius: 5px;
+          border: solid 1px lightgrey;
+        }
+
+        &.prev-month:hover, &.next-month:hover {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .date-select-dropdown {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 40px;
+    background-color: white;
+    display: none;
+
+    .select-container {
+      width: 140px;
+      height: auto;
+      float: left;
+      padding: 5px 60px 5px 60px;
+
+      .up, .down {
+        width: 100%;
+        height: 25px;
+        text-align: center;
+        background-color: transparent;
+        cursor: pointer;
+        line-height: 22px;
+        float: left;
+        border: none;
+        outline: none;
+        color: #7d7d7d;
+        position: relative;
+      }
+
+      .up {
+        &:after {
+          content: "<";
+          position: absolute;
+          top: 0;
+          left: 19px;
+          font-size: 20px;
+          display: inline-block;
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+        }
+      }
+
+      .down {
+        &:after {
+          content: "<";
+          position: absolute;
+          top: 0;
+          left: unset;
+          right: 19px;
+          font-size: 20px;
+          display: inline-block;
+          -webkit-transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -o-transform: rotate(-90deg);
+          -ms-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+        }
+      }
+
+      .select-wrapper {
+        float: left;
+        width: 50px;
+        height: 175px;
+        position: relative;
+        margin: 10px;
+
+        .option-wrapper {
+          float: left;
+          width: 100%;
+          height: auto;
+
+          .option {
+            height: 25px;
+            border-radius: 5px;
+            text-align: center;
+            float: left;
+            width: 100%;
+            line-height: 25px;
+          }
+
+          .option-2 {
+            background-color: lightgrey;
+          }
+        }
+      }
+    }
+  }
+
+  &[data-open="false"] {
+    visibility: hidden;
+    z-index: -100 !important;
+    top: 0;
+  }
+
+  &[data-open="true"] {
+    visibility: visible;
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: -20px;
+    left: 10px;
+    height: 0;
+    width: 0;
+    border: 10px solid transparent;
+    border-bottom-color: white;
+    z-index: 1;
+  }
+
+  &:after {
+    border-bottom-color: white;
+  }
+
+  &:after {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    top: 1px;
+    left: 30px;
+    box-sizing: border-box;
+
+    border: 8px solid #ffffff;
+    border-color: transparent transparent #ffffff #ffffff;
+
+    transform-origin: 0 0;
+    transform: rotate(135deg);
+
+    box-shadow: 0 1px 5px 2px rgba(0, 0, 0, 0.4)
+  }
+  &:before {
+    z-index: 1;
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+    top: 1px;
+    left: 30px;
+    box-sizing: border-box;
+
+    border: 8px solid black;
+    border-color: transparent transparent #ffffff #ffffff;
+
+    transform-origin: 0 0;
+    transform: rotate(135deg);
+  }
+}
