@@ -28,6 +28,7 @@ date-input-polyfill {
       cursor: pointer;
       position: relative;
       line-height: 15px;
+      font-size: 13px;
     }
 
     .date-header-button-active:after {
@@ -72,45 +73,59 @@ date-input-polyfill {
       width: 100%;
       text-align: center;
       font-size: 18px;
+      padding: 0;
+      line-height: 24px;
 
       thead {
         color: #b4b4b4;
         pointer-events: none;
-      }
-      td {
-        border: solid 1px white;
 
-        &.current-day {
-          border: solid 1px grey;
-          background-color: grey;
-          border-radius: 5px;
+        th {
+          border: none;
+          padding: 0;
+          text-align: center;
+          font-size: 18px;
         }
+      }
+      tbody {
+        td {
+          border: solid 1px white;
+          padding: 0;
+          text-align: center;
+          font-size: 18px;
 
-        &[data-selected] {
-          font-weight: bold;
-          border: solid 1px #a2d8f6;
-          background-color: #a2d8f6;
-          border-radius: 5px;
-          color: white;
-          &:hover {
+          &.current-day {
+            border: solid 1px grey;
+            background-color: grey;
+            border-radius: 5px;
+          }
+
+          &[data-selected] {
+            font-weight: bold;
             border: solid 1px #a2d8f6;
             background-color: #a2d8f6;
+            border-radius: 5px;
+            color: white;
+            &:hover {
+              border: solid 1px #a2d8f6;
+              background-color: #a2d8f6;
+            }
           }
-        }
 
-        &.prev-month, &.next-month {
-          color: lightgrey;
-        }
+          &.prev-month, &.next-month {
+            color: lightgrey;
+          }
 
-        &:hover {
-          cursor: pointer;
-          background-color: #dadada;
-          border-radius: 5px;
-          border: solid 1px lightgrey;
-        }
+          &:hover {
+            cursor: pointer;
+            background-color: #dadada;
+            border-radius: 5px;
+            border: solid 1px lightgrey;
+          }
 
-        &.prev-month:hover, &.next-month:hover {
-          color: white;
+          &.prev-month:hover, &.next-month:hover {
+            color: white;
+          }
         }
       }
     }
