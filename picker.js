@@ -133,14 +133,14 @@ class Picker {
     }
 
     // Position picker below element. Align to element's right edge.
-    //TODO neu machen
+    //TODO rebuild
     positionPicker(element) {
         const rekt = element.getBoundingClientRect();
         this.container.style.top = `${
-        rekt.top + rekt.height
-        + (document.documentElement.scrollTop || document.body.scrollTop)
-        + 10
-            }px`;
+            rekt.top + rekt.height
+            + (document.documentElement.scrollTop || document.body.scrollTop)
+            + 3
+        }px`;
 
         const contRekt = this.container.getBoundingClientRect();
         const width = contRekt.width ? contRekt.width : 280;
@@ -149,21 +149,20 @@ class Picker {
             return this.container.className
                 .replace(`polyfill-left-aligned`, ``)
                 .replace(`polyfill-right-aligned`, ``)
-                .replace(/\s+/g, ` `).trim();
+                .replace(/\s+/g,` `).trim();
         };
 
-        let base = rekt.right - (width / 2) - 13;
-        if (rekt.right < width) {
+        let base = rekt.right - width;
+        if(rekt.right < width) {
             base = rekt.left;
             this.container.className = `${classWithOutPos()} polyfill-left-aligned`;
         } else {
             this.container.className = `${classWithOutPos()} polyfill-right-aligned`;
         }
-
         this.container.style.left = `${
-        base
-        + (document.documentElement.scrollLeft || document.body.scrollLeft)
-            }px`;
+            base
+            + (document.documentElement.scrollLeft || document.body.scrollLeft)
+        }px`;
         this.show();
     }
 
