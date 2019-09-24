@@ -1,12 +1,16 @@
 # configurable-date-input-polyfill
 
 [![Build Status](https://travis-ci.org/KreutzerCode/configurable-date-input-polyfill.svg?branch=master)](https://travis-ci.org/KreutzerCode/configurable-date-input-polyfill)
+[![npm version](https://badge.fury.io/js/configurable-date-input-polyfill.svg)](https://badge.fury.io/js/configurable-date-input-polyfill)
 
 Just include this simple script and IE, Firefox, and OS X Safari will support `<input type="date">`, without any dependencies, not even jQuery!
 
 The last Date-Input-Polyfill you will ever need. A fancy and lightweight date input with a high number of configuration options for all needs. Supports European and American formatting and many other localizations.
 
 Forked from [date-input-polyfill](https://github.com/jcgertig/date-input-polyfill). Continuing as a separate project.
+
+
+[VIEW DEMO HERE](https://kreutzercode.github.io/configurable-date-input-polyfill/)
 
 ## Features
 
