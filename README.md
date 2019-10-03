@@ -2,10 +2,11 @@
 
 [![Build Status](https://travis-ci.org/KreutzerCode/configurable-date-input-polyfill.svg?branch=master)](https://travis-ci.org/KreutzerCode/configurable-date-input-polyfill)
 [![npm version](https://badge.fury.io/js/configurable-date-input-polyfill.svg)](https://badge.fury.io/js/configurable-date-input-polyfill)
+[![devDependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/dev-status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill?type=dev)
 
 Just include this simple script and IE, Firefox, and OS X Safari will support `<input type="date">`, without any dependencies, not even jQuery!
 
-The last Date-Input-Polyfill you will ever need. A fancy and lightweight date input with a high number of configuration options for all needs. Supports European and American formatting and many other localizations.
+The last Date-Input-Polyfill you will ever need. A fancy and lightweight date input with a high number of configuration options for all needs. Supports European and American formatting and many other localisations.
 
 Forked from [date-input-polyfill](https://github.com/jcgertig/date-input-polyfill). Continuing as a separate project.
 
@@ -16,8 +17,8 @@ Forked from [date-input-polyfill](https://github.com/jcgertig/date-input-polyfil
 
 * Easily Stylable. [These are the default styles](https://github.com/KreutzerCode/configurable-date-input-polyfill/blob/master/configurable-date-input-polyfill.scss),
 which you may override with your own.
-* Accessibility friendly with Keyboard Shortcuts. `Esc` will hide the datepicker. `Up/Down` will
-increment/decrement the date by one day.
+* Accessibility friendly with Keyboard Shortcuts. Full arrow controls `Up/Down/Left/Right` to increment/decrement the selected date.
+`Esc` to hide the datepicker.
 * Easy Localization. Specify the datepicker's locale by setting the
 `lang` attribute of the `input` element. The Localisation is easy to extend with own items.
 * Configure display format at will. Specify the display format by setting either the
