@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/KreutzerCode/configurable-date-input-polyfill.svg?branch=master)](https://travis-ci.org/KreutzerCode/configurable-date-input-polyfill)
 [![npm version](https://badge.fury.io/js/configurable-date-input-polyfill.svg)](https://badge.fury.io/js/configurable-date-input-polyfill)
+[![dependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill)
 [![devDependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/dev-status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill?type=dev)
 
 Just include this simple script and IE, Firefox, and OS X Safari will support `<input type="date">`, without any dependencies, not even jQuery!
