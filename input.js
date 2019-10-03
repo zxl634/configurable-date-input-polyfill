@@ -84,8 +84,24 @@ export default class Input {
                     //hide on esc
                     Picker.hide();
                     break;
+                case 37:
+                    //arrow left
+                    if(this.element.valueAsDate) {
+                        date = Picker.returnCurrentDate();
+                        date.setDate(date.getDate() - 1);
+                        this.element.valueAsDate = date;
+                    }
+                    break;
                 case 38:
                     //arrow up
+                    if(this.element.valueAsDate) {
+                        date = Picker.returnCurrentDate();
+                        date.setDate(date.getDate() - 7);
+                        this.element.valueAsDate = date;
+                    }
+                    break;
+                case 39:
+                    //arrow right
                     if(this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() + 1);
@@ -96,7 +112,7 @@ export default class Input {
                     //arrow down
                     if(this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
-                        date.setDate(date.getDate() - 1);
+                        date.setDate(date.getDate() + 7);
                         this.element.valueAsDate = date;
                     }
                     break;
