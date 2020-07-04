@@ -61,17 +61,9 @@ class Picker {
         this.monthSelect.className = "select-wrapper month-select";
         this.selectWrapper.appendChild(this.monthSelect);
 
-        const yearSelect = DateSelect.createYearSelect();
-        this.selectWrapper.appendChild(yearSelect);
-        let yearControlls = yearSelect.getElementsByClassName('control');
-
-        for (let i = 0; i < yearControlls.length; i++) {
-            yearControlls[i].addEventListener(`click`, target => {
-                this.date.setYear(DateSelect.returnSelectedYear());
-                this.refreshDaysMatrix();
-                dateHeaderButton.innerHTML = DateSelect.returnCurrentSelection();
-            });
-        }
+        this.yearSelect = document.createElement('div');
+        this.yearSelect.className = "select-wrapper year-select";
+        this.selectWrapper.appendChild(this.yearSelect);
 
         this.container.appendChild(dateSelectWrapper);
 
@@ -224,13 +216,53 @@ class Picker {
         //set matrix header and locale
         this.refreshMatrixHeader();
 
+        //create year select by given values
+        this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper year-select')[0]);
+        this.yearSelect = DateSelect.createYearSelect(this.input.yearRange);
+        this.selectWrapper.insertBefore(this.yearSelect, this.selectWrapper.firstChild);
+
         //create month select by given language
         this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper month-select')[0]);
         this.monthSelect = DateSelect.createMonthSelect(this.locale.months);
         this.selectWrapper.insertBefore(this.monthSelect, this.selectWrapper.firstChild);
 
-        //sync DateSelect with given input
-        DateSelect.setDateSelect(this.date);
+        let minRange = parseInt(this.input.yearRange[0]);
+        let maxRange = parseInt(this.input.yearRange[1]);
+
+        //if current year is in selection range
+        if(this.date.getFullYear() < maxRange && this.date.getFullYear() > minRange) {
+            DateSelect.setDateSelect(this.date);
+        }else {
+            //check if default year needs to be calculated
+            if (isNaN(Date.parse(this.input.valueAsDate)) || this.date.getFullYear() > maxRange || this.date.getFullYear() < minRange) {
+                  //calculate year by given range
+                let defaultYearValueOfGivenRange = minRange + (Math.round(maxRange - minRange) / 2);
+                this.date.setFullYear(defaultYearValueOfGivenRange);
+            }
+
+            DateSelect.setDateSelect(this.date);
+        }
+
+        // Setup click events for the selection Button
+        let selectDateButton = document.getElementsByClassName('date-header-button')[0];
+        selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
+
+        let monthControlls = this.monthSelect.getElementsByClassName('control');
+
+        for (let i = 0; i < monthControlls.length; i++) {
+            monthControlls[i].addEventListener(`click`, target => {
+                selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
+            });
+        }
+        
+        let yearControlls = this.yearSelect.getElementsByClassName('control');
+
+        for (let i = 0; i < yearControlls.length; i++) {
+            yearControlls[i].addEventListener('click', target => {
+                this.date.setFullYear(DateSelect.returnSelectedYear());
+                selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
+            });
+        }
 
         this.refreshDaysMatrix();
     }
@@ -242,19 +274,6 @@ class Picker {
         setTimeout(() => { // IE wouldn't hide, so in a timeout you go.
             this.hide();
         }, 100);
-    }
-
-    refreshDateSelect() {
-
-        let monthControlls = this.monthSelect.getElementsByClassName('control');
-        let selectDateButton = document.getElementsByClassName('date-header-button')[0];
-        selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
-
-        for (let i = 0; i < monthControlls.length; i++) {
-            monthControlls[i].addEventListener(`click`, target => {
-                selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
-            });
-        }
     }
 
     refreshMatrixHeader() {
@@ -273,7 +292,6 @@ class Picker {
 
     refreshDaysMatrix() {
         this.refreshMatrixHeader();
-        this.refreshDateSelect();
         // Determine days for this month and year,
         // as well as on which weekdays they lie.
         const year = this.date.getFullYear(); // Get the year (2016).

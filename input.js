@@ -58,8 +58,12 @@ export default class Input {
                     set: val=> {
                         this.element.valueAsDate = new Date(val);
                     }
+                },
+                'yearRange': {
+                    value: this.getYearRange(),
+                    writable: true
                 }
-            }
+            },
         );
 
         // Open the picker when the input get focus,
@@ -73,6 +77,9 @@ export default class Input {
 
         this.element.addEventListener(`focus`, showPicker);
         this.element.addEventListener(`mouseup`, showPicker);
+
+        let minYear = this.element.yearRange[0];
+        let maxYear = this.element.yearRange[1];
 
         // Update the picker if the date changed manually in the input.
         this.element.addEventListener(`keydown`, e => {
@@ -89,7 +96,10 @@ export default class Input {
                     if(this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() - 1);
-                        this.element.valueAsDate = date;
+
+                        if(date.getFullYear() >= minYear) {
+                            this.element.valueAsDate = date;
+                        }
                     }
                     break;
                 case 38:
@@ -97,7 +107,10 @@ export default class Input {
                     if(this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() - 7);
-                        this.element.valueAsDate = date;
+
+                        if(date.getFullYear() >= minYear) {
+                            this.element.valueAsDate = date;
+                        }
                     }
                     break;
                 case 39:
@@ -105,7 +118,10 @@ export default class Input {
                     if(this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() + 1);
-                        this.element.valueAsDate = date;
+
+                        if(date.getFullYear() <= maxYear) {
+                            this.element.valueAsDate = date;
+                        }
                     }
                     break;
                 case 40:
@@ -113,7 +129,10 @@ export default class Input {
                     if(this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() + 7);
-                        this.element.valueAsDate = date;
+
+                        if(date.getFullYear() <= maxYear) {
+                            this.element.valueAsDate = date;
+                        }
                     }
                     break;
                 default:
@@ -143,6 +162,26 @@ export default class Input {
                 return Localisation[localeSet];
             }
         }
+    }
+
+    //determines if min and max values are given
+    getYearRange() {
+
+        this.minYear = this.element.getAttribute('min');
+        this.maxYear = this.element.getAttribute('max');
+
+        //check if values are in correct order and limited in size
+        if(this.minYear > 1000 && this.maxYear > 1000 
+            && this.minYear < 4000 && this.maxYear < 4001 
+            && this.minYear < this.maxYear) {
+            this.yearRange = [];
+            this.yearRange.push(this.minYear,this.maxYear);
+        } else {
+            //return default value if not
+            this.yearRange = [1800,2200];
+        }
+
+        return this.yearRange;
     }
 
     // Return false if the browser does not support input[type="date"].

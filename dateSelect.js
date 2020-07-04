@@ -6,8 +6,8 @@ export default class DateSelect {
         return this.monthSelectHtml;
     }
 
-    static createYearSelect() {
-        this.yearSelect = new YearSelect();
+    static createYearSelect(yearRange) {
+        this.yearSelect = new YearSelect(yearRange);
         this.yearSelectHtml = this.yearSelect.returnYearSelectWrapper();
         return this.yearSelectHtml;
     }
@@ -43,7 +43,7 @@ export default class DateSelect {
 }
 
 
-function YearSelect () {
+function YearSelect (givenYearRange) {
     this.yearSelectWrapper = document.createElement('div');
     this.yearSelectWrapper.className = "select-wrapper year-select";
 
@@ -118,7 +118,7 @@ function YearSelect () {
         return yearArray;
     };
 
-    let yearArray = createYearRangeArray(1800,2200);
+    let yearArray = createYearRangeArray(givenYearRange);
 
     /* start Function */
     for(let i=0; i < 5; i++) {
@@ -163,11 +163,22 @@ function YearSelect () {
     });
 
 
-    function createYearRangeArray(min, max) {
+    function createYearRangeArray(givenYearRange) {
+
         let yearRangeArray = [];
+        let min = givenYearRange[0];
+        let max = givenYearRange[1];
 
         for (let i = min; i <= max; ++i) {
             yearRangeArray.push(i);
+        }
+
+        if(yearRangeArray.length < 5) {
+            let missingItems = 5 - yearRangeArray.length;
+
+            for(let k = 0; k < missingItems; k++) {
+                yearRangeArray.push(yearRangeArray[k]);
+            }
         }
 
         return yearRangeArray;
