@@ -230,12 +230,15 @@ class Picker {
         let maxRange = parseInt(this.input.yearRange[1]);
 
         //if current year is in selection range
-        if(this.date.getFullYear() < maxRange && this.date.getFullYear() > minRange) {
+        if(this.date.getFullYear() <= maxRange && this.date.getFullYear() >= minRange) {
             DateSelect.setDateSelect(this.date);
         }else {
+            
+            let currentDate = new Date();
             //check if default year needs to be calculated
-            if (isNaN(Date.parse(this.input.valueAsDate)) || this.date.getFullYear() > maxRange || this.date.getFullYear() < minRange) {
-                  //calculate year by given range
+            if(currentDate.getFullYear() <= maxRange && currentDate.getFullYear() >= minRange) {
+                this.date.setFullYear(currentDate.getFullYear());
+            }else {
                 let defaultYearValueOfGivenRange = minRange + (Math.round(maxRange - minRange) / 2);
                 this.date.setFullYear(defaultYearValueOfGivenRange);
             }
