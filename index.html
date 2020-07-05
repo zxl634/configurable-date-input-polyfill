@@ -6,48 +6,145 @@
     <title>Polyfill Datepicker Demo</title>
     <meta name="description" content="Polyfill Demo">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #a2d8f6;
+        }
+        h1   {
+            width: 100%;
+            font-size: 65px;
+            text-align: center;
+            color: white;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .demo-wrapper {
+            width: 100%; /*Optional*/
+            table-layout: fixed; /*Optional*/
+            border-spacing: 10px; /*Optional*/
+            display: table;
+            height: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .example-container {
+            display: table-cell;
+            background-color: white;
+            border: solid 2px black;
+            padding: 10px 50px 10px 50px;
+            margin: 10px;
+            width: 30%;
+        }
+        .example-container p {
+            font-size: 16px;
+        }
+        .example-container p input{
+            float: right;
+        }
+        .info {
+            width: 500px;
+            height: auto;
+            margin: 30px;
+            
+        }
+    </style>
 </head>
 <body>
+<h1>Configurable Date-Input-Polyfill DEMO</h1>
+<div class="demo-wrapper">
+    <div class="example-container">
+        <h2>Example Date-Input configuration</h2>
+        <p>
+            Normal Input date (default):
+            <input title="normal" type="date" />
+        </p>
+        
+        <p>
+            With value:
+            <input title="with-value" type="date" value="2015-03-28" />
+        </p>
+        
+        <p>
+            With format ("date-format"):
+            <input title="date-format" type="date" date-format="mm/dd/yyyy" />
+        </p>
+        
+        <p>
+            With format ("data-date-format"):
+            <input title="data-date-format" type="date" data-date-format="mm/dd/yyyy" />
+        </p>
 
-<p>
-    normal:
-    <input title="normal" type="date" />
-</p>
+        <p>
+            With localization:
+            <input title="data-date-format" type="date" lang="de" />
+        </p>
 
-<p>
-    with value:
-    <input title="with-value" type="date" value="2015-03-28" />
-</p>
+        <p>
+            With min and max configuration:
+            <input title="data-date-format" type="date" min="2005" max="2030"/>
+        </p>
+        <p>
+            ...
+        </p>
+    </div>
+    
+    <div class="example-container">
+        <h2>Example Inputs with class configuration</h2>
+        <p>
+            With type text & class (default):
+            <input title="text-class-default" class="date-polyfill" type="text" />
+        </p>
 
-<p>
-    with format ("date-format"):
-    <input title="date-format" type="date" date-format="mm/dd/yyyy" />
-</p>
+        <p>
+            Text & class with value:
+            <input title="text-class-with-value" class="date-polyfill" type="text" value="2020-03-28" />
+        </p>
 
-<p>
-    with format ("data-date-format"):
-    <input title="data-date-format" type="date" data-date-format="mm/dd/yyyy" />
-</p>
+        <p>
+            Text & class with format:
+            <input title="text-class" class="date-polyfill" type="text" date-format="mm/dd/yyyy" />
+        </p>
 
-<p>
-    text class with format:
-    <input title="text-class" class="date-polyfill" type="text" date-format="mm/dd/yyyy" />
-</p>
+        <p>
+            Text & class with localization:
+            <input title="text-class-with-local" class="date-polyfill" type="text" lang="de" />
+        </p>
+        
+        <p>
+            Text & class with german formating:
+            <input title="europe-format" class="date-polyfill" type="text" lang="de" data-date-format="dd.mm.yyyy" data-matrix-format="eu"/>
+        </p>
+        
+        <p>
+            Text & class with min and max value:
+            <input title="europe-format" class="date-polyfill" type="text" min="2010" max="2030"/>
+        </p>
+        <p>
+            ...
+        </p>
+    </div>
+    
+    <div class="example-container">
+        <h2>Fancy dynamic example</h2>
+        <p id="dynamic">
+            dynamically created:
+            <script>
+                setTimeout(function() {
+                    var input = document.createElement("input");
+                    input.setAttribute("type", "date");
+                    document.getElementById("dynamic").appendChild(input);
+                }, 2000);
+            </script>
+        </p>
+    </div>
+</div>
 
-<p>
-    text class with format german:
-    <input title="europe-format" class="date-polyfill" type="text" lang="de" data-date-format="dd.mm.yyyy" data-matrix-format="eu"/>
-</p>
-
-<p id="dynamic">
-    dynamically created:
-    <script>
-        setTimeout(function() {
-            var input = document.createElement("input");
-            input.setAttribute("type", "date");
-            document.getElementById("dynamic").appendChild(input);
-        }, 2000);
-    </script>
+<p class="info">
+    *Note that some examples in modern browsers like Chrome and Firefox are replaced by an integrated datepicker. 
+    If you are viewing this demo from a modern browser, I recommend that you take a look at the "Example entries with class configuration" or reopen this page with Internet Explorer.    
 </p>
 
 <script src="configurable-date-input-polyfill.dist.js"></script>
