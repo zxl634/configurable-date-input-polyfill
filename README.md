@@ -22,6 +22,7 @@ which you may override with your own.
 `Esc` to hide the datepicker.
 * Easy Localization. Specify the datepicker's locale by setting the
 `lang` attribute of the `input` element. The Localisation is easy to extend with own items.
+* Limit the range to choose from by setting the `min` and `max` attributes.
 * Configure display format at will. Specify the display format by setting either the
 `date-format` or `data-date-format` attribute of the `input` element.
 * Configure Day Matrix Format. Specify the Format of the Day Matrix. By setting the 
@@ -55,10 +56,20 @@ include it anywhere in your HTML.
 ## Localization
 * You can easily set a specific locale for each date input. The default locale is `en`.
 ```html
-<!--default-->
+<!--default dont need to be specified-->
 <input type="date" lang="en" />
 
 <input type="date" lang="fr" />
+```
+
+## Min and Max attributes
+* Set the range to choose from differently for every input you faced with by setting the `min` and `max` attributes.
+```html
+<!--default dont need to be specified-->
+<input type="date" min="1800" max="2200"/>
+
+<!--custom-->
+<input type="date" min="2000" max="2030" />
 ```
 
 ## Formatting
@@ -66,7 +77,7 @@ include it anywhere in your HTML.
 `date-format` or `data-date-format` attribute of the `input` element.  The default format is `yyyy-mm-dd`. 
 [Available options list.](https://github.com/felixge/node-dateformat#mask-options)
 ```html
-<!--default-->
+<!--default dont need to be specified-->
 <input type="date" date-format="yyyy-mm-dd" />
 
 <input type="date" data-date-format="mm/dd/yyyy" />
@@ -75,9 +86,9 @@ include it anywhere in your HTML.
 ```
 
 ## Matrix Formatting
-Specify the Format of the DatePicker Matrix. With the data-matrix-format attribute you can change the Day starting the week between Saturday and Monday.
+* Specify the Format of the DatePicker Matrix. With the data-matrix-format attribute you can change the Day starting the week between Saturday and Monday.
 ```html
-<!--default-->
+<!--default dont need to be specified-->
 <input type="date" data-matrix-format="us" />
 
 <!--europe-->
