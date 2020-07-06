@@ -5,9 +5,9 @@
 [![dependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill)
 [![devDependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/dev-status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill?type=dev)
 
-Just include this simple script and IE, Firefox, and OS X Safari will support `<input type="date">`, without any dependencies, not even jQuery!
-
 The last Date-Input-Polyfill you will ever need. A fancy and lightweight date input with a high number of configuration options for all needs. Supports European and American formatting and many other localisations.
+
+Just include this simple script and IE, Firefox, and OS X Safari will support `<input type="date">`, without any dependencies, not even jQuery!
 
 Forked from [date-input-polyfill](https://github.com/jcgertig/date-input-polyfill). Continuing as a separate project.
 
