@@ -99,14 +99,12 @@ date-input-polyfill {
           &.current-day {
             border: solid 1px #a8a3a3;
             background-color: #a8a3a3;
-            border-radius: 5px;
           }
 
           &[data-selected] {
             font-weight: bold;
             border: solid 1px #a2d8f6;
             background-color: #a2d8f6;
-            border-radius: 5px;
             color: white;
             &:hover {
               border: solid 1px #a2d8f6;
@@ -121,7 +119,6 @@ date-input-polyfill {
           &:hover {
             cursor: pointer;
             background-color: #dadada;
-            border-radius: 5px;
             border: solid 1px lightgrey;
           }
 

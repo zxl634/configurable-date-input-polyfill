@@ -359,6 +359,16 @@ class Picker {
 
         // Populate days matrix.
         const matrixHTML = [];
+
+        //check if its the current month were looking at
+        let today = new Date();
+        let lookingAtCurrentMonth = false;
+        if (this.date.getFullYear() === today.getFullYear()) {
+            if (this.date.getMonth() === today.getMonth()) {
+                lookingAtCurrentMonth = true;
+            }
+        }
+
         for (let i = 0; i < maxDays + startDay; ++i) {
             // Add a row every 7 days.
             if (i % 7 === 0) {
@@ -376,12 +386,18 @@ class Picker {
             const dayNum = i + 1 - startDay;
             const selected = selMatrix && selDate.getDate() === dayNum;
 
-
-            matrixHTML.push(
-                `<td data-day ${selected ? `data-selected` : ``}>
-          ${dayNum}
-        </td>`
-            );
+            //check if current item is current day            
+            if(lookingAtCurrentMonth && today.getDate() == dayNum) {
+                //highlight the current day
+                matrixHTML.push(
+                    `<td ${selected ? `data-selected` : ``} class="current-day">${dayNum}</td>`
+                );
+            }else {
+                //display normal
+                matrixHTML.push(
+                    `<td data-day ${selected ? `data-selected` : ``}>${dayNum}</td>`
+                );
+            }
         }
 
         //fill remaining space with next Month items
@@ -439,28 +455,6 @@ class Picker {
         }
 
         this.days.innerHTML = matrixHTML.join(``);
-
-        //highlight the current day
-        let today = new Date();
-        //check if its the current year were looking at
-        if (this.date.getFullYear() === today.getFullYear()) {
-            //check if its the current month were looking at
-            if (this.date.getMonth() === today.getMonth()) {
-                let daysArray = this.days.getElementsByTagName('td');
-                let targetDay = today.getDate();
-
-                for (let i = 0; i < daysArray.length; i++) {
-                    // check if current date matches
-                    if (parseInt(daysArray[i].innerHTML) === targetDay) {
-                        //check if its not prev or next month item
-                        if (!daysArray[i].classList.contains('next-month') && !daysArray[i].classList.contains('prev-month')) {
-                            //set selected
-                            daysArray[i].classList.add('current-day');
-                        }
-                    }
-                }
-            }
-        }
     }
 
     returnCurrentDate() {
