@@ -75,7 +75,7 @@ function YearSelect (givenYearRange) {
             case (targetYear > yearRangeArray[2]):
                 return targetYear - yearRangeArray[2];
             default:
-                console.log('Error in calculateTargetOffset');
+                console.log('Error in YearSelect calculateTargetOffset');
                 break;
         }
     };
@@ -91,7 +91,7 @@ function YearSelect (givenYearRange) {
 
     this.toggleByInput = function (value) {
 
-        //in canse input is out of range
+        //in case input is out of range
         if(value > Math.max(...yearArray)) {
             value = Math.max(...yearArray);
         }
@@ -166,8 +166,8 @@ function YearSelect (givenYearRange) {
     function createYearRangeArray(givenYearRange) {
 
         let yearRangeArray = [];
-        let min = givenYearRange[0];
-        let max = givenYearRange[1];
+        let min = parseInt(givenYearRange[0]);
+        let max = parseInt(givenYearRange[1]);
 
         for (let i = min; i <= max; ++i) {
             yearRangeArray.push(i);
@@ -217,7 +217,7 @@ function MonthSelect (targetLocaleArray) {
             case (targetMonth > monthArray[2]):
                 return targetMonth - monthArray[2];
             default:
-                console.log('Error in calculateTargetOffset');
+                console.log('Error in MonthSelect calculateTargetOffset');
                 break;
         }
     };
