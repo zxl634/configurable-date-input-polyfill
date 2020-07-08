@@ -21,10 +21,14 @@
             text-align: center;
             margin-bottom: 30px;
         }
+        a {
+            text-decoration: none;
+            border-spacing: unset;
+        }
         .demo-wrapper {
-            width: 100%; /*Optional*/
-            table-layout: fixed; /*Optional*/
-            border-spacing: 10px; /*Optional*/
+            width: 100%;
+            table-layout: fixed;
+            border-spacing: 10px;
             display: table;
             height: auto;
             padding: 20px;
@@ -44,11 +48,46 @@
         .example-container p input{
             float: right;
         }
-        .info {
-            width: 500px;
+        .info-wrapper {
+            display: block;
+            width: 100%;
             height: auto;
-            margin: 30px;
-            
+            padding: 20px;
+            float: left;
+        }
+        .info-container {
+            display: block;
+            width: 100%;
+            width: 30%;
+            padding: 10px 15px 10px 30px;
+            float: left;
+        }
+        .info-container p {
+            margin: unset;
+        }
+        .download {
+            border: solid 1px black;
+            background-color: #ffffff;
+            font-size: 4vw;
+            color: #a2d8f6;
+            font-weight: bolder;
+            width: 100%;
+            text-align: center;
+        }
+        .npm {
+            background: #cc3534;
+            border: solid 1px #cc3534;
+            color: #ffffff;
+            font-size: 6vw;
+            text-align: center;
+            font-weight: bolder;
+        }
+        .back {
+            margin: 50px;
+        }
+        .back a {
+            font-size: 18px;
+            color: white
         }
     </style>
 </head>
@@ -142,10 +181,34 @@
     </div>
 </div>
 
-<p class="info">
-    *Note that some examples in modern browsers like Chrome and Firefox are replaced by an integrated datepicker. 
-    If you are viewing this demo from a modern browser, I recommend that you take a look at the "Example entries with class configuration" or reopen this page with Internet Explorer.    
-</p>
+<div class="info-wrapper">
+    <div class="info-container">
+        <p>
+            *Note that some examples are replaced in modern browsers like Chrome and Firefox by an integrated datepicker. 
+            If you are viewing this demo from a modern browser, I recommend that you take a look at the "Example Inputs with class configuration" or reopen this page with Internet Explorer.          
+        </p>
+    </div>
+    <div class="info-container">
+        <a href="https://github.com/KreutzerCode/configurable-date-input-polyfill/archive/master.zip" target="_blank">
+            <div class="download">
+                Download
+            </div>
+        </a>
+    </div>
+    <div class="info-container">
+        <a href="https://www.npmjs.com/package/configurable-date-input-polyfill" target="_blank">
+            <div class="npm">
+                NPM
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="back">
+    <p>
+        <a href="javascript:history.back()">Back</a>
+    </p>
+</div>
 
 <script src="configurable-date-input-polyfill.dist.js"></script>
 
