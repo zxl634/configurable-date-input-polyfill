@@ -21,6 +21,10 @@ export default class DateSelect {
         return this.monthSelect.returnSelectedMonthAsLabel()+' '+this.yearSelect.returnSelectedYear()
     }
 
+    static returnSelectedMonth () {
+        return this.monthSelect.returnSelectedMonth();
+    }
+
     static returnSelectedYear () {
         return this.yearSelect.returnSelectedYear();
     }
@@ -35,10 +39,6 @@ export default class DateSelect {
         }
 
         this.monthSelect.toggleByMatrix(mode);
-    }
-
-    static returnSelectedMonth () {
-        return this.monthSelect.returnSelectedMonth();
     }
 }
 
@@ -64,8 +64,6 @@ function YearSelect (givenYearRange) {
 
     this.calculateTargetYearOffset = function (yearRangeArray,targetYear) {
         var yearRangeArrayLength = yearRangeArray.length;
-        var targetIndex = yearRangeArray.indexOf(targetYear);
-        var centerArrayPosition = 3;
 
         switch (true) {
             case (targetYear < yearRangeArray[2]):
