@@ -214,7 +214,7 @@ class Picker {
         }
 
         //set matrix header and locale
-        this.refreshMatrixHeader();
+        this.createMatrixHeader();
 
         //create year select by given values
         this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper year-select')[0]);
@@ -279,7 +279,7 @@ class Picker {
         }, 100);
     }
 
-    refreshMatrixHeader() {
+    createMatrixHeader() {
         if (this.locale === this.input.locale) {
             return false;
         }
@@ -294,7 +294,6 @@ class Picker {
     }
 
     refreshDaysMatrix() {
-        this.refreshMatrixHeader();
         // Determine days for this month and year,
         // as well as on which weekdays they lie.
         const year = this.date.getFullYear(); // Get the year (2016).
@@ -390,7 +389,7 @@ class Picker {
             if(lookingAtCurrentMonth && today.getDate() == dayNum) {
                 //highlight the current day
                 matrixHTML.push(
-                    `<td ${selected ? `data-selected` : ``} class="current-day">${dayNum}</td>`
+                    `<td data-day ${selected ? `data-selected` : ``} class="current-day">${dayNum}</td>`
                 );
             }else {
                 //display normal
