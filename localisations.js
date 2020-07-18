@@ -192,13 +192,13 @@ const localisations = {
     /* French */
     'fr_fr-FR_fr-BE': {
         days: [
-            `Di`,
             `Lu`,
             `Ma`,
             `Me`,
             `Je`,
             `Ve`,
-            `Sa`
+            `Sa`,
+            `Di`
         ],
         months: [
             `Janvier`,
