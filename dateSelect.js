@@ -130,14 +130,8 @@ function YearSelect(givenYearRange) {
 
     /* downClick Function*/
     this.toggleDown.addEventListener('click', function () {
-        const zs = yearArray[0];
-        for (let i = 0; i < yearArray.length; i++) {
-            if (i < yearArray.length - 1) {
-                yearArray[i] = yearArray[(i + 1)];
-            } else {
-                yearArray[i] = zs;
-            }
-        }
+        //update array order
+        yearArray.push(yearArray.shift());
 
         for (let i = 0; i < 5; i++) {
             this.previousElementSibling.getElementsByClassName('option')[i].innerHTML = yearArray[i];
@@ -146,14 +140,8 @@ function YearSelect(givenYearRange) {
 
     /* upClick Function*/
     this.toggleUp.addEventListener('click', function () {
-        const zs = yearArray[yearArray.length - 1];
-        for (let i = yearArray.length - 1; i >= 0; i--) {
-            if (i > 0) {
-                yearArray[i] = yearArray[(i - 1)];
-            } else {
-                yearArray[i] = zs;
-            }
-        }
+        //update array order
+        yearArray.unshift(yearArray.pop());
 
         for (let i = 0; i < 5; i++) {
             this.nextElementSibling.getElementsByClassName('option')[i].innerHTML = yearArray[i];
@@ -308,14 +296,8 @@ function MonthSelect(targetLocaleArray) {
 
     /* downClick Function*/
     this.toggleDown.addEventListener(`click`, buttonObject => {
-        const zs = monthArray[0];
-        for (let i = 0; i < monthArray.length; i++) {
-            if (i < monthArray.length - 1) {
-                monthArray[i] = monthArray[(i + 1)];
-            } else {
-                monthArray[i] = zs;
-            }
-        }
+        //update array order
+        monthArray.push(monthArray.shift());
 
         let monthStringArray = this.returnMonthStringArray(monthArray);
 
@@ -326,14 +308,8 @@ function MonthSelect(targetLocaleArray) {
 
     /* upClick Function*/
     this.toggleUp.addEventListener(`click`, buttonObject => {
-        const zs = monthArray[monthArray.length - 1];
-        for (let i = monthArray.length - 1; i >= 0; i--) {
-            if (i > 0) {
-                monthArray[i] = monthArray[(i - 1)];
-            } else {
-                monthArray[i] = zs;
-            }
-        }
+        //update array order
+        monthArray.unshift(monthArray.pop());
 
         let monthStringArray = this.returnMonthStringArray(monthArray);
 
