@@ -24,7 +24,7 @@ class Picker {
 
         const dateHeaderButton = document.createElement(`button`);
         dateHeaderButton.className = "date-header-button date-header-button-inactive";
-        dateHeaderButton.addEventListener(`click`, e => {
+        dateHeaderButton.addEventListener(`click`, () => {
 
             if (dateHeaderButton.classList.contains('date-header-button-inactive')) {
                 dateHeaderButton.classList.add('date-header-button-active');
@@ -37,6 +37,7 @@ class Picker {
 
                 //refresh dayMatrix here cause performance
                 this.date.setMonth(DateSelect.returnSelectedMonth());
+                this.date.setFullYear(DateSelect.returnSelectedYear());
                 this.refreshDaysMatrix();
             }
         });
@@ -119,7 +120,7 @@ class Picker {
                     isPicker = el === this.container;
                 }
                 ((e.target.getAttribute(`type`) !== `date` && !isPicker) || !isPicker)
-                && this.hide();
+                    && this.hide();
             }
         };
     }
@@ -132,7 +133,7 @@ class Picker {
             rekt.top + rekt.height
             + (document.documentElement.scrollTop || document.body.scrollTop)
             + 3
-        }px`;
+            }px`;
 
         const contRekt = this.container.getBoundingClientRect();
         const width = contRekt.width ? contRekt.width : 280;
@@ -141,11 +142,11 @@ class Picker {
             return this.container.className
                 .replace(`polyfill-left-aligned`, ``)
                 .replace(`polyfill-right-aligned`, ``)
-                .replace(/\s+/g,` `).trim();
+                .replace(/\s+/g, ` `).trim();
         };
 
         let base = rekt.right - width;
-        if(rekt.right < width) {
+        if (rekt.right < width) {
             base = rekt.left;
             this.container.className = `${classWithOutPos()} polyfill-left-aligned`;
         } else {
@@ -154,7 +155,7 @@ class Picker {
         this.container.style.left = `${
             base
             + (document.documentElement.scrollLeft || document.body.scrollLeft)
-        }px`;
+            }px`;
         this.show();
     }
 
@@ -230,15 +231,15 @@ class Picker {
         let maxRange = parseInt(this.input.yearRange[1]);
 
         //if current year is in selection range
-        if(this.date.getFullYear() <= maxRange && this.date.getFullYear() >= minRange) {
+        if (this.date.getFullYear() <= maxRange && this.date.getFullYear() >= minRange) {
             DateSelect.setDateSelect(this.date);
-        }else {
-            
+        } else {
+
             let currentDate = new Date();
             //check if default year needs to be calculated
-            if(currentDate.getFullYear() <= maxRange && currentDate.getFullYear() >= minRange) {
+            if (currentDate.getFullYear() <= maxRange && currentDate.getFullYear() >= minRange) {
                 this.date.setFullYear(currentDate.getFullYear());
-            }else {
+            } else {
                 let defaultYearValueOfGivenRange = minRange + (Math.round(maxRange - minRange) / 2);
                 this.date.setFullYear(defaultYearValueOfGivenRange);
             }
@@ -253,16 +254,15 @@ class Picker {
         let monthControlls = this.monthSelect.getElementsByClassName('control');
 
         for (let i = 0; i < monthControlls.length; i++) {
-            monthControlls[i].addEventListener(`click`, target => {
+            monthControlls[i].addEventListener(`click`, function () {
                 selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
             });
         }
-        
+
         let yearControlls = this.yearSelect.getElementsByClassName('control');
 
         for (let i = 0; i < yearControlls.length; i++) {
-            yearControlls[i].addEventListener('click', target => {
-                this.date.setFullYear(DateSelect.returnSelectedYear());
+            yearControlls[i].addEventListener('click', function () {
                 selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
             });
         }
@@ -301,8 +301,8 @@ class Picker {
         if (this.input.firstDayOfWeek === 'sa') {
             daysHeaderContent.unshift(daysHeaderContent.pop());
         }
-        
-        this.daysHead.innerHTML = "<tr>"+daysHeaderContent.join(``)+"</tr>";
+
+        this.daysHead.innerHTML = "<tr>" + daysHeaderContent.join(``) + "</tr>";
     }
 
     refreshDaysMatrix() {
@@ -322,18 +322,18 @@ class Picker {
         //check if first day of week is monday
         if (this.input.firstDayOfWeek === 'mo') {
             //update startDay to EU format -> start at mo
-            if(startDay === 0) {
+            if (startDay === 0) {
                 startDay = 6;
-            }else {
+            } else {
                 startDay--;
             }
         }
         //check if first day of week is saturday
         if (this.input.firstDayOfWeek === 'sa') {
             //update startDay to EU format -> start at mo
-            if(startDay === 6) {
+            if (startDay === 6) {
                 startDay = 0;
-            }else {
+            } else {
                 startDay++;
             }
         }
@@ -390,12 +390,12 @@ class Picker {
             const selected = selMatrix && selDate.getDate() === dayNum;
 
             //check if current item is current day            
-            if(lookingAtCurrentMonth && today.getDate() == dayNum) {
+            if (lookingAtCurrentMonth && today.getDate() == dayNum) {
                 //highlight the current day
                 matrixHTML.push(
                     `<td data-day ${selected ? `data-selected` : ``} class="current-day">${dayNum}</td>`
                 );
-            }else {
+            } else {
                 //display normal
                 matrixHTML.push(
                     `<td data-day ${selected ? `data-selected` : ``}>${dayNum}</td>`

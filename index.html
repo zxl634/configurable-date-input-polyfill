@@ -11,20 +11,24 @@
             font-family: Arial, Helvetica, sans-serif;
             background-color: #a2d8f6;
         }
-        h1   {
+
+        h1 {
             width: 100%;
             font-size: 65px;
             text-align: center;
             color: white;
         }
+
         h2 {
             text-align: center;
             margin-bottom: 30px;
         }
+
         a {
             text-decoration: none;
             border-spacing: unset;
         }
+
         .demo-wrapper {
             width: 100%;
             table-layout: fixed;
@@ -34,6 +38,7 @@
             padding: 20px;
             box-sizing: border-box;
         }
+
         .example-container {
             display: table-cell;
             background-color: white;
@@ -42,12 +47,15 @@
             margin: 10px;
             width: 30%;
         }
+
         .example-container p {
             font-size: 16px;
         }
-        .example-container p input{
+
+        .example-container p input {
             float: right;
         }
+
         .info-wrapper {
             display: block;
             width: 100%;
@@ -56,6 +64,7 @@
             float: left;
             box-sizing: border-box;
         }
+
         .info-container {
             display: block;
             width: 100%;
@@ -63,9 +72,11 @@
             padding: 10px 25px 10px 30px;
             float: left;
         }
+
         .info-container p {
             margin: unset;
         }
+
         .download {
             border: solid 1px black;
             background-color: #ffffff;
@@ -75,6 +86,7 @@
             width: 100%;
             text-align: center;
         }
+
         .npm {
             background: #cc3534;
             border: solid 1px #cc3534;
@@ -83,145 +95,152 @@
             text-align: center;
             font-weight: bolder;
         }
+
         .back {
             margin: 50px;
         }
+
         .back a {
             font-size: 18px;
             color: white
         }
     </style>
 </head>
+
 <body>
-<h1>Configurable Date-Input-Polyfill DEMO</h1>
-<div class="demo-wrapper">
-    <div class="example-container">
-        <h2>Example Date-Input configuration</h2>
-        <p>
-            Normal Input date (default):
-            <input title="normal" type="date" />
-        </p>
-        
-        <p>
-            With value:
-            <input title="with-value" type="date" value="2015-03-28" />
-        </p>
-        
-        <p>
-            With format ("date-format"):
-            <input title="date-format" type="date" date-format="mm/dd/yyyy" />
-        </p>
-        
-        <p>
-            With format ("data-date-format"):
-            <input title="data-date-format" type="date" data-date-format="mm/dd/yyyy" />
-        </p>
+    <h1>Configurable Date-Input-Polyfill DEMO</h1>
+    <div class="demo-wrapper">
+        <div class="example-container">
+            <h2>Example Date-Input configuration</h2>
+            <p>
+                Normal Input date (default):
+                <input title="normal" type="date" />
+            </p>
 
-        <p>
-            With localization:
-            <input title="data-date-format" type="date" lang="de" />
-        </p>
+            <p>
+                With value:
+                <input title="with-value" type="date" value="2015-03-28" />
+            </p>
 
-        <p>
-            With monday as first week day:
-            <input title="first-week-day-monday" type="date" data-first-day="mo"/>
-        </p>
+            <p>
+                With format ("date-format"):
+                <input title="date-format" type="date" date-format="mm/dd/yyyy" />
+            </p>
 
+            <p>
+                With format ("data-date-format"):
+                <input title="data-date-format" type="date" data-date-format="mm/dd/yyyy" />
+            </p>
+
+            <p>
+                With localization:
+                <input title="data-date-format" type="date" lang="de" />
+            </p>
+
+            <p>
+                With monday as first week day:
+                <input title="first-week-day-monday" type="date" data-first-day="mo" />
+            </p>
+
+            <p>
+                With min and max configuration:
+                <input title="data-date-format" type="date" min="2005" max="2030" />
+            </p>
+            <p>
+                ...
+            </p>
+        </div>
+
+        <div class="example-container">
+            <h2>Example Inputs with class configuration</h2>
+            <p>
+                With type text & class (default):
+                <input title="text-class-default" class="date-polyfill" type="text" />
+            </p>
+
+            <p>
+                Text & class with value:
+                <input title="text-class-with-value" class="date-polyfill" type="text" value="2020-03-28" />
+            </p>
+
+            <p>
+                Text & class with format:
+                <input title="text-class" class="date-polyfill" type="text" date-format="mm/dd/yyyy" />
+            </p>
+
+            <p>
+                Text & class with localization:
+                <input title="text-class-with-local" class="date-polyfill" type="text" lang="fr" />
+            </p>
+
+            <p>
+                Text & class with monday as first week day:
+                <input title="first-week-day-monday" class="date-polyfill" type="text" data-first-day="mo" />
+            </p>
+
+            <p>
+                Text & class with a german configuration:
+                <input title="german-configuration" class="date-polyfill" type="text" lang="de"
+                    data-date-format="dd.mm.yyyy" data-first-day="mo" />
+            </p>
+
+            <p>
+                Text & class with min and max value:
+                <input title="min-max-value" class="date-polyfill" type="text" min="2010" max="2030" />
+            </p>
+            <p>
+                ...
+            </p>
+        </div>
+
+        <div class="example-container">
+            <h2>Fancy dynamic example</h2>
+            <p id="dynamic">
+                dynamically created:
+                <script>
+                    setTimeout(function () {
+                        var input = document.createElement("input");
+                        input.setAttribute("type", "date");
+                        document.getElementById("dynamic").appendChild(input);
+                    }, 2000);
+                </script>
+            </p>
+        </div>
+    </div>
+
+    <div class="info-wrapper">
+        <div class="info-container">
+            <p>
+                *Note that some examples are replaced in modern browsers like Chrome and Firefox by an integrated
+                datepicker.
+                If you are viewing this demo from a modern browser, I recommend that you take a look at the "Example
+                Inputs with class configuration" or reopen this page with Internet Explorer.
+            </p>
+        </div>
+        <div class="info-container">
+            <a href="https://github.com/KreutzerCode/configurable-date-input-polyfill/archive/master.zip"
+                target="_blank">
+                <div class="download">
+                    Download
+                </div>
+            </a>
+        </div>
+        <div class="info-container">
+            <a href="https://www.npmjs.com/package/configurable-date-input-polyfill" target="_blank">
+                <div class="npm">
+                    NPM
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="back">
         <p>
-            With min and max configuration:
-            <input title="data-date-format" type="date" min="2005" max="2030"/>
-        </p>
-        <p>
-            ...
+            <a href="javascript:history.back()">Back</a>
         </p>
     </div>
-    
-    <div class="example-container">
-        <h2>Example Inputs with class configuration</h2>
-        <p>
-            With type text & class (default):
-            <input title="text-class-default" class="date-polyfill" type="text" />
-        </p>
 
-        <p>
-            Text & class with value:
-            <input title="text-class-with-value" class="date-polyfill" type="text" value="2020-03-28" />
-        </p>
-
-        <p>
-            Text & class with format:
-            <input title="text-class" class="date-polyfill" type="text" date-format="mm/dd/yyyy" />
-        </p>
-
-        <p>
-            Text & class with localization:
-            <input title="text-class-with-local" class="date-polyfill" type="text" lang="fr"/>
-        </p>
-        
-        <p>
-            Text & class with monday as first week day:
-            <input title="first-week-day-monday" class="date-polyfill" type="text" data-first-day="mo"/>
-        </p>
-
-        <p>
-            Text & class with a german configuration:
-            <input title="german-configuration" class="date-polyfill" type="text" lang="de" data-date-format="dd.mm.yyyy" data-first-day="mo"/>
-        </p>
-        
-        <p>
-            Text & class with min and max value:
-            <input title="min-max-value" class="date-polyfill" type="text" min="2010" max="2030"/>
-        </p>
-        <p>
-            ...
-        </p>
-    </div>
-    
-    <div class="example-container">
-        <h2>Fancy dynamic example</h2>
-        <p id="dynamic">
-            dynamically created:
-            <script>
-                setTimeout(function() {
-                    var input = document.createElement("input");
-                    input.setAttribute("type", "date");
-                    document.getElementById("dynamic").appendChild(input);
-                }, 2000);
-            </script>
-        </p>
-    </div>
-</div>
-
-<div class="info-wrapper">
-    <div class="info-container">
-        <p>
-            *Note that some examples are replaced in modern browsers like Chrome and Firefox by an integrated datepicker. 
-            If you are viewing this demo from a modern browser, I recommend that you take a look at the "Example Inputs with class configuration" or reopen this page with Internet Explorer.          
-        </p>
-    </div>
-    <div class="info-container">
-        <a href="https://github.com/KreutzerCode/configurable-date-input-polyfill/archive/master.zip" target="_blank">
-            <div class="download">
-                Download
-            </div>
-        </a>
-    </div>
-    <div class="info-container">
-        <a href="https://www.npmjs.com/package/configurable-date-input-polyfill" target="_blank">
-            <div class="npm">
-                NPM
-            </div>
-        </a>
-    </div>
-</div>
-
-<div class="back">
-    <p>
-        <a href="javascript:history.back()">Back</a>
-    </p>
-</div>
-
-<script src="configurable-date-input-polyfill.dist.js"></script>
+    <script src="configurable-date-input-polyfill.dist.js"></script>
 
 </body>
 </html>

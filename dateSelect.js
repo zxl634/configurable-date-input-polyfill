@@ -18,24 +18,24 @@ export default class DateSelect {
     }
 
     static returnCurrentSelection() {
-        return this.monthSelect.returnSelectedMonthAsLabel()+' '+this.yearSelect.returnSelectedYear()
+        return this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear()
     }
 
-    static returnSelectedMonth () {
+    static returnSelectedMonth() {
         return this.monthSelect.returnSelectedMonth();
     }
 
-    static returnSelectedYear () {
+    static returnSelectedYear() {
         return this.yearSelect.returnSelectedYear();
     }
 
-    static toggleMonthByMatrix (mode) {
-        if(mode === "next" && this.monthSelect.returnSelectedMonth() === 11) {
-            this.yearSelect.toggleByInput(this.yearSelect.returnSelectedYear()+1);
+    static toggleMonthByMatrix(mode) {
+        if (mode === "next" && this.monthSelect.returnSelectedMonth() === 11) {
+            this.yearSelect.toggleByInput(this.yearSelect.returnSelectedYear() + 1);
         }
 
-        if(mode === "prev" && this.monthSelect.returnSelectedMonth() === 0) {
-            this.yearSelect.toggleByInput(this.yearSelect.returnSelectedYear()-1);
+        if (mode === "prev" && this.monthSelect.returnSelectedMonth() === 0) {
+            this.yearSelect.toggleByInput(this.yearSelect.returnSelectedYear() - 1);
         }
 
         this.monthSelect.toggleByMatrix(mode);
@@ -43,7 +43,7 @@ export default class DateSelect {
 }
 
 
-function YearSelect (givenYearRange) {
+function YearSelect(givenYearRange) {
     this.yearSelectWrapper = document.createElement('div');
     this.yearSelectWrapper.className = "select-wrapper year-select";
 
@@ -62,7 +62,7 @@ function YearSelect (givenYearRange) {
 
     this.date = new Date();
 
-    this.calculateTargetYearOffset = function (yearRangeArray,targetYear) {
+    this.calculateTargetYearOffset = function (yearRangeArray, targetYear) {
         var yearRangeArrayLength = yearRangeArray.length;
 
         switch (true) {
@@ -78,10 +78,10 @@ function YearSelect (givenYearRange) {
         }
     };
 
-    this.rotate = function (array , times ){
-        while( times-- ){
+    this.rotate = function (array, times) {
+        while (times--) {
             var temp = array.shift();
-            array.push( temp )
+            array.push(temp)
         }
 
         return array;
@@ -90,15 +90,15 @@ function YearSelect (givenYearRange) {
     this.toggleByInput = function (value) {
 
         //in case input is out of range
-        if(value > Math.max(...yearArray)) {
+        if (value > Math.max(...yearArray)) {
             value = Math.max(...yearArray);
         }
 
-        if(value !== yearArray[2] && value >= Math.min(...yearArray)) {
+        if (value !== yearArray[2] && value >= Math.min(...yearArray)) {
             let targetRotateCount = this.calculateTargetYearOffset(yearArray, value);
-            yearArray = this.rotate(yearArray,targetRotateCount);
+            yearArray = this.rotate(yearArray, targetRotateCount);
 
-            for(let i=0; i < 5; i++) {
+            for (let i = 0; i < 5; i++) {
                 this.optionWrapper.getElementsByClassName('option')[i].innerHTML = yearArray[i];
             }
         }
@@ -119,10 +119,10 @@ function YearSelect (givenYearRange) {
     let yearArray = createYearRangeArray(givenYearRange);
 
     /* start Function */
-    for(let i=0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
 
         let option = document.createElement('div');
-        option.className = "option option-"+i;
+        option.className = "option option-" + i;
         option.innerHTML = yearArray[i];
 
         this.optionWrapper.appendChild(option);
@@ -132,22 +132,22 @@ function YearSelect (givenYearRange) {
     this.toggleDown.addEventListener('click', function () {
         const zs = yearArray[0];
         for (let i = 0; i < yearArray.length; i++) {
-            if (i < yearArray.length-1) {
+            if (i < yearArray.length - 1) {
                 yearArray[i] = yearArray[(i + 1)];
             } else {
                 yearArray[i] = zs;
             }
         }
 
-        for(let i=0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             this.previousElementSibling.getElementsByClassName('option')[i].innerHTML = yearArray[i];
         }
     });
 
     /* upClick Function*/
     this.toggleUp.addEventListener('click', function () {
-        const zs = yearArray[yearArray.length-1];
-        for (let i = yearArray.length-1; i >= 0; i--) {
+        const zs = yearArray[yearArray.length - 1];
+        for (let i = yearArray.length - 1; i >= 0; i--) {
             if (i > 0) {
                 yearArray[i] = yearArray[(i - 1)];
             } else {
@@ -155,7 +155,7 @@ function YearSelect (givenYearRange) {
             }
         }
 
-        for(let i=0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             this.nextElementSibling.getElementsByClassName('option')[i].innerHTML = yearArray[i];
         }
     });
@@ -171,19 +171,19 @@ function YearSelect (givenYearRange) {
             yearRangeArray.push(i);
         }
 
-        if(yearRangeArray.length < 5) {
+        if (yearRangeArray.length < 5) {
             let missingItems = 5 - yearRangeArray.length;
 
-            for(let k = 0; k < missingItems; k++) {
+            for (let k = 0; k < missingItems; k++) {
                 yearRangeArray.push(yearRangeArray[k]);
             }
         }
 
         return yearRangeArray;
     }
-};
+}
 
-function MonthSelect (targetLocaleArray) {
+function MonthSelect(targetLocaleArray) {
 
     this.monthSelectWrapper = document.createElement('div');
     this.monthSelectWrapper.className = "select-wrapper month-select";
@@ -204,7 +204,7 @@ function MonthSelect (targetLocaleArray) {
     this.date = new Date();
     this.currentMonth = this.date.getMonth();
 
-    this.calculateMonthOffset = function (monthArray,targetMonth) {
+    this.calculateMonthOffset = function (monthArray, targetMonth) {
         let monthArrayLength = monthArray.length;
 
         switch (true) {
@@ -224,11 +224,11 @@ function MonthSelect (targetLocaleArray) {
 
         let monthStringArray = [];
 
-        if(!Array.isArray(monthArray)) {
+        if (!Array.isArray(monthArray)) {
             return targetLocaleArray[monthArray];
         }
 
-        monthArray.forEach(function(index) {
+        monthArray.forEach(function (index) {
 
             monthStringArray.push(targetLocaleArray[index].substring(0, 3));
         });
@@ -238,11 +238,11 @@ function MonthSelect (targetLocaleArray) {
 
     this.toggleByInput = function (value) {
 
-        if(value !== monthArray[2]) {
-            monthArray = this.rotate(monthArray,this.calculateMonthOffset(monthArray,value));
+        if (value !== monthArray[2]) {
+            monthArray = this.rotate(monthArray, this.calculateMonthOffset(monthArray, value));
             monthStringArray = this.returnMonthStringArray(monthArray);
 
-            for(let i=0; i < 5; i++) {
+            for (let i = 0; i < 5; i++) {
                 this.optionWrapper.getElementsByClassName('option')[i].innerHTML = monthStringArray[i];
             }
         }
@@ -252,10 +252,10 @@ function MonthSelect (targetLocaleArray) {
 
         switch (mode) {
             case 'next':
-                monthArray = this.rotate(monthArray,1);
+                monthArray = this.rotate(monthArray, 1);
                 break;
             case 'prev':
-                monthArray = this.rotate(monthArray,11);
+                monthArray = this.rotate(monthArray, 11);
                 break;
             default:
                 console.log('mode is not defined in toggleMonthByMatrix');
@@ -263,15 +263,15 @@ function MonthSelect (targetLocaleArray) {
 
         monthStringArray = this.returnMonthStringArray(monthArray);
 
-        for(let i=0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             this.optionWrapper.getElementsByClassName('option')[i].innerHTML = monthStringArray[i];
         }
     };
 
-    this.rotate = function (array , times ){
-        while( times-- ){
+    this.rotate = function (array, times) {
+        while (times--) {
             let temp = array.shift();
-            array.push( temp )
+            array.push(temp)
         }
 
         return array;
@@ -293,14 +293,14 @@ function MonthSelect (targetLocaleArray) {
         return monthArray;
     };
 
-    let monthArray = [0,1,2,3,4,5,6,7,8,9,10,11];
+    let monthArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
     let monthStringArray = this.returnMonthStringArray(monthArray);
 
     /* start Function */
-    for(let i=0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
 
         let option = document.createElement('div');
-        option.className = "option option-"+i;
+        option.className = "option option-" + i;
         option.innerHTML = monthStringArray[i];
 
         this.optionWrapper.appendChild(option);
@@ -310,7 +310,7 @@ function MonthSelect (targetLocaleArray) {
     this.toggleDown.addEventListener(`click`, buttonObject => {
         const zs = monthArray[0];
         for (let i = 0; i < monthArray.length; i++) {
-            if (i < monthArray.length-1) {
+            if (i < monthArray.length - 1) {
                 monthArray[i] = monthArray[(i + 1)];
             } else {
                 monthArray[i] = zs;
@@ -319,15 +319,15 @@ function MonthSelect (targetLocaleArray) {
 
         let monthStringArray = this.returnMonthStringArray(monthArray);
 
-        for(let i=0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             buttonObject.target.previousElementSibling.getElementsByClassName('option')[i].innerHTML = monthStringArray[i];
         }
     });
 
     /* upClick Function*/
     this.toggleUp.addEventListener(`click`, buttonObject => {
-        const zs = monthArray[monthArray.length-1];
-        for (let i = monthArray.length-1; i >= 0; i--) {
+        const zs = monthArray[monthArray.length - 1];
+        for (let i = monthArray.length - 1; i >= 0; i--) {
             if (i > 0) {
                 monthArray[i] = monthArray[(i - 1)];
             } else {
@@ -337,8 +337,8 @@ function MonthSelect (targetLocaleArray) {
 
         let monthStringArray = this.returnMonthStringArray(monthArray);
 
-        for(let i=0; i < 5; i++) {
+        for (let i = 0; i < 5; i++) {
             buttonObject.target.nextElementSibling.getElementsByClassName('option')[i].innerHTML = monthStringArray[i];
         }
     });
-};
+}

@@ -4,7 +4,7 @@ import Input from './input.js';
 const addPolyfillPickers = () => {
     Input.addPickerToOtherInputs();
     // Check if type="date" is supported. feature disabled!
-    if(!Input.supportsDateInput()) {
+    if (!Input.supportsDateInput()) {
         Input.addPickerToDateInputs();
     }
 };

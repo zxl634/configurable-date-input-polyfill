@@ -30,32 +30,32 @@ export default class Input {
             {
                 'valueAsDate': {
                     get: () => {
-                        if(!this.element.value) {
+                        if (!this.element.value) {
                             return null;
                         }
                         const format = this.format || 'yyyy-mm-dd';
                         const parts = this.element.value.match(/(\d+)/g);
                         let i = 0, fmt = {};
 
-                        format.replace(/(yyyy|dd|mm)/g, part=> {
+                        format.replace(/(yyyy|dd|mm)/g, part => {
                             fmt[part] = i++;
                         });
 
-                        return new Date(parts[fmt['yyyy']], parts[fmt['mm']]-1, parts[fmt['dd']]);
+                        return new Date(parts[fmt['yyyy']], parts[fmt['mm']] - 1, parts[fmt['dd']]);
                     },
                     set: val => {
                         this.element.value = DateFormat(val, this.format);
                     }
                 },
                 'valueAsNumber': {
-                    get: ()=> {
-                        if(!this.element.value) {
+                    get: () => {
+                        if (!this.element.value) {
                             return NaN;
                         }
 
                         return this.element.valueAsDate.valueOf();
                     },
-                    set: val=> {
+                    set: val => {
                         this.element.valueAsDate = new Date(val);
                     }
                 },
@@ -68,11 +68,12 @@ export default class Input {
 
         // Open the picker when the input get focus,
         // also on various click events to capture it in all corner cases.
-        const showPicker = (e) => {
+        const showPicker = () => {
             const elm = this.element;
             elm.firstDayOfWeek = this.firstDayOfWeek;
             elm.locale = this.localeLabels;
-            const didAttach = Picker.attachTo(elm);
+            //const didAttach = Picker.attachTo(elm); <-for checking purposes
+            Picker.attachTo(elm);
         };
 
         this.element.addEventListener(`focus`, showPicker);
@@ -85,7 +86,7 @@ export default class Input {
         this.element.addEventListener(`keydown`, e => {
             let date = new Date();
 
-            switch(e.keyCode) {
+            switch (e.keyCode) {
                 case 9: //hide on tab
                 case 27:
                     //hide on esc
@@ -93,44 +94,44 @@ export default class Input {
                     break;
                 case 37:
                     //arrow left
-                    if(this.element.valueAsDate) {
+                    if (this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() - 1);
 
-                        if(date.getFullYear() >= minYear) {
+                        if (date.getFullYear() >= minYear) {
                             this.element.valueAsDate = date;
                         }
                     }
                     break;
                 case 38:
                     //arrow up
-                    if(this.element.valueAsDate) {
+                    if (this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() - 7);
 
-                        if(date.getFullYear() >= minYear) {
+                        if (date.getFullYear() >= minYear) {
                             this.element.valueAsDate = date;
                         }
                     }
                     break;
                 case 39:
                     //arrow right
-                    if(this.element.valueAsDate) {
+                    if (this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() + 1);
 
-                        if(date.getFullYear() <= maxYear) {
+                        if (date.getFullYear() <= maxYear) {
                             this.element.valueAsDate = date;
                         }
                     }
                     break;
                 case 40:
                     //arrow down
-                    if(this.element.valueAsDate) {
+                    if (this.element.valueAsDate) {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() + 7);
 
-                        if(date.getFullYear() <= maxYear) {
+                        if (date.getFullYear() <= maxYear) {
                             this.element.valueAsDate = date;
                         }
                     }
@@ -143,7 +144,7 @@ export default class Input {
             Picker.syncPickerWithInput();
         });
 
-        this.element.addEventListener(`keyup`, e => {
+        this.element.addEventListener(`keyup`, function () {
             Picker.syncPickerWithInput();
         });
     }
@@ -151,13 +152,13 @@ export default class Input {
     getLocaleLabels() {
         const locale = this.locale.toLowerCase();
 
-        for(const localeSet in Localisation) {
+        for (const localeSet in Localisation) {
             const localeList = localeSet.split(`_`);
-            localeList.map(el=>el.toLowerCase());
+            localeList.map(el => el.toLowerCase());
 
-            if(
+            if (
                 !!~localeList.indexOf(locale)
-                || !!~localeList.indexOf(locale.substr(0,2))
+                || !!~localeList.indexOf(locale.substr(0, 2))
             ) {
                 return Localisation[localeSet];
             }
@@ -171,14 +172,14 @@ export default class Input {
         this.maxYear = this.element.getAttribute('max');
 
         //check if values are in correct order and limited in size
-        if(this.minYear > 1000 && this.maxYear > 1000 
-            && this.minYear < 4000 && this.maxYear < 4001 
+        if (this.minYear > 1000 && this.maxYear > 1000
+            && this.minYear < 4000 && this.maxYear < 4001
             && this.minYear < this.maxYear) {
             this.yearRange = [];
-            this.yearRange.push(this.minYear,this.maxYear);
+            this.yearRange.push(this.minYear, this.maxYear);
         } else {
             //return default value if not
-            this.yearRange = [1800,2200];
+            this.yearRange = [1800, 2200];
         }
 
         return this.yearRange;
@@ -201,11 +202,11 @@ export default class Input {
         const dateInputs = document.querySelectorAll(`input[type="date"]:not([data-has-picker])`);
         const length = dateInputs.length;
 
-        if(!length) {
+        if (!length) {
             return false;
         }
 
-        for(let i = 0; i < length; ++i) {
+        for (let i = 0; i < length; ++i) {
             new Input(dateInputs[i]);
         }
     }
@@ -216,11 +217,11 @@ export default class Input {
         const dateInputs = document.querySelectorAll(`input[type="text"].date-polyfill:not([data-has-picker])`);
         const length = dateInputs.length;
 
-        if(!length) {
+        if (!length) {
             return false;
         }
 
-        for(let i = 0; i < length; ++i) {
+        for (let i = 0; i < length; ++i) {
             new Input(dateInputs[i]);
         }
     }
