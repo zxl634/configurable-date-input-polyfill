@@ -1,6 +1,7 @@
 // Localizations for UI text.
 // Keys correspond to applicable `lang` values, delimited by an underscore.
-// Days and months must be listed in the order they should display.
+// Days must be listed in the order Sunday till Saturday.
+// Months must be listed in the order January till December.
 
 const localisations = {
     'en_en-US_en-UK': {
@@ -109,13 +110,13 @@ const localisations = {
     /* German (Germany) */
     'de_de-DE': {
         days: [
+            `So`,
             `Mo`,
             `Di`,
             `Mi`,
             `Do`,
             `Fr`,
-            `Sa`,
-            `So`
+            `Sa`
         ],
         months: [
             `Januar`,
@@ -137,13 +138,13 @@ const localisations = {
     /* Dutch */
     'nl_nl-NL_nl-BE': {
         days: [
-            `Maandag`,
-            `Dinsdag`,
-            `Woensdag`,
-            `Donderdag`,
-            `Vrijdag`,
-            `Zaterdag`,
-            `Zondag`
+            `Zo`,
+            `Ma`,
+            `Di`,
+            `Wo`,
+            `Do`,
+            `Vr`,
+            `Za`
         ],
         months: [
             `Januari`,
@@ -192,13 +193,13 @@ const localisations = {
     /* French */
     'fr_fr-FR_fr-BE': {
         days: [
+            `Di`,
             `Lu`,
             `Ma`,
             `Me`,
             `Je`,
             `Ve`,
-            `Sa`,
-            `Di`
+            `Sa`
         ],
         months: [
             `Janvier`,
