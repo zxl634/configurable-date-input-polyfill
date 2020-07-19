@@ -13,18 +13,18 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/, // include .js files
-                exclude:path.resolve(__dirname, "node_modules"), // exclude any and all files in the node_modules folder
+                exclude: path.resolve(__dirname, "node_modules"), // exclude any and all files in the node_modules folder
                 use: [{
                     loader: "babel-loader",
                     options: {
                         presets: ['@babel/preset-env']
                     }
-                }]
+                }, "eslint-loader"]
             },
             {
-                test:/\.(s*)css$/,
-                exclude:path.resolve(__dirname, "node_modules"), // exclude any and all files in the node_modules folder
-                use:['style-loader','css-loader', 'sass-loader']
+                test: /\.(s*)css$/,
+                exclude: path.resolve(__dirname, "node_modules"), // exclude any and all files in the node_modules folder
+                use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
     },
