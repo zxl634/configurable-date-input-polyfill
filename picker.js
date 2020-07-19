@@ -280,17 +280,29 @@ class Picker {
     }
 
     createMatrixHeader() {
-        if (this.locale === this.input.locale) {
+        if (this.locale === this.input.locale && this.firstDayOfWeek === this.input.firstDayOfWeek) {
             return false;
         }
 
         this.locale = this.input.locale;
+        this.firstDayOfWeek = this.input.firstDayOfWeek;
 
-        const daysHeadHTML = [`<tr>`];
+        let daysHeaderContent = [];
+
         for (let i = 0, len = this.locale.days.length; i < len; ++i) {
-            daysHeadHTML.push(`<th scope="col">${this.locale.days[i]}</th>`);
+            daysHeaderContent.push(`<th scope="col">${this.locale.days[i]}</th>`);
         }
-        this.daysHead.innerHTML = daysHeadHTML.join(``);
+
+        //check if first day of week is monday
+        if (this.input.firstDayOfWeek === 'mo') {
+            daysHeaderContent.push(daysHeaderContent.shift());
+        }
+        //check if first day of week is saturday
+        if (this.input.firstDayOfWeek === 'sa') {
+            daysHeaderContent.unshift(daysHeaderContent.pop());
+        }
+        
+        this.daysHead.innerHTML = "<tr>"+daysHeaderContent.join(``)+"</tr>";
     }
 
     refreshDaysMatrix() {
