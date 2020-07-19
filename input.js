@@ -12,10 +12,10 @@ export default class Input {
             || document.body.getAttribute(`lang`)
             || `en`;
 
-        this.matrixFormat =
-            this.element.getAttribute(`data-matrix-format`)
-            || document.body.getAttribute(`data-matrix-format`)
-            || `us`;
+        this.firstDayOfWeek =
+            this.element.getAttribute(`data-first-day`)
+            || document.body.getAttribute(`data-first-day`)
+            || `su`;
 
         this.format = this.element.getAttribute('date-format')
             || document.body.getAttribute('date-format')
@@ -70,7 +70,7 @@ export default class Input {
         // also on various click events to capture it in all corner cases.
         const showPicker = (e) => {
             const elm = this.element;
-            elm.matrixFormat = this.matrixFormat;
+            elm.firstDayOfWeek = this.firstDayOfWeek;
             elm.locale = this.localeLabels;
             const didAttach = Picker.attachTo(elm);
         };

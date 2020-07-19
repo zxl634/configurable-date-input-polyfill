@@ -307,30 +307,22 @@ class Picker {
             0
         ).getDate(); // Get days in month (1-31).
 
-        if (this.input.matrixFormat === 'eu') {
+        //check if first day of week is monday
+        if (this.input.firstDayOfWeek === 'mo') {
             //update startDay to EU format -> start at mo
-            switch (startDay) {
-                case 0:
-                    startDay = 6;
-                    break;
-                case 1:
-                    startDay = 0;
-                    break;
-                case 2:
-                    startDay = 1;
-                    break;
-                case 3:
-                    startDay = 2;
-                    break;
-                case 4:
-                    startDay = 3;
-                    break;
-                case 5:
-                    startDay = 4;
-                    break;
-                case 6:
-                    startDay = 5;
-                    break;
+            if(startDay === 0) {
+                startDay = 6;
+            }else {
+                startDay--;
+            }
+        }
+        //check if first day of week is saturday
+        if (this.input.firstDayOfWeek === 'sa') {
+            //update startDay to EU format -> start at mo
+            if(startDay === 6) {
+                startDay = 0;
+            }else {
+                startDay++;
             }
         }
 
