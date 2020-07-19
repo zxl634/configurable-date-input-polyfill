@@ -5,7 +5,7 @@
 [![dependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill)
 [![devDependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/dev-status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill?type=dev)
 
-The last Date-Input-Polyfill you will ever need. A fancy and lightweight date input with a high number of configuration options for all needs. Supports European and American formatting and many other localisations.
+The last date-input polyfill you will ever need. A fancy and lightweight date input with a high number of configuration options for all needs. Supports any calendar format and contains a large amount of localizations.
 
 Just include this simple script and IE, Firefox, and OS X Safari will support `<input type="date">`, without any dependencies, not even jQuery!
 
@@ -25,8 +25,8 @@ which you may override with your own.
 * Limit the range to choose from by setting the `min` and `max` attributes.
 * Configure display format at will. Specify the display format by setting either the
 `date-format` or `data-date-format` attribute of the `input` element.
-* Configure Day Matrix Format. Specify the Format of the Day Matrix. By setting the 
-`data-matrix-format` attribute, you can set the Matrix Format to Europe or US standards.
+* Configure the first day of the week. By setting the attribute `data-first-day` attribute you 
+can set the calendar matrix format to any standard. Value of this attribute can be `sa`,`su` or `mo`.
 * Polyfill can be added with class `date-polyfill`.
 * Polyfill works with `valueAsDate` and `valueAsNumber`.
 [Learn more about these properties.](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#property-valueasdate)
@@ -85,14 +85,17 @@ include it anywhere in your HTML.
 <input type="date" data-date-format="dd.mm.yyyy" />
 ```
 
-## Matrix Formatting
-* Specify the Format of the DatePicker Matrix. With the data-matrix-format attribute you can change the Day starting the week between Saturday and Monday.
+## First day of the Week (Matrix Formatting)
+* Specify the first day of the Week. With the data-first-day attribute you can change the Day starting the week between Saturday, Sunday and Monday.
 ```html
 <!--default dont need to be specified-->
-<input type="date" data-matrix-format="us" />
+<input type="date" data-first-day="su" />
 
 <!--europe-->
-<input type="date" data-matrix-format="eu" />
+<input type="date" data-first-day="mo" />
+
+<!--egypt-->
+<input type="date" data-first-day="sa" />
 ```
 
 ## Browser support

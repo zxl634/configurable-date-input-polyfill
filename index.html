@@ -123,6 +123,11 @@
         </p>
 
         <p>
+            With monday as first week day:
+            <input title="first-week-day-monday" type="date" data-first-day="mo"/>
+        </p>
+
+        <p>
             With min and max configuration:
             <input title="data-date-format" type="date" min="2005" max="2030"/>
         </p>
@@ -150,17 +155,22 @@
 
         <p>
             Text & class with localization:
-            <input title="text-class-with-local" class="date-polyfill" type="text" lang="fr" data-matrix-format="eu"/>
+            <input title="text-class-with-local" class="date-polyfill" type="text" lang="fr"/>
         </p>
         
         <p>
-            Text & class with german formating:
-            <input title="europe-format" class="date-polyfill" type="text" lang="de" data-date-format="dd.mm.yyyy" data-matrix-format="eu"/>
+            Text & class with monday as first week day:
+            <input title="first-week-day-monday" class="date-polyfill" type="text" data-first-day="mo"/>
+        </p>
+
+        <p>
+            Text & class with a german configuration:
+            <input title="german-configuration" class="date-polyfill" type="text" lang="de" data-date-format="dd.mm.yyyy" data-first-day="mo"/>
         </p>
         
         <p>
             Text & class with min and max value:
-            <input title="europe-format" class="date-polyfill" type="text" min="2010" max="2030"/>
+            <input title="min-max-value" class="date-polyfill" type="text" min="2010" max="2030"/>
         </p>
         <p>
             ...
