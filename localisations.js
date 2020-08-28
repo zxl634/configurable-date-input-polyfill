@@ -246,6 +246,34 @@ const localisations = {
         today: `Hoy`,
         format: `D/M/Y`
     },
+    /* Italian */
+    'it_it-IT': {
+        days: [
+            `Do`,
+            `Lu`,
+            `Ma`,
+            `Me`,
+            `Gi`,
+            `Ve`,
+            `Sa`
+        ],
+        months: [
+            `Gennaio`,
+            `Febbraio`,
+            `Marzo`,
+            `Aprile`,
+            `Maggio`,
+            `Giugno`,
+            `Luglio`,
+            `Agosto`,
+            `Settembre`,
+            `Ottobre`,
+            `Novembre`,
+            `Dicembre`
+        ],
+        today: `Oggi`,
+        format: `D/M/Y`
+    },
     /* Danish */
     'da_da-dk': {
         days: [
