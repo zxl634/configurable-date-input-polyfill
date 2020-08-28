@@ -25,7 +25,7 @@ which you may override with your own.
 * Limit the range to choose from by setting the `min` and `max` attributes.
 * Configure display format at will. Specify the display format by setting either the
 `date-format` or `data-date-format` attribute of the `input` element.
-* Configure the first day of the week. By setting the attribute `data-first-day` attribute you 
+* Configure the first day of the week. By setting the `data-first-day` attribute you 
 can set the calendar matrix format to any standard. Value of this attribute can be `sa`,`su` or `mo`.
 * Polyfill can be added with class `date-polyfill`.
 * Polyfill works with `valueAsDate` and `valueAsNumber`.
@@ -86,7 +86,7 @@ include it anywhere in your HTML.
 ```
 
 ## First day of the Week (Matrix Formatting)
-* Specify the first day of the Week. With the data-first-day attribute you can change the Day starting the week between Saturday, Sunday and Monday.
+* Specify the first day of the Week. With the data-first-day attribute you can change the day starting the week between Saturday, Sunday and Monday.
 ```html
 <!--default dont need to be specified-->
 <input type="date" data-first-day="su" />
@@ -109,6 +109,7 @@ include it anywhere in your HTML.
 
 #### Mobile
 * iOS Safari 7+
+* Samsung Internet 11+
 
 
 ## Contributing
