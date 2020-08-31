@@ -8,8 +8,12 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <style>
         body {
+            display: block;
+            width: 100%;
+            height: auto;
             font-family: Arial, Helvetica, sans-serif;
             background-color: #a2d8f6;
+            margin: 0px;
         }
 
         h1 {
@@ -17,6 +21,7 @@
             font-size: 65px;
             text-align: center;
             color: white;
+            word-wrap: Break-Word;
         }
 
         h2 {
@@ -26,83 +31,74 @@
 
         a {
             text-decoration: none;
-            border-spacing: unset;
+            color: #fff;
         }
 
-        .demo-wrapper {
+        .demo-wrapper, .info-wrapper {
             width: 100%;
-            table-layout: fixed;
-            border-spacing: 10px;
-            display: table;
+            position: relative;
+            display: block;
             height: auto;
-            padding: 20px;
+			padding: 20px;
             box-sizing: border-box;
+            text-align: center;
         }
 
-        .example-container {
-            display: table-cell;
+        .example-container, .info-container {
+            display: inline-block;
             background-color: white;
             border: solid 2px black;
             padding: 10px 50px 10px 50px;
             margin: 10px;
-            width: 30%;
+            width: 25%;
+            min-width: 200px;
+			min-height: 450px;
+            vertical-align: top;
         }
 
-        .example-container p {
+        .example-container div {
+            margin: 10px 0;
+        }
+
+        .example-container span {
             font-size: 16px;
-        }
-
-        .example-container p input {
-            float: right;
-        }
-
-        .info-wrapper {
-            display: block;
-            width: 100%;
-            height: auto;
-            padding: 20px;
-            float: left;
-            box-sizing: border-box;
+            width: 60%;
+            display: inline-block;
         }
 
         .info-container {
-            display: block;
-            width: 100%;
-            width: 30%;
-            padding: 10px 25px 10px 30px;
-            float: left;
+            background-color: transparent;
+            border: 0px;
+            padding: 0px;
+			min-height: 0px;
         }
 
-        .info-container p {
-            margin: unset;
+        .button {
+            height: 75px;
+			min-width: 300px;
+            font-size: 60px;
+            text-align: center;
+            line-height: 75px;
+            font-weight: bolder;
+            border: solid 1px black;
         }
 
         .download {
-            border: solid 1px black;
             background-color: #ffffff;
-            font-size: 4vw;
             color: #a2d8f6;
-            font-weight: bolder;
-            width: 100%;
-            text-align: center;
         }
 
         .npm {
-            background: #cc3534;
+            background-color: #cc3534;
             border: solid 1px #cc3534;
-            color: #ffffff;
-            font-size: 6vw;
-            text-align: center;
-            font-weight: bolder;
         }
 
         .back {
-            margin: 50px;
-        }
-
-        .back a {
-            font-size: 18px;
-            color: white
+            width: 100%;
+            padding: 15px;
+            box-sizing: border-box;
+            text-align: left;
+            color: #fff;
         }
     </style>
 </head>
@@ -112,40 +108,48 @@
     <div class="demo-wrapper">
         <div class="example-container">
             <h2>Example Date-Input configuration</h2>
-            <p>
-                Normal Input date (default):
+            <div>
+                <span>
+                    Normal Input date (default):
+                </span>
                 <input title="normal" type="date" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 With value:
+                </span>
                 <input title="with-value" type="date" value="2015-03-28" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 With format ("date-format"):
+                </span>
                 <input title="date-format" type="date" date-format="mm/dd/yyyy" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 With format ("data-date-format"):
+                </span>
                 <input title="data-date-format" type="date" data-date-format="mm/dd/yyyy" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 With localization:
+                </span>
                 <input title="data-date-format" type="date" lang="de" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 With monday as first week day:
+                </span>
                 <input title="first-week-day-monday" type="date" data-first-day="mo" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 With min and max configuration:
+                </span>
                 <input title="data-date-format" type="date" min="2005" max="2030" />
-            </p>
+            </div>
             <p>
                 ...
             </p>
@@ -153,41 +157,49 @@
 
         <div class="example-container">
             <h2>Example Inputs with class configuration</h2>
-            <p>
+            <div>
+                <span>
                 With type text & class (default):
+                </span>
                 <input title="text-class-default" class="date-polyfill" type="text" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 Text & class with value:
+                </span>
                 <input title="text-class-with-value" class="date-polyfill" type="text" value="2020-03-28" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 Text & class with format:
+                </span>
                 <input title="text-class" class="date-polyfill" type="text" date-format="mm/dd/yyyy" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 Text & class with localization:
+                </span>
                 <input title="text-class-with-local" class="date-polyfill" type="text" lang="fr" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 Text & class with monday as first week day:
+                </span>
                 <input title="first-week-day-monday" class="date-polyfill" type="text" data-first-day="mo" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 Text & class with a german configuration:
+                </span>
                 <input title="german-configuration" class="date-polyfill" type="text" lang="de"
                     data-date-format="dd.mm.yyyy" data-first-day="mo" />
-            </p>
-
-            <p>
+            </div>
+            <div>
+                <span>
                 Text & class with min and max value:
+                </span>
                 <input title="min-max-value" class="date-polyfill" type="text" min="2010" max="2030" />
-            </p>
+            </div>
             <p>
                 ...
             </p>
@@ -210,36 +222,30 @@
 
     <div class="info-wrapper">
         <div class="info-container">
-            <p>
+            <span>
                 *Note that some examples are replaced in modern browsers like Chrome and Firefox by an integrated
                 datepicker.
                 If you are viewing this demo from a modern browser, I recommend that you take a look at the "Example
                 Inputs with class configuration" or reopen this page with Internet Explorer.
-            </p>
+            </span>
         </div>
-        <div class="info-container">
-            <a href="https://github.com/KreutzerCode/configurable-date-input-polyfill/archive/master.zip"
-                target="_blank">
-                <div class="download">
-                    Download
-                </div>
-            </a>
-        </div>
-        <div class="info-container">
-            <a href="https://www.npmjs.com/package/configurable-date-input-polyfill" target="_blank">
-                <div class="npm">
-                    NPM
-                </div>
-            </a>
-        </div>
+        <a href="https://github.com/KreutzerCode/configurable-date-input-polyfill/archive/master.zip"
+        target="_blank">
+            <div class="info-container download button">
+                Download
+            </div>
+        </a>
+        <a href="https://www.npmjs.com/package/configurable-date-input-polyfill" target="_blank">
+            <div class="info-container npm button">
+                NPM
+            </div>
+        </a>
+        <a href="javascript:history.back()"></a>
+            <div class="back">
+                Back
+            </div>
+        </a>
     </div>
-
-    <div class="back">
-        <p>
-            <a href="javascript:history.back()">Back</a>
-        </p>
-    </div>
-
     <script src="configurable-date-input-polyfill.dist.js"></script>
 
 </body>
