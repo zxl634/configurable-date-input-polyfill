@@ -1,27 +1,36 @@
+$white-color: #ffffff;
+$lightgrey-color: #d3d3d3;
+$grey-color: #a8a3a3;
+$font-color:  #000000;
+$boxshadow-color: #808080;
+$weekdaylabel-color: #b4b4b4;
+$selectedday-color: #a2d8f6;
+$arrows-color: #7d7d7d;
+
 date-input-polyfill {
   width: auto;
   height: auto;
-  background-color: white;
-  -webkit-box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.81);
-  -moz-box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.81);
-  box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.81);
+  background-color: $white-color;
+  -webkit-box-shadow: 0px 0px 5px 2px rgba($boxshadow-color, 0.81);
+  -moz-box-shadow: 0px 0px 5px 2px rgba($boxshadow-color, 0.81);
+  box-shadow: 0px 0px 5px 2px rgba($boxshadow-color, 0.81);
   position: absolute;
   font-family: Arial;
   font-size: 16px;
-  color: black;
+  color: $font-color;
 
   .date-select-header {
     position: relative;
     width: 100%;
     height: 40px;
-    background-color: white;
+    background-color: $white-color;
     text-align: center;
     line-height: 40px;
 
     .date-header-button {
       padding: 5px 25px 5px 5px;
-      border: solid 1px #a5a5a5;
-      background-color: white;
+      border: solid 1px $grey-color;
+      background-color: $white-color;
       min-width: 150px;
       width: auto;
       max-width: 180px;
@@ -65,7 +74,7 @@ date-input-polyfill {
   .day-matrix-wrapper {
     position: relative;
     float: left;
-    background-color: white;
+    background-color: $white-color;
     min-width: 240px;
     width: auto;
     height: 195px;
@@ -79,7 +88,7 @@ date-input-polyfill {
       line-height: 24px;
 
       thead {
-        color: #b4b4b4;
+        color: $weekdaylabel-color;
         pointer-events: none;
 
         th {
@@ -91,40 +100,39 @@ date-input-polyfill {
       }
       tbody {
         td {
-          border: solid 1px white;
+          border: solid 1px $white-color;
           padding: 0;
           text-align: center;
           font-size: 18px;
           width: 26px;
 
           &.current-day {
-            border: solid 1px #a8a3a3;
-            background-color: #a8a3a3;
+            border: solid 1px $grey-color;
+            background-color: $grey-color;
           }
 
           &[data-selected] {
             font-weight: bold;
-            border: solid 1px #a2d8f6;
-            background-color: #a2d8f6;
-            color: white;
+            border: solid 1px $selectedday-color;
+            background-color: $selectedday-color;
             &:hover {
-              border: solid 1px #a2d8f6;
-              background-color: #a2d8f6;
+              border: solid 1px $selectedday-color;
+              background-color: $selectedday-color;
             }
           }
 
           &.prev-month, &.next-month {
-            color: lightgrey;
+            color: $lightgrey-color;
           }
 
           &:hover {
             cursor: pointer;
-            background-color: #dadada;
-            border: solid 1px lightgrey;
+            background-color: $lightgrey-color;
+            border: solid 1px $lightgrey-color;
           }
 
           &.prev-month:hover, &.next-month:hover {
-            color: white;
+            color: $white-color;
           }
         }
       }
@@ -136,7 +144,7 @@ date-input-polyfill {
     width: 100%;
     height: auto;
     top: 40px;
-    background-color: white;
+    background-color: $white-color;
     display: none;
 
     .select-container {
@@ -155,7 +163,7 @@ date-input-polyfill {
         float: left;
         border: none;
         outline: none;
-        color: #7d7d7d;
+        color: $arrows-color;
         position: relative;
       }
 
@@ -214,7 +222,7 @@ date-input-polyfill {
           }
 
           .option-2 {
-            background-color: lightgrey;
+            background-color: $lightgrey-color;
           }
         }
       }
