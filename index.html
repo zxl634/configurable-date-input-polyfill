@@ -6,22 +6,29 @@
     <title>Polyfill Datepicker Demo</title>
     <meta name="description" content="Polyfill Demo">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <style>
         body {
-            display: block;
-            width: 100%;
-            height: auto;
             font-family: Arial, Helvetica, sans-serif;
             background-color: #a2d8f6;
-            margin: 0px;
+        }
+
+        input {
+            min-width: 125px;
+            max-width: 100%;
+        }
+
+        .col-12 {
+            margin-top: 15px;
         }
 
         h1 {
-            width: 100%;
-            font-size: 65px;
+            font-size: 60px;
             text-align: center;
             color: white;
             word-wrap: Break-Word;
+            margin: 30px 0 30px 0;
         }
 
         h2 {
@@ -29,53 +36,28 @@
             margin-bottom: 30px;
         }
 
-        a {
-            text-decoration: none;
-            color: #fff;
-        }
-
-        .demo-wrapper, .info-wrapper {
+        .example-container,
+        .info-container {
             width: 100%;
-            position: relative;
-            display: block;
-            height: auto;
-			padding: 20px;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        .example-container, .info-container {
-            display: inline-block;
+            height: 100%;
             background-color: white;
             border: solid 2px black;
-            padding: 10px 50px 10px 50px;
-            margin: 10px;
-            width: 25%;
-            min-width: 200px;
-			min-height: 450px;
-            vertical-align: top;
-        }
-
-        .example-container div {
-            margin: 10px 0;
-        }
-
-        .example-container span {
-            font-size: 16px;
-            width: 60%;
-            display: inline-block;
+            padding: 30px 15px;
+            box-sizing: border-box;
         }
 
         .info-container {
             background-color: transparent;
+            height: auto;
+            width: auto;
             border: 0px;
             padding: 0px;
-			min-height: 0px;
+            margin: 20px;
         }
 
         .button {
-            height: 75px;
-			min-width: 300px;
+            min-width: 325px;
+            min-height: 90px;
             font-size: 60px;
             text-align: center;
             line-height: 75px;
@@ -91,161 +73,249 @@
         .npm {
             background-color: #cc3534;
             border: solid 1px #cc3534;
+            color: #ffffff;
         }
 
         .back {
-            width: 100%;
-            padding: 15px;
-            box-sizing: border-box;
-            text-align: left;
+            background-color: transparent;
+            border: 0px;
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .example-input {
+            text-align: center;
+        }
+
+        .example-row {
+            margin-bottom: 10px;
         }
     </style>
 </head>
 
-<body>
+<body class="container-fluid">
     <h1>Configurable Date-Input-Polyfill DEMO</h1>
-    <div class="demo-wrapper">
-        <div class="example-container">
-            <h2>Example Date-Input configuration</h2>
-            <div>
+    <div class="row">
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="example-container">
+                <h2>Example Date-Input configuration</h2>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            Normal Input date (default):
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with default configuration" type="date" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            With value:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with preset value" type="date" value="2015-03-28" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            With format ("date-format"):
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with configured date format" type="date" date-format="mm/dd/yyyy" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            With format ("data-date-format"):
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with configured date format" type="date" data-date-format="mm/dd/yyyy" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            With localization:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with german local" type="date" lang="de" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            With monday as first week day:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with monday as first week day" type="date" data-first-day="mo" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            With min and max configuration:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with configured min & max value" type="date" min="2005" max="2030" />
+                    </div>
+                </div>
                 <span>
-                    Normal Input date (default):
+                    ...
                 </span>
-                <input title="normal" type="date" />
             </div>
-            <div>
-                <span>
-                With value:
-                </span>
-                <input title="with-value" type="date" value="2015-03-28" />
-            </div>
-            <div>
-                <span>
-                With format ("date-format"):
-                </span>
-                <input title="date-format" type="date" date-format="mm/dd/yyyy" />
-            </div>
-            <div>
-                <span>
-                With format ("data-date-format"):
-                </span>
-                <input title="data-date-format" type="date" data-date-format="mm/dd/yyyy" />
-            </div>
-            <div>
-                <span>
-                With localization:
-                </span>
-                <input title="data-date-format" type="date" lang="de" />
-            </div>
-            <div>
-                <span>
-                With monday as first week day:
-                </span>
-                <input title="first-week-day-monday" type="date" data-first-day="mo" />
-            </div>
-            <div>
-                <span>
-                With min and max configuration:
-                </span>
-                <input title="data-date-format" type="date" min="2005" max="2030" />
-            </div>
-            <p>
-                ...
-            </p>
         </div>
 
-        <div class="example-container">
-            <h2>Example Inputs with class configuration</h2>
-            <div>
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="example-container">
+                <h2>Example Inputs with class configuration</h2>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            With type text & class (default):
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with default configuration" class="date-polyfill" type="text" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            Text & class with value:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with preset value" class="date-polyfill" type="text" value="2020-03-28" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            Text & class with format:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with configured date format" class="date-polyfill" type="text"
+                            date-format="mm/dd/yyyy" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            Text & class with localization:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with french local" class="date-polyfill" type="text" lang="fr" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            Text & class with monday as first week day:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with monday as first week day" class="date-polyfill" type="text"
+                            data-first-day="mo" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            Text & class with a german configuration:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with german configuration" class="date-polyfill" type="text" lang="de"
+                            data-date-format="dd.mm.yyyy" data-first-day="mo" />
+                    </div>
+                </div>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            Text & class with min and max value:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-5 example-input">
+                        <input title="with configured min & max value" class="date-polyfill" type="text" min="2010"
+                            max="2030" />
+                    </div>
+                </div>
                 <span>
-                With type text & class (default):
+                    ...
                 </span>
-                <input title="text-class-default" class="date-polyfill" type="text" />
             </div>
-            <div>
-                <span>
-                Text & class with value:
-                </span>
-                <input title="text-class-with-value" class="date-polyfill" type="text" value="2020-03-28" />
-            </div>
-            <div>
-                <span>
-                Text & class with format:
-                </span>
-                <input title="text-class" class="date-polyfill" type="text" date-format="mm/dd/yyyy" />
-            </div>
-            <div>
-                <span>
-                Text & class with localization:
-                </span>
-                <input title="text-class-with-local" class="date-polyfill" type="text" lang="fr" />
-            </div>
-            <div>
-                <span>
-                Text & class with monday as first week day:
-                </span>
-                <input title="first-week-day-monday" class="date-polyfill" type="text" data-first-day="mo" />
-            </div>
-            <div>
-                <span>
-                Text & class with a german configuration:
-                </span>
-                <input title="german-configuration" class="date-polyfill" type="text" lang="de"
-                    data-date-format="dd.mm.yyyy" data-first-day="mo" />
-            </div>
-            <div>
-                <span>
-                Text & class with min and max value:
-                </span>
-                <input title="min-max-value" class="date-polyfill" type="text" min="2010" max="2030" />
-            </div>
-            <p>
-                ...
-            </p>
         </div>
 
-        <div class="example-container">
-            <h2>Fancy dynamic example</h2>
-            <p id="dynamic">
-                dynamically created:
-                <script>
-                    setTimeout(function () {
-                        var input = document.createElement("input");
-                        input.setAttribute("type", "date");
-                        document.getElementById("dynamic").appendChild(input);
-                    }, 2000);
-                </script>
-            </p>
+        <div class="col-12 col-md-12 col-xl-4">
+            <div class="example-container">
+                <h2>Fancy dynamic example</h2>
+                <div class="row example-row">
+                    <div class="col-md-12 col-xl-7">
+                        <span>
+                            Dynamically created Input:
+                        </span>
+                    </div>
+                    <div class="col-md-12 col-xl-4 example-input" id="dynamic-example">
+                        <script>
+                            setTimeout(function () {
+                                var input = document.createElement("input");
+                                input.setAttribute("type", "date");
+                                document.getElementById("dynamic-example").appendChild(input);
+                            }, 2000);
+                        </script>
+                    </div>
+                </div>
+                <span>
+                    ...
+                </span>
+            </div>
         </div>
     </div>
-
-    <div class="info-wrapper">
-        <div class="info-container">
-            <span>
-                *Note that some examples are replaced in modern browsers like Chrome and Firefox by an integrated
-                datepicker.
-                If you are viewing this demo from a modern browser, I recommend that you take a look at the "Example
-                Inputs with class configuration" or reopen this page with Internet Explorer.
-            </span>
-        </div>
-        <a href="https://github.com/KreutzerCode/configurable-date-input-polyfill/archive/master.zip"
-        target="_blank">
-            <div class="info-container download button">
+    <div class="row">
+        <div class="col-12 col-md-6 col-xl-4 text-center">
+            <button class="info-container download button"
+                onclick="window.open('https://github.com/KreutzerCode/configurable-date-input-polyfill/archive/master.zip','_blank')">
                 Download
-            </div>
-        </a>
-        <a href="https://www.npmjs.com/package/configurable-date-input-polyfill" target="_blank">
-            <div class="info-container npm button">
+            </button>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4 text-center">
+            <button class="info-container npm button"
+                onclick="window.open('https://www.npmjs.com/package/configurable-date-input-polyfill','_blank')">
                 NPM
+            </button>
+        </div>
+        <div class="col-12 col-md-12 col-xl-4">
+            <div class="info-container">
+                <p>
+                    Note that some examples are replaced in modern browsers like Chrome and Firefox by an integrated
+                    datepicker.
+                    If you are viewing this demo from a modern browser, I recommend that you take a look at the "Example
+                    Inputs with class configuration" or reopen this page with Internet Explorer.
+                </p>
             </div>
-        </a>
-        <a href="javascript:history.back()">
-            <div class="back">
-                Back
-            </div>
-        </a>
+        </div>
     </div>
-    <script src="configurable-date-input-polyfill.dist.js"></script>
-
+    <div class="row">
+        <div class="col-12">
+            <button class="back" onclick="history.back()">
+                Back
+            </button>
+        </div>
+    </div>
+    <script src="./configurable-date-input-polyfill.dist.js"></script>
 </body>
+
 </html>
