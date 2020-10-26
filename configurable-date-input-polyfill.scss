@@ -9,6 +9,7 @@ $arrows-color: #7d7d7d;
 
 date-input-polyfill {
   width: auto;
+  min-width: 260px;
   height: auto;
   background-color: $white-color;
   -webkit-box-shadow: 0px 0px 5px 2px rgba($boxshadow-color, 0.81);
@@ -73,12 +74,11 @@ date-input-polyfill {
 
   .day-matrix-wrapper {
     position: relative;
-    float: left;
     background-color: $white-color;
-    min-width: 240px;
-    width: auto;
-    height: 195px;
+    width: 100%;
+    height: auto;
     padding: 0 10px 10px 10px;
+    box-sizing: border-box;
 
     table {
       width: 100%;
@@ -86,6 +86,7 @@ date-input-polyfill {
       font-size: 18px;
       padding: 0;
       line-height: 24px;
+      border-collapse: separate;
 
       thead {
         color: $weekdaylabel-color;
@@ -104,7 +105,7 @@ date-input-polyfill {
           padding: 0;
           text-align: center;
           font-size: 18px;
-          width: 26px;
+          width: 30px;
 
           &.current-day {
             border: solid 1px $grey-color;
@@ -148,9 +149,10 @@ date-input-polyfill {
     display: none;
 
     .select-container {
-      width: 140px;
-      height: auto;
+      position: relative;
       float: left;
+      width: 100%;
+      height: auto;
       padding: 5px 60px 5px 60px;
 
       .up, .down {
