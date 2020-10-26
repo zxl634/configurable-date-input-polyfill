@@ -1,9 +1,10 @@
 # configurable-date-input-polyfill
 
 [![Build Status](https://travis-ci.org/KreutzerCode/configurable-date-input-polyfill.svg?branch=master)](https://travis-ci.org/KreutzerCode/configurable-date-input-polyfill)
-[![npm version](https://badge.fury.io/js/configurable-date-input-polyfill.svg)](https://badge.fury.io/js/configurable-date-input-polyfill)
-[![dependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill)
-[![devDependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/dev-status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill?type=dev)
+[![Monthly downloads](https://img.shields.io/npm/dm/configurable-date-input-polyfill.svg)](https://img.shields.io/npm/dm/configurable-date-input-polyfill)
+[![NPM version](https://badge.fury.io/js/configurable-date-input-polyfill.svg)](https://badge.fury.io/js/configurable-date-input-polyfill)
+[![Dependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill)
+[![DevDependencies Status](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill/dev-status.svg)](https://david-dm.org/KreutzerCode/configurable-date-input-polyfill?type=dev)
 
 The last date-input polyfill you will ever need. A fancy and lightweight date input with a high number of configuration options for all needs. Supports any calendar format and contains a large amount of localizations.
 
