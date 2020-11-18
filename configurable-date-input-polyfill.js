@@ -12,12 +12,12 @@ const addPolyfillPickers = () => {
 // Run the above code on any <input type="date"> in the document, also on dynamically created ones.
 addPolyfillPickers();
 
-document.addEventListener(`DOMContentLoaded`, () => {
+document.addEventListener('DOMContentLoaded', () => {
     addPolyfillPickers();
 });
 
 // This is also on mousedown event so it will capture new inputs that might
 // be added to the DOM dynamically.
-document.querySelector(`body`).addEventListener(`mousedown`, () => {
+document.querySelector('body').addEventListener('mousedown', () => {
     addPolyfillPickers();
 });
