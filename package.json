@@ -37,7 +37,7 @@
     "webpack-cli": "^4.1.0"
   },
   "scripts": {
-    "watch": "webpack --watch",
+    "watch": "webpack --watch --mode=development",
     "production": "webpack --mode=production",
     "build": "webpack --mode=development"
   }
