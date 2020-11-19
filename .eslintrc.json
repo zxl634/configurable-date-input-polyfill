@@ -7,6 +7,11 @@
         "eslint:recommended"
     ],
     "parser": "babel-eslint",
+    "ignorePatterns": ["dateformat.js"],
+    "rules": {
+        "linebreak-style": 0,
+        "indent": 0
+    },
     "parserOptions": {
         "ecmaVersion": 11,
         "sourceType": "module"
