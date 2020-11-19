@@ -166,8 +166,11 @@ export default class Input {
     // determines if min and max values are given
     getYearRange() {
 
-        this.minYear = this.element.getAttribute('min');
-        this.maxYear = this.element.getAttribute('max');
+        this.minYear = this.element.getAttribute('min')
+            || document.body.getAttribute('data-min');
+
+        this.maxYear = this.element.getAttribute('max')
+        || document.body.getAttribute('data-max');
 
         // check if values are in correct order and limited in size
         if (this.minYear > 1000 && this.maxYear > 1000

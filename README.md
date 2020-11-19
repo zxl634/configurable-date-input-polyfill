@@ -63,14 +63,17 @@ include it anywhere in your HTML.
 <input type="date" lang="fr" />
 ```
 
-## Min and Max attributes
-* Set the range to choose from differently for every input you faced with by setting the `min` and `max` attributes.
+## Min and Max
+* By setting the `min` and `max` attributes you can change the range of available options. In case you are faced with an input without type date, it is recommended to use `data-min` and `data-max`.
 ```html
 <!--default dont need to be specified-->
 <input type="date" min="1800" max="2200"/>
 
 <!--custom-->
 <input type="date" min="2000" max="2030" />
+
+<!--custom for non type date-->
+<input type="text" class="date-polyfill" data-min="2000" data-max="2030" />
 ```
 
 ## Formatting
