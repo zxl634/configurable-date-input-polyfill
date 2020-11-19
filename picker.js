@@ -1,4 +1,4 @@
-import DateSelect from './dateSelect.js';
+import {YearSelect, MonthSelect} from './dateSelect.js';
 
 class Picker {
     constructor() {
@@ -36,8 +36,8 @@ class Picker {
                 dateSelectWrapper.style.display = 'none';
 
                 // Refresh dayMatrix here cause performance
-                this.date.setMonth(DateSelect.returnSelectedMonth());
-                this.date.setFullYear(DateSelect.returnSelectedYear());
+                this.date.setMonth(this.monthSelect.returnSelectedMonth());
+                this.date.setFullYear(this.yearSelect.returnSelectedYear());
                 this.refreshDaysMatrix();
             }
         });
@@ -86,18 +86,28 @@ class Picker {
             // Checks for next or prev month
             let jumpMonth = false;
             if (targetDay.classList.contains('next-month')) {
-                DateSelect.toggleMonthByMatrix('next');
+                if (this.monthSelect.returnSelectedMonth() === 11) {
+                    this.yearSelect.toggleByInput(this.yearSelect.returnSelectedYear() + 1);
+                }
+
+                this.monthSelect.toggleByMatrix('next');
+
                 jumpMonth = true;
             } else if (targetDay.classList.contains('prev-month')) {
-                DateSelect.toggleMonthByMatrix('prev');
+                if (this.monthSelect.returnSelectedMonth() === 0) {
+                    this.yearSelect.toggleByInput(this.yearSelect.returnSelectedYear() - 1);
+                }
+
+                this.monthSelect.toggleByMatrix('prev');
+
                 jumpMonth = true;
             }
 
             // Updates if jump is detected
             if (jumpMonth) {
-                this.date.setMonth(DateSelect.returnSelectedMonth());
-                this.date.setYear(DateSelect.returnSelectedYear());
-                dateHeaderButton.innerHTML = DateSelect.returnCurrentSelection();
+                this.date.setMonth(this.monthSelect.returnSelectedMonth());
+                this.date.setYear(this.yearSelect.returnSelectedYear());
+                dateHeaderButton.innerHTML = this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear();
             }
 
             this.date.setDate(parseInt(targetDay.textContent));
@@ -216,20 +226,23 @@ class Picker {
 
         // create year select by given values
         this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper year-select')[0]);
-        this.yearSelect = DateSelect.createYearSelect(this.input.yearRange);
-        this.selectWrapper.insertBefore(this.yearSelect, this.selectWrapper.firstChild);
+        this.yearSelect = new YearSelect(this.input.yearRange);
+
+        this.selectWrapper.insertBefore(this.yearSelect.returnDateSelectWrapper(), this.selectWrapper.firstChild);
 
         // create month select by given language
         this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper month-select')[0]);
-        this.monthSelect = DateSelect.createMonthSelect(this.locale.months);
-        this.selectWrapper.insertBefore(this.monthSelect, this.selectWrapper.firstChild);
+        this.monthSelect = new MonthSelect(this.locale.months);
+
+        this.selectWrapper.insertBefore(this.monthSelect.returnDateSelectWrapper(), this.selectWrapper.firstChild);
 
         const minRange = parseInt(this.input.yearRange[0]);
         const maxRange = parseInt(this.input.yearRange[1]);
 
         // if current year is in selection range
         if (this.date.getFullYear() <= maxRange && this.date.getFullYear() >= minRange) {
-            DateSelect.setDateSelect(this.date);
+            this.monthSelect.toggleByInput(this.date.getMonth());
+            this.yearSelect.toggleByInput(this.date.getFullYear());
         } else {
 
             const currentDate = new Date();
@@ -241,26 +254,20 @@ class Picker {
                 this.date.setFullYear(defaultYearValueOfGivenRange);
             }
 
-            DateSelect.setDateSelect(this.date);
+            this.monthSelect.toggleByInput(this.date.getMonth());
+            this.yearSelect.toggleByInput(this.date.getFullYear());
         }
 
         // Setup click events for the selection Button
         const selectDateButton = document.getElementsByClassName('date-header-button')[0];
-        selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
 
-        const monthControlls = this.monthSelect.getElementsByClassName('control');
+        selectDateButton.innerHTML = this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear();
 
-        for (let i = 0; i < monthControlls.length; i++) {
-            monthControlls[i].addEventListener('click', function () {
-                selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
-            });
-        }
+        const dateSelectControlls = this.selectWrapper.getElementsByClassName('control');
 
-        const yearControlls = this.yearSelect.getElementsByClassName('control');
-
-        for (let i = 0; i < yearControlls.length; i++) {
-            yearControlls[i].addEventListener('click', function () {
-                selectDateButton.innerHTML = DateSelect.returnCurrentSelection();
+        for (let i = 0; i < dateSelectControlls.length; i++) {
+            dateSelectControlls[i].addEventListener('click', () => {
+                selectDateButton.innerHTML = this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear();
             });
         }
 

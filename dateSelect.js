@@ -1,48 +1,4 @@
-export default class DateSelectMenu {
-
-    static createMonthSelect(targetLocale) {
-        this.monthSelect = new MonthSelect(targetLocale);
-        this.monthSelectHtml = this.monthSelect.returnDateSelectWrapper();
-        return this.monthSelectHtml;
-    }
-
-    static createYearSelect(yearRange) {
-        this.yearSelect = new YearSelect(yearRange);
-        this.yearSelectHtml = this.yearSelect.returnDateSelectWrapper();
-        return this.yearSelectHtml;
-    }
-
-    static setDateSelect(date) {
-        this.monthSelect.toggleByInput(date.getMonth());
-        this.yearSelect.toggleByInput(date.getFullYear());
-    }
-
-    static returnCurrentSelection() {
-        return this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear();
-    }
-
-    static returnSelectedMonth() {
-        return this.monthSelect.returnSelectedMonth();
-    }
-
-    static returnSelectedYear() {
-        return this.yearSelect.returnSelectedYear();
-    }
-
-    static toggleMonthByMatrix(mode) {
-        if (mode === 'next' && this.monthSelect.returnSelectedMonth() === 11) {
-            this.yearSelect.toggleByInput(this.yearSelect.returnSelectedYear() + 1);
-        }
-
-        if (mode === 'prev' && this.monthSelect.returnSelectedMonth() === 0) {
-            this.yearSelect.toggleByInput(this.yearSelect.returnSelectedYear() - 1);
-        }
-
-        this.monthSelect.toggleByMatrix(mode);
-    }
-}
-
-class DateSelect {
+export class DateSelect {
     constructor() {
 
         this.dateSelectWrapper = document.createElement('div');
@@ -95,7 +51,7 @@ class DateSelect {
 
 }
 
-class YearSelect extends DateSelect {
+export class YearSelect extends DateSelect {
     constructor(givenYearRange) {
         super();
         this.dateSelectWrapper.className = 'select-wrapper year-select';
@@ -180,7 +136,7 @@ class YearSelect extends DateSelect {
     }
 }
 
-class MonthSelect extends DateSelect {
+export class MonthSelect extends DateSelect {
     constructor(targetLocaleArray) {
         super();
         this.dateSelectWrapper.className = 'select-wrapper month-select';
