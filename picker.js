@@ -1,8 +1,7 @@
-import {YearSelect, MonthSelect} from './dateSelect.js';
+import { YearSelect, MonthSelect } from './dateSelect';
 
 class Picker {
     constructor() {
-
         // This is a singleton.
         if (window.thePicker) {
             return window.thePicker;
@@ -25,7 +24,6 @@ class Picker {
         const dateHeaderButton = document.createElement('button');
         dateHeaderButton.className = 'date-header-button date-header-button-inactive';
         dateHeaderButton.addEventListener('click', () => {
-
             if (dateHeaderButton.classList.contains('date-header-button-inactive')) {
                 dateHeaderButton.classList.add('date-header-button-active');
                 dateHeaderButton.classList.remove('date-header-button-inactive');
@@ -75,7 +73,7 @@ class Picker {
 
         // Click event to set that day as the date.
         // Uses event delegation.
-        this.days.addEventListener('click', e => {
+        this.days.addEventListener('click', (e) => {
             const targetDay = e.target;
             const currentSelected = this.days.querySelector('[data-selected]');
             if (currentSelected) {
@@ -121,7 +119,7 @@ class Picker {
         this.hide();
         document.body.appendChild(this.container);
 
-        this.removeClickOut = e => {
+        this.removeClickOut = (e) => {
             if (this.isOpen) {
                 let el = e.target;
                 let isPicker = el === this.container || el === this.input;
@@ -168,7 +166,6 @@ class Picker {
 
     // Initiate I/O with given date input.
     attachTo(input) {
-
         if (input === this.input && this.isOpen) {
             return false;
         }
@@ -213,7 +210,6 @@ class Picker {
 
     // Match picker date with input date.
     syncPickerWithInput() {
-
         // fixes bug where an empty calendar appears if year is missing from keyboard input
         if (!isNaN(Date.parse(this.input.valueAsDate))) {
             this.date = Picker.absoluteDate(this.input.valueAsDate);
@@ -244,7 +240,6 @@ class Picker {
             this.monthSelect.toggleByInput(this.date.getMonth());
             this.yearSelect.toggleByInput(this.date.getFullYear());
         } else {
-
             const currentDate = new Date();
             // check if default year needs to be calculated
             if (currentDate.getFullYear() <= maxRange && currentDate.getFullYear() >= minRange) {
@@ -265,7 +260,7 @@ class Picker {
 
         const dateSelectControlls = this.selectWrapper.getElementsByClassName('control');
 
-        for (let i = 0; i < dateSelectControlls.length; i++) {
+        for (let i = 0; i < dateSelectControlls.length; i += 1) {
             dateSelectControlls[i].addEventListener('click', () => {
                 selectDateButton.innerHTML = this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear();
             });
@@ -291,9 +286,9 @@ class Picker {
         this.locale = this.input.locale;
         this.firstDayOfWeek = this.input.firstDayOfWeek;
 
-        let daysHeaderContent = [];
+        const daysHeaderContent = [];
 
-        for (let i = 0, len = this.locale.days.length; i < len; ++i) {
+        for (let i = 0, len = this.locale.days.length; i < len; i += 1) {
             daysHeaderContent.push(`<th scope="col">${this.locale.days[i]}</th>`);
         }
 
@@ -314,13 +309,13 @@ class Picker {
         // as well as on which weekdays they lie.
         const year = this.date.getFullYear(); // Get the year (2016).
         const month = this.date.getMonth(); // Get the month number (0-11).
-        let oldDaysInCurrentMonth = [];
+        const oldDaysInCurrentMonth = [];
 
         let startDay = new Date(year, month, 1).getDay(); // First weekday of month (0-6).
         const maxDays = new Date(
             this.date.getFullYear(),
             month + 1,
-            0
+            0,
         ).getDate(); // Get days in month (1-31).
 
         // check if first day of week is monday
@@ -329,7 +324,7 @@ class Picker {
             if (startDay === 0) {
                 startDay = 6;
             } else {
-                startDay--;
+                startDay -= 1;
             }
         }
         // check if first day of week is saturday
@@ -338,7 +333,7 @@ class Picker {
             if (startDay === 6) {
                 startDay = 0;
             } else {
-                startDay++;
+                startDay += 1;
             }
         }
 
@@ -349,9 +344,9 @@ class Picker {
             const daysToCollect = startDay;
             let dayPosition = daysToCollect - 1;
 
-            for (let i = 0; i < daysToCollect; i++) {
+            for (let i = 0; i < daysToCollect; i += 1) {
                 oldDaysInCurrentMonth.push(daysOfLastMonth - dayPosition);
-                dayPosition--;
+                dayPosition -= 1;
             }
         }
 
@@ -375,7 +370,7 @@ class Picker {
             }
         }
 
-        for (let i = 0; i < maxDays + startDay; ++i) {
+        for (let i = 0; i < maxDays + startDay; i += 1) {
             // Add a row every 7 days.
             if (i % 7 === 0) {
                 matrixHTML.push(`${i !== 0 ? `</tr>` : ``}<tr>`);
@@ -408,7 +403,6 @@ class Picker {
 
         // fill remaining space with next Month items
         if (startDay + maxDays < 42) {
-
             let remainingSpace = 42 - (startDay + maxDays);
             let nextMonthDaysValue = 0;
 
@@ -416,7 +410,7 @@ class Picker {
             const currentRows = (startDay + maxDays) / 7;
 
             if (currentRows <= 4) {
-                for (let i = 0; i < remainingSpace; i++) {
+                for (let i = 0; i < remainingSpace; i += 1) {
                     // Add a row every 7 days.
                     if (i % 7 === 0) {
                         matrixHTML.push(`${i !== 0 ? `</tr>` : ``}<tr>`);
@@ -431,7 +425,7 @@ class Picker {
                 // fill last items of existent row
                 if (currentDisplayedDays < 35) {
                     const existentRowSpace = 35 - currentDisplayedDays;
-                    for (let i = 0; i < existentRowSpace; i++) {
+                    for (let i = 0; i < existentRowSpace; i += 1) {
                         matrixHTML.push('<td class="next-month">' + (i + 1) + '</td>');
                     }
                     remainingSpace = remainingSpace - existentRowSpace;
@@ -440,7 +434,7 @@ class Picker {
 
                 matrixHTML.push('<tr>');
 
-                for (let i = 0; i < remainingSpace; i++) {
+                for (let i = 0; i < remainingSpace; i += 1) {
                     if (nextMonthDaysValue > 0) {
                         const itemLabel = nextMonthDaysValue + (i + 1);
                         matrixHTML.push('<td class="next-month">' + itemLabel + '</td>');
@@ -453,11 +447,10 @@ class Picker {
             }
 
             if (currentRows > 5) {
-                for (let i = 0; i < remainingSpace; i++) {
+                for (let i = 0; i < remainingSpace; i += 1) {
                     matrixHTML.push('<td class="next-month">' + (i + 1) + '</td>');
                 }
             }
-
         }
 
         this.days.innerHTML = matrixHTML.join('');
