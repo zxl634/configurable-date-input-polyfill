@@ -1,5 +1,5 @@
 import './configurable-date-input-polyfill.scss';
-import Input from './input.js';
+import Input from './input';
 
 const addPolyfillPickers = () => {
     Input.addPickerToOtherInputs();

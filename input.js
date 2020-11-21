@@ -33,15 +33,16 @@ export default class Input {
                         }
                         const format = this.format || 'yyyy-mm-dd';
                         const parts = this.element.value.match(/(\d+)/g);
-                        let i = 0, fmt = {};
+                        let i = 0;
+                        const fmt = {};
 
-                        format.replace(/(yyyy|dd|mm)/g, part => {
+                        format.replace(/(yyyy|dd|mm)/g, (part) => {
                             fmt[part] = i++;
                         });
 
                         return new Date(parts[fmt['yyyy']], parts[fmt['mm']] - 1, parts[fmt['dd']]);
                     },
-                    set: val => {
+                    set: (val) => {
                         this.element.value = DateFormat(val, this.format);
                     },
                 },
@@ -53,13 +54,13 @@ export default class Input {
 
                         return this.element.valueAsDate.valueOf();
                     },
-                    set: val => {
+                    set: (val) => {
                         this.element.valueAsDate = new Date(val);
                     },
                 },
                 'yearRange': {
                     value: this.getYearRange(),
-                    writable: true
+                    writable: true,
                 },
             },
         );
@@ -70,18 +71,18 @@ export default class Input {
             const elm = this.element;
             elm.firstDayOfWeek = this.firstDayOfWeek;
             elm.locale = this.localeLabels;
-            //const didAttach = Picker.attachTo(elm); <-for checking purposes
+            // const didAttach = Picker.attachTo(elm); <-for checking purposes
             Picker.attachTo(elm);
         };
 
         this.element.addEventListener('focus', showPicker);
         this.element.addEventListener('mouseup', showPicker);
 
-        let minYear = this.element.yearRange[0];
-        let maxYear = this.element.yearRange[1];
+        const minYear = this.element.yearRange[0];
+        const maxYear = this.element.yearRange[1];
 
         // Update the picker if the date changed manually in the input.
-        this.element.addEventListener('keydown', e => {
+        this.element.addEventListener('keydown', (e) => {
             let date = new Date();
 
             switch (e.keyCode) {
@@ -142,7 +143,7 @@ export default class Input {
             Picker.syncPickerWithInput();
         });
 
-        this.element.addEventListener('keyup', function () {
+        this.element.addEventListener('keyup', () => {
             Picker.syncPickerWithInput();
         });
     }
@@ -152,7 +153,7 @@ export default class Input {
 
         for (const localeSet in Localisation) {
             const localeList = localeSet.split('_');
-            localeList.map(el => el.toLowerCase());
+            localeList.map((el) => el.toLowerCase());
 
             if (
                 !!~localeList.indexOf(locale)
@@ -165,12 +166,11 @@ export default class Input {
 
     // determines if min and max values are given
     getYearRange() {
-
         this.minYear = this.element.getAttribute('min')
             || this.element.getAttribute('data-min');
 
         this.maxYear = this.element.getAttribute('max')
-        || this.element.getAttribute('data-max');
+            || this.element.getAttribute('data-max');
 
         // check if values are in correct order and limited in size
         if (this.minYear > 1000 && this.maxYear > 1000
@@ -207,13 +207,12 @@ export default class Input {
             return false;
         }
 
-        for (let i = 0; i < length; ++i) {
+        for (let i = 0; i < length; i += 1) {
             new Input(dateInputs[i]);
         }
     }
 
     static addPickerToOtherInputs() {
-
         // Get and loop all the input[type="text"] class date-polyfill in the page that do not have '[data-has-picker]' yet.
         const dateInputs = document.querySelectorAll('input[type="text"].date-polyfill:not([data-has-picker])');
         const length = dateInputs.length;
@@ -222,7 +221,7 @@ export default class Input {
             return false;
         }
 
-        for (let i = 0; i < length; ++i) {
+        for (let i = 0; i < length; i += 1) {
             new Input(dateInputs[i]);
         }
     }
