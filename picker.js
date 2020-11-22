@@ -105,7 +105,7 @@ class Picker {
             if (jumpMonth) {
                 this.date.setMonth(this.monthSelect.returnSelectedMonth());
                 this.date.setYear(this.yearSelect.returnSelectedYear());
-                dateHeaderButton.innerHTML = this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear();
+                dateHeaderButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
             }
 
             this.date.setDate(parseInt(targetDay.textContent));
@@ -256,13 +256,13 @@ class Picker {
         // Setup click events for the selection Button
         const selectDateButton = document.getElementsByClassName('date-header-button')[0];
 
-        selectDateButton.innerHTML = this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear();
+        selectDateButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
 
         const dateSelectControlls = this.selectWrapper.getElementsByClassName('control');
 
         for (let i = 0; i < dateSelectControlls.length; i += 1) {
             dateSelectControlls[i].addEventListener('click', () => {
-                selectDateButton.innerHTML = this.monthSelect.returnSelectedMonthAsLabel() + ' ' + this.yearSelect.returnSelectedYear();
+                selectDateButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
             });
         }
 
@@ -301,7 +301,7 @@ class Picker {
             daysHeaderContent.unshift(daysHeaderContent.pop());
         }
 
-        this.daysHead.innerHTML = '<tr>' + daysHeaderContent.join('') + '</tr>';
+        this.daysHead.innerHTML = `<tr> ${daysHeaderContent.join('')} </tr>`;
     }
 
     refreshDaysMatrix() {
@@ -415,8 +415,8 @@ class Picker {
                     if (i % 7 === 0) {
                         matrixHTML.push(`${i !== 0 ? `</tr>` : ``}<tr>`);
                     }
-
-                    matrixHTML.push('<td class="next-month">' + (i + 1) + '</td>');
+                    
+                    matrixHTML.push(`<td class="next-month"> ${i + 1} </td>`);
                 }
             }
 
@@ -426,7 +426,7 @@ class Picker {
                 if (currentDisplayedDays < 35) {
                     const existentRowSpace = 35 - currentDisplayedDays;
                     for (let i = 0; i < existentRowSpace; i += 1) {
-                        matrixHTML.push('<td class="next-month">' + (i + 1) + '</td>');
+                        matrixHTML.push(`<td class="next-month"> ${i + 1} </td>`);
                     }
                     remainingSpace = remainingSpace - existentRowSpace;
                     nextMonthDaysValue = existentRowSpace;
@@ -437,9 +437,9 @@ class Picker {
                 for (let i = 0; i < remainingSpace; i += 1) {
                     if (nextMonthDaysValue > 0) {
                         const itemLabel = nextMonthDaysValue + (i + 1);
-                        matrixHTML.push('<td class="next-month">' + itemLabel + '</td>');
+                        matrixHTML.push(`<td class="next-month"> ${itemLabel} </td>`);
                     } else {
-                        matrixHTML.push('<td class="next-month">' + (i + 1) + '</td>');
+                        matrixHTML.push(`<td class="next-month"> ${i + 1} </td>`);
                     }
                 }
 
@@ -448,7 +448,7 @@ class Picker {
 
             if (currentRows > 5) {
                 for (let i = 0; i < remainingSpace; i += 1) {
-                    matrixHTML.push('<td class="next-month">' + (i + 1) + '</td>');
+                    matrixHTML.push(`<td class="next-month"> ${i + 1} </td>`);
                 }
             }
         }
