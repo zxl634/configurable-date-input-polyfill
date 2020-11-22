@@ -26,7 +26,7 @@ export default class Input {
         Object.defineProperties(
             this.element,
             {
-                'valueAsDate': {
+                valueAsDate: {
                     get: () => {
                         if (!this.element.value) {
                             return null;
@@ -37,16 +37,17 @@ export default class Input {
                         const fmt = {};
 
                         format.replace(/(yyyy|dd|mm)/g, (part) => {
-                            fmt[part] = i++;
+                            fmt[part] = i;
+                            i += 1;
                         });
 
-                        return new Date(parts[fmt['yyyy']], parts[fmt['mm']] - 1, parts[fmt['dd']]);
+                        return new Date(parts[fmt.yyyy], parts[fmt.mm] - 1, parts[fmt.dd]);
                     },
                     set: (val) => {
                         this.element.value = DateFormat(val, this.format);
                     },
                 },
-                'valueAsNumber': {
+                valueAsNumber: {
                     get: () => {
                         if (!this.element.value) {
                             return NaN;
@@ -58,7 +59,7 @@ export default class Input {
                         this.element.valueAsDate = new Date(val);
                     },
                 },
-                'yearRange': {
+                yearRange: {
                     value: this.getYearRange(),
                     writable: true,
                 },
@@ -150,8 +151,10 @@ export default class Input {
 
     getLocaleLabels() {
         const locale = this.locale.toLowerCase();
+        let localeLabels;
 
-        for (const localeSet in Localisation) {
+        Object.keys(Localisation).forEach((key) => {
+            const localeSet = key;
             const localeList = localeSet.split('_');
             localeList.map((el) => el.toLowerCase());
 
@@ -159,9 +162,10 @@ export default class Input {
                 !!~localeList.indexOf(locale)
                 || !!~localeList.indexOf(locale.substr(0, 2))
             ) {
-                return Localisation[localeSet];
+                localeLabels = Localisation[localeSet];
             }
-        }
+        });
+        return localeLabels;
     }
 
     // determines if min and max values are given
@@ -201,7 +205,7 @@ export default class Input {
     static addPickerToDateInputs() {
         // Get and loop all the input[type="date"]s in the page that do not have '[data-has-picker]' yet.
         const dateInputs = document.querySelectorAll('input[type="date"]:not([data-has-picker])');
-        const length = dateInputs.length;
+        const { length } = dateInputs;
 
         if (!length) {
             return false;
@@ -210,12 +214,14 @@ export default class Input {
         for (let i = 0; i < length; i += 1) {
             new Input(dateInputs[i]);
         }
+
+        return true;
     }
 
     static addPickerToOtherInputs() {
         // Get and loop all the input[type="text"] class date-polyfill in the page that do not have '[data-has-picker]' yet.
         const dateInputs = document.querySelectorAll('input[type="text"].date-polyfill:not([data-has-picker])');
-        const length = dateInputs.length;
+        const { length } = dateInputs;
 
         if (!length) {
             return false;
@@ -224,5 +230,7 @@ export default class Input {
         for (let i = 0; i < length; i += 1) {
             new Input(dateInputs[i]);
         }
+
+        return true;
     }
 }
