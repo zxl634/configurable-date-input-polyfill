@@ -211,7 +211,7 @@ class Picker {
     // Match picker date with input date.
     syncPickerWithInput() {
         // fixes bug where an empty calendar appears if year is missing from keyboard input
-        if (!isNaN(Date.parse(this.input.valueAsDate))) {
+        if (!Number.isNaN(Date.parse(this.input.valueAsDate))) {
             this.date = Picker.absoluteDate(this.input.valueAsDate);
         } else {
             this.date = new Date();
@@ -302,6 +302,8 @@ class Picker {
         }
 
         this.daysHead.innerHTML = `<tr> ${daysHeaderContent.join('')} </tr>`;
+
+        return true;
     }
 
     refreshDaysMatrix() {
@@ -379,7 +381,7 @@ class Picker {
             // Add new column.
             // If no days from this month in this column, it will be empty.
             if (i + 1 <= startDay) {
-                matrixHTML.push('<td class="prev-month">' + oldDaysInCurrentMonth[i] + '</td>');
+                matrixHTML.push(`<td class="prev-month"> ${oldDaysInCurrentMonth[i]} </td>`);
                 continue;
             }
 
@@ -387,17 +389,13 @@ class Picker {
             const dayNum = i + 1 - startDay;
             const selected = selMatrix && selDate.getDate() === dayNum;
 
-            // check if current item is current day            
+            // check if current item is current day
             if (lookingAtCurrentMonth && today.getDate() === dayNum) {
                 // highlight the current day
-                matrixHTML.push(
-                    `<td data-day ${selected ? `data-selected` : ``} class='current-day'>${dayNum}</td>`
-                );
+                matrixHTML.push(`<td data-day ${selected ? `data-selected` : ``} class='current-day'>${dayNum}</td>`);
             } else {
                 // display normal
-                matrixHTML.push(
-                    `<td data-day ${selected ? `data-selected` : ``}>${dayNum}</td>`
-                );
+                matrixHTML.push(`<td data-day ${selected ? `data-selected` : ``}>${dayNum}</td>`);
             }
         }
 
@@ -415,13 +413,12 @@ class Picker {
                     if (i % 7 === 0) {
                         matrixHTML.push(`${i !== 0 ? `</tr>` : ``}<tr>`);
                     }
-                    
+
                     matrixHTML.push(`<td class="next-month"> ${i + 1} </td>`);
                 }
             }
 
             if (currentRows <= 5 && currentRows > 4) {
-
                 // fill last items of existent row
                 if (currentDisplayedDays < 35) {
                     const existentRowSpace = 35 - currentDisplayedDays;
