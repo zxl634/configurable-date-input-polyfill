@@ -226,13 +226,15 @@ class Picker {
         this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper year-select')[0]);
         this.yearSelect = new YearSelect(this.input.yearRange);
 
-        this.selectWrapper.insertBefore(this.yearSelect.returnDateSelectWrapper(), this.selectWrapper.firstChild);
+        this.selectWrapper.insertBefore(this.yearSelect.returnDateSelectWrapper(),
+            this.selectWrapper.firstChild);
 
         // create month select by given language
         this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper month-select')[0]);
         this.monthSelect = new MonthSelect(this.locale.months);
 
-        this.selectWrapper.insertBefore(this.monthSelect.returnDateSelectWrapper(), this.selectWrapper.firstChild);
+        this.selectWrapper.insertBefore(this.monthSelect.returnDateSelectWrapper(),
+            this.selectWrapper.firstChild);
 
         const minRange = parseInt(this.input.yearRange[0]);
         const maxRange = parseInt(this.input.yearRange[1]);
@@ -247,7 +249,8 @@ class Picker {
             if (currentDate.getFullYear() <= maxRange && currentDate.getFullYear() >= minRange) {
                 this.date.setFullYear(currentDate.getFullYear());
             } else {
-                const defaultYearValueOfGivenRange = minRange + (Math.round(maxRange - minRange) / 2);
+                const defaultYearValueOfGivenRange = minRange
+                    + (Math.round(maxRange - minRange) / 2);
                 this.date.setFullYear(defaultYearValueOfGivenRange);
             }
 
@@ -281,7 +284,8 @@ class Picker {
     }
 
     createMatrixHeader() {
-        if (this.locale === this.input.locale && this.firstDayOfWeek === this.input.firstDayOfWeek) {
+        if (this.locale === this.input.locale
+            && this.firstDayOfWeek === this.input.firstDayOfWeek) {
             return false;
         }
 

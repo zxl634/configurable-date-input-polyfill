@@ -102,7 +102,8 @@ export class YearSelect extends DateSelect {
             givenInputValue = Math.max(...this.yearArray);
         }
 
-        if (givenInputValue !== this.yearArray[2] && givenInputValue >= Math.min(...this.yearArray)) {
+        if (givenInputValue !== this.yearArray[2]
+            && givenInputValue >= Math.min(...this.yearArray)) {
             const targetRotateCount = this.calculateDateOffset(this.yearArray, givenInputValue);
             this.yearArray = this.rotate(this.yearArray, targetRotateCount);
 
@@ -206,7 +207,8 @@ export class MonthSelect extends DateSelect {
 
     toggleByInput(value) {
         if (value !== this.monthArray[2]) {
-            this.monthArray = this.rotate(this.monthArray, this.calculateDateOffset(this.monthArray, value));
+            this.monthArray = this.rotate(this.monthArray,
+                this.calculateDateOffset(this.monthArray, value));
             this.monthStringArray = this.returnMonthStringArray(this.monthArray);
 
             for (let i = 0; i < 5; i += 1) {

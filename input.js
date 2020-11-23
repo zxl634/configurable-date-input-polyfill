@@ -200,7 +200,7 @@ export default class Input {
 
     // Will add the Picker to all inputs in the page.
     static addPickerToDateInputs() {
-        // Get and loop all the input[type="date"]s in the page that do not have '[data-has-picker]' yet.
+        // Get and loop all input[type="date"]s that do not have '[data-has-picker]' yet.
         const dateInputs = document.querySelectorAll('input[type="date"]:not([data-has-picker])');
         const { length } = dateInputs;
 
@@ -216,7 +216,8 @@ export default class Input {
     }
 
     static addPickerToOtherInputs() {
-        // Get and loop all the input[type="text"] class date-polyfill in the page that do not have '[data-has-picker]' yet.
+        // Get and loop all the input[type="text"]s with
+        // class date-polyfill that do not have '[data-has-picker]' yet.
         const dateInputs = document.querySelectorAll('input[type="text"].date-polyfill:not([data-has-picker])');
         const { length } = dateInputs;
 
