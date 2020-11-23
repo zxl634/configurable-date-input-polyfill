@@ -43,9 +43,10 @@ export class DateSelect {
 
     rotate(array, times) {
         let timesToRotate = times;
-        while (timesToRotate--) {
+        while (timesToRotate > 0) {
             const temp = array.shift();
             array.push(temp);
+            timesToRotate -= 1;
         }
 
         return array;

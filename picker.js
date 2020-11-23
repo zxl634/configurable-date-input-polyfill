@@ -17,7 +17,24 @@ class Picker {
 
         // Add controls.
 
-        // DateSelect Header
+        // DateSelect Menu
+
+        this.dateSelectWrapper = document.createElement('div');
+        this.dateSelectWrapper.className = 'date-select-dropdown';
+
+        this.selectWrapper = document.createElement('div');
+        this.selectWrapper.className = 'select-container';
+        this.dateSelectWrapper.appendChild(this.selectWrapper);
+
+        this.monthSelect = document.createElement('div');
+        this.monthSelect.className = 'select-wrapper month-select';
+        this.selectWrapper.appendChild(this.monthSelect);
+
+        this.yearSelect = document.createElement('div');
+        this.yearSelect.className = 'select-wrapper year-select';
+        this.selectWrapper.appendChild(this.yearSelect);
+
+        // Polyfill Header
         const dateSelectHeader = document.createElement('div');
         dateSelectHeader.className = 'date-select-header';
 
@@ -27,11 +44,11 @@ class Picker {
             if (dateHeaderButton.classList.contains('date-header-button-inactive')) {
                 dateHeaderButton.classList.add('date-header-button-active');
                 dateHeaderButton.classList.remove('date-header-button-inactive');
-                dateSelectWrapper.style.display = 'block';
+                this.dateSelectWrapper.style.display = 'block';
             } else if (dateHeaderButton.classList.contains('date-header-button-active')) {
                 dateHeaderButton.classList.add('date-header-button-inactive');
                 dateHeaderButton.classList.remove('date-header-button-active');
-                dateSelectWrapper.style.display = 'none';
+                this.dateSelectWrapper.style.display = 'none';
 
                 // Refresh dayMatrix here cause performance
                 this.date.setMonth(this.monthSelect.returnSelectedMonth());
@@ -48,23 +65,7 @@ class Picker {
         dayMatrixWrapper.className = 'day-matrix-wrapper';
         this.container.appendChild(dayMatrixWrapper);
 
-        const dateSelectWrapper = document.createElement('div');
-        this.dateSelectWrapper = dateSelectWrapper;
-        dateSelectWrapper.className = 'date-select-dropdown';
-
-        this.selectWrapper = document.createElement('div');
-        this.selectWrapper.className = 'select-container';
-        dateSelectWrapper.appendChild(this.selectWrapper);
-
-        this.monthSelect = document.createElement('div');
-        this.monthSelect.className = 'select-wrapper month-select';
-        this.selectWrapper.appendChild(this.monthSelect);
-
-        this.yearSelect = document.createElement('div');
-        this.yearSelect.className = 'select-wrapper year-select';
-        this.selectWrapper.appendChild(this.yearSelect);
-
-        this.container.appendChild(dateSelectWrapper);
+        this.container.appendChild(this.dateSelectWrapper);
 
         // Setup unchanging DOM for days matrix.
         const daysMatrix = document.createElement('table');
@@ -123,17 +124,18 @@ class Picker {
             if (this.isOpen) {
                 let el = e.target;
                 let isPicker = el === this.container || el === this.input;
-                while (!isPicker && (el = el.parentNode)) {
+                while (!isPicker && el !== null) {
+                    el = el.parentNode;
                     isPicker = el === this.container;
                 }
-                ((e.target.getAttribute('type') !== 'date' && !isPicker) || !isPicker)
-                    && this.hide();
+                if ((e.target.getAttribute('type') !== 'date' && !isPicker) || !isPicker) {
+                    this.hide();
+                }
             }
         };
     }
 
     // Position picker below element. Align to element's right edge.
-    // TODO rebuild
     positionPicker(element) {
         const rekt = element.getBoundingClientRect();
         this.container.style.top = `${rekt.top + rekt.height
@@ -145,7 +147,7 @@ class Picker {
         const width = contRekt.width ? contRekt.width : 280;
 
         const classWithOutPos = () => {
-            return this.container.className
+            this.container.className
                 .replace('polyfill-left-aligned', '')
                 .replace('polyfill-right-aligned', '')
                 .replace(/\s+/g, ' ').trim();
@@ -211,7 +213,7 @@ class Picker {
     // Match picker date with input date.
     syncPickerWithInput() {
         // fixes bug where an empty calendar appears if year is missing from keyboard input
-        if (!Number.isNaN(Date.parse(this.input.valueAsDate))) {
+        if (!isNaN(Date.parse(this.input.valueAsDate))) {
             this.date = Picker.absoluteDate(this.input.valueAsDate);
         } else {
             this.date = new Date();
@@ -382,20 +384,19 @@ class Picker {
             // If no days from this month in this column, it will be empty.
             if (i + 1 <= startDay) {
                 matrixHTML.push(`<td class="prev-month"> ${oldDaysInCurrentMonth[i]} </td>`);
-                continue;
-            }
-
-            // Populate day number.
-            const dayNum = i + 1 - startDay;
-            const selected = selMatrix && selDate.getDate() === dayNum;
-
-            // check if current item is current day
-            if (lookingAtCurrentMonth && today.getDate() === dayNum) {
-                // highlight the current day
-                matrixHTML.push(`<td data-day ${selected ? `data-selected` : ``} class='current-day'>${dayNum}</td>`);
             } else {
-                // display normal
-                matrixHTML.push(`<td data-day ${selected ? `data-selected` : ``}>${dayNum}</td>`);
+                // Populate day number.
+                const dayNum = i + 1 - startDay;
+                const selected = selMatrix && selDate.getDate() === dayNum;
+
+                // check if current item is current day
+                if (lookingAtCurrentMonth && today.getDate() === dayNum) {
+                    // highlight the current day
+                    matrixHTML.push(`<td data-day ${selected ? `data-selected` : ``} class='current-day'>${dayNum}</td>`);
+                } else {
+                    // display normal
+                    matrixHTML.push(`<td data-day ${selected ? `data-selected` : ``}>${dayNum}</td>`);
+                }
             }
         }
 
@@ -425,7 +426,7 @@ class Picker {
                     for (let i = 0; i < existentRowSpace; i += 1) {
                         matrixHTML.push(`<td class="next-month"> ${i + 1} </td>`);
                     }
-                    remainingSpace = remainingSpace - existentRowSpace;
+                    remainingSpace -= existentRowSpace;
                     nextMonthDaysValue = existentRowSpace;
                 }
 

@@ -155,13 +155,10 @@ export default class Input {
 
         Object.keys(Localisation).forEach((key) => {
             const localeSet = key;
-            const localeList = localeSet.split('_');
-            localeList.map((el) => el.toLowerCase());
+            let localeList = localeSet.split('_');
+            localeList = localeList.map((el) => el.toLowerCase());
 
-            if (
-                !!~localeList.indexOf(locale)
-                || !!~localeList.indexOf(locale.substr(0, 2))
-            ) {
+            if (localeList.indexOf(locale) >= 0 || localeList.indexOf(locale.substr(0, 2)) >= 0) {
                 localeLabels = Localisation[localeSet];
             }
         });
