@@ -3,3 +3,4 @@ node_modules/
 .travis.yml
 _config.yml
 index.html
+favicons/
