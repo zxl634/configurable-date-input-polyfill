@@ -224,7 +224,7 @@ class Picker {
 
         // create year select by given values
         this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper year-select')[0]);
-        this.yearSelect = new YearSelect(this.input.yearRange);
+        this.yearSelect = new YearSelect();
 
         this.selectWrapper.insertBefore(this.yearSelect.returnDateSelectWrapper(),
             this.selectWrapper.firstChild);
@@ -236,22 +236,26 @@ class Picker {
         this.selectWrapper.insertBefore(this.monthSelect.returnDateSelectWrapper(),
             this.selectWrapper.firstChild);
 
-        const minRange = parseInt(this.input.yearRange[0]);
-        const maxRange = parseInt(this.input.yearRange[1]);
+        // create new DateRange Object
+        const minRange = new Date(this.input.yearRange[0]);
+        const maxRange = new Date(this.input.yearRange[1]);
 
         // if current year is in selection range
-        if (this.date.getFullYear() <= maxRange && this.date.getFullYear() >= minRange) {
+        if (this.date <= maxRange && this.date >= minRange) {
             this.monthSelect.toggleByInput(this.date.getMonth());
             this.yearSelect.toggleByInput(this.date.getFullYear());
         } else {
             const currentDate = new Date();
             // check if default year needs to be calculated
-            if (currentDate.getFullYear() <= maxRange && currentDate.getFullYear() >= minRange) {
-                this.date.setFullYear(currentDate.getFullYear());
+            if (currentDate <= maxRange && currentDate >= minRange) {
+                this.date = currentDate;
             } else {
+                /*
                 const defaultYearValueOfGivenRange = minRange
                     + (Math.round(maxRange - minRange) / 2);
                 this.date.setFullYear(defaultYearValueOfGivenRange);
+                */
+               this.date = minRange;
             }
 
             this.monthSelect.toggleByInput(this.date.getMonth());

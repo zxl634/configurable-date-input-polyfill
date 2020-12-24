@@ -60,8 +60,8 @@ export default class Input {
                     },
                 },
                 yearRange: {
-                    value: this.getYearRange(),
-                    writable: true,
+                    value: this.getDateRange(),
+                    writable: false,
                 },
             },
         );
@@ -79,8 +79,8 @@ export default class Input {
         this.element.addEventListener('focus', showPicker);
         this.element.addEventListener('mouseup', showPicker);
 
-        const minYear = this.element.yearRange[0];
-        const maxYear = this.element.yearRange[1];
+        const minDate = this.element.yearRange[0];
+        const maxDate = this.element.yearRange[1];
 
         // Update the picker if the date changed manually in the input.
         this.element.addEventListener('keydown', (e) => {
@@ -98,7 +98,7 @@ export default class Input {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() - 1);
 
-                        if (date.getFullYear() >= minYear) {
+                        if (date >= minDate) {
                             this.element.valueAsDate = date;
                         }
                     }
@@ -109,7 +109,7 @@ export default class Input {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() - 7);
 
-                        if (date.getFullYear() >= minYear) {
+                        if (date >= minDate) {
                             this.element.valueAsDate = date;
                         }
                     }
@@ -120,7 +120,7 @@ export default class Input {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() + 1);
 
-                        if (date.getFullYear() <= maxYear) {
+                        if (date <= maxDate) {
                             this.element.valueAsDate = date;
                         }
                     }
@@ -131,7 +131,7 @@ export default class Input {
                         date = Picker.returnCurrentDate();
                         date.setDate(date.getDate() + 7);
 
-                        if (date.getFullYear() <= maxYear) {
+                        if (date <= maxDate) {
                             this.element.valueAsDate = date;
                         }
                     }
@@ -166,25 +166,31 @@ export default class Input {
     }
 
     // determines if min and max values are given
-    getYearRange() {
-        this.minYear = this.element.getAttribute('min')
-            || this.element.getAttribute('data-min');
+    getDateRange() {
+        const minDate = new Date(this.element.getAttribute('min')
+            || this.element.getAttribute('data-min'));
+        minDate.setHours(0, 0, 0, 0);
 
-        this.maxYear = this.element.getAttribute('max')
-            || this.element.getAttribute('data-max');
+        const maxDate = new Date(this.element.getAttribute('max')
+            || this.element.getAttribute('data-max'));
+        maxDate.setHours(0, 0, 0, 0);
+
+        const minDateMark = new Date("1000");
+        const maxDateMark = new Date("3000");
+
+        let dateRange = [];
 
         // check if values are in correct order and limited in size
-        if (this.minYear > 1000 && this.maxYear > 1000
-            && this.minYear < 4000 && this.maxYear < 4001
-            && this.minYear < this.maxYear) {
-            this.yearRange = [];
-            this.yearRange.push(this.minYear, this.maxYear);
+        if (minDate > minDateMark && maxDate > minDateMark
+            && minDate < maxDateMark && maxDate <= maxDateMark
+            && minDate < maxDate) {
+            dateRange.push(minDate, maxDate);
         } else {
             // return default value if not
-            this.yearRange = [1800, 2200];
+            dateRange = [new Date("1800"), new Date("2200")];
         }
 
-        return this.yearRange;
+        return dateRange;
     }
 
     // Return false if the browser does not support input[type="date"].

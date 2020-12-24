@@ -58,10 +58,10 @@ export class DateSelect {
 }
 
 export class YearSelect extends DateSelect {
-    constructor(givenYearRange) {
+    constructor() {
         super();
         this.dateSelectWrapper.className = 'select-wrapper year-select';
-        this.yearArray = this.createYearRangeArray(givenYearRange);
+        this.yearArray = this.createYearRangeArray([1800, 2200]);
 
         /* start Function */
         for (let i = 0; i < 5; i += 1) {
