@@ -167,27 +167,48 @@ export default class Input {
 
     // determines if min and max values are given
     getDateRange() {
-        const minDate = new Date(this.element.getAttribute('min')
-            || this.element.getAttribute('data-min'));
-        minDate.setHours(0, 0, 0, 0);
+        const minDateMark = new Date("1800");
+        const maxDateMark = new Date("2200");
 
-        const maxDate = new Date(this.element.getAttribute('max')
-            || this.element.getAttribute('data-max'));
-        maxDate.setHours(0, 0, 0, 0);
+        const dateRange = [];
 
-        const minDateMark = new Date("1000");
-        const maxDateMark = new Date("3000");
+        let minDate;
+        let maxDate;
 
-        let dateRange = [];
+        const minAttribute = this.element.getAttribute('min')
+        || this.element.getAttribute('data-min');
+        // If attribute exisits
+        if (minAttribute) {
+                const givenDate = new Date(minAttribute);
+                givenDate.setHours(0, 0, 0, 0);
+            if (givenDate >= minDateMark && givenDate < maxDateMark) {
+                minDate = givenDate;
+            }
+        }
 
-        // check if values are in correct order and limited in size
-        if (minDate > minDateMark && maxDate > minDateMark
-            && minDate < maxDateMark && maxDate <= maxDateMark
-            && minDate < maxDate) {
+        const maxAttribute = this.element.getAttribute('max')
+        || this.element.getAttribute('data-max');
+        // If attribute exisits
+        if (maxAttribute) {
+            const givenDate = new Date(maxAttribute);
+            givenDate.setHours(0, 0, 0, 0);
+            if (givenDate > minDateMark && givenDate <= maxDateMark) {
+                maxDate = givenDate;
+            }
+        }
+        // Check if minDate is set
+        if (!minDate) {
+            minDate = minDateMark;
+        }
+        // Check if maxDate is set
+        if (!maxDate) {
+            maxDate = maxDateMark;
+        }
+        // Check if there are in correct order
+        if (minDate < maxDate) {
             dateRange.push(minDate, maxDate);
         } else {
-            // return default value if not
-            dateRange = [new Date("1800"), new Date("2200")];
+            dateRange.push(minDateMark, maxDateMark);
         }
 
         return dateRange;
