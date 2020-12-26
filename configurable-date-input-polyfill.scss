@@ -124,16 +124,25 @@ date-input-polyfill {
 
           &.prev-month, &.next-month {
             color: $lightgrey-color;
+            &:hover {
+              color: $white-color;
+            }
+          }
+
+          &.disabled {
+            background-color: #808080;
+            color: #d3d3d3;
+            &:hover {
+              background-color: #808080;
+              border: solid 1px #ffffff;
+              color: #d3d3d3;
+            }
           }
 
           &:hover {
             cursor: pointer;
             background-color: $lightgrey-color;
             border: solid 1px $lightgrey-color;
-          }
-
-          &.prev-month:hover, &.next-month:hover {
-            color: $white-color;
           }
         }
       }
