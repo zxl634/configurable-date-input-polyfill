@@ -440,7 +440,8 @@ class Picker {
             let remainingSpace = maxDayTiles - (startDay + maxDays);
             let nextMonthDaysValue = 0;
 
-            const calculatedNextMonthDate = new Date(year, month, 0);
+            // TODO find out why  + 2
+            const calculatedNextMonthDate = new Date(year, month + 2, 0);
 
             const currentDisplayedDays = startDay + maxDays;
             // TODO mathround macht das kaputt?
@@ -464,8 +465,10 @@ class Picker {
                 if (currentDisplayedDays < 35) {
                     const existentRowSpace = 35 - currentDisplayedDays;
                     for (let i = 0; i < existentRowSpace; i += 1) {
+                        calculatedNextMonthDate.setDate(i + 1);
+
                         matrixHTML.push(`<td class="next-month 2
-                            ${calculatedNextMonthDate.setDate(i + 1) < minDate || calculatedNextMonthDate.setDate(i + 1) > maxDate ? `disabled` : ``}
+                            ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
                             ">${i + 1}</td>`);
                     }
                     remainingSpace -= existentRowSpace;
@@ -477,8 +480,11 @@ class Picker {
                 for (let i = 0; i < remainingSpace; i += 1) {
                     if (nextMonthDaysValue > 0) {
                         const itemLabel = nextMonthDaysValue + (i + 1);
+
+                        calculatedNextMonthDate.setDate(itemLabel);
+
                         matrixHTML.push(`<td class="next-month 3
-                            ${calculatedNextMonthDate.setDate(itemLabel) < minDate || calculatedNextMonthDate.setDate(itemLabel) > maxDate ? `disabled` : ``}
+                            ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
                             ">${itemLabel}</td>`);
                     } else {
                         matrixHTML.push(`<td class="next-month 4
