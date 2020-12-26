@@ -77,6 +77,11 @@ class Picker {
         this.days.addEventListener('click', (e) => {
             const targetDay = e.target;
 
+            // Check if targetDay is valid
+            if (targetDay.textContent.length > 2) {
+                return;
+            }
+
             // Returns if target day has disabled flag
             if (targetDay.classList.contains("disabled")) {
                 return;
@@ -402,7 +407,7 @@ class Picker {
             if (i + 1 <= startDay) {
                 const calculatedPrevMonthDate = new Date(year, month - 1, oldDaysInCurrentMonth[i]);
                 const dayTile = `<td class="prev-month
-                    ${calculatedPrevMonthDate < minDate || calculatedPrevMonthDate > maxDate ? `disabled` : ``}"> ${oldDaysInCurrentMonth[i]} </td>`;
+                    ${calculatedPrevMonthDate < minDate || calculatedPrevMonthDate > maxDate ? `disabled` : ``}">${oldDaysInCurrentMonth[i]}</td>`;
 
                 matrixHTML.push(dayTile);
             } else {
@@ -450,7 +455,7 @@ class Picker {
 
                     matrixHTML.push(`<td class="next-month 1
                     ${calculatedNextMonthDate.setDate(i + 1) < minDate || calculatedNextMonthDate.setDate(i + 1) > maxDate ? `disabled` : ``}
-                    "> ${i + 1} </td>`);
+                    ">${i + 1}</td>`);
                 }
             }
 
@@ -461,7 +466,7 @@ class Picker {
                     for (let i = 0; i < existentRowSpace; i += 1) {
                         matrixHTML.push(`<td class="next-month 2
                             ${calculatedNextMonthDate.setDate(i + 1) < minDate || calculatedNextMonthDate.setDate(i + 1) > maxDate ? `disabled` : ``}
-                            "> ${i + 1} </td>`);
+                            ">${i + 1}</td>`);
                     }
                     remainingSpace -= existentRowSpace;
                     nextMonthDaysValue = existentRowSpace;
@@ -474,11 +479,11 @@ class Picker {
                         const itemLabel = nextMonthDaysValue + (i + 1);
                         matrixHTML.push(`<td class="next-month 3
                             ${calculatedNextMonthDate.setDate(itemLabel) < minDate || calculatedNextMonthDate.setDate(itemLabel) > maxDate ? `disabled` : ``}
-                            "> ${itemLabel} </td>`);
+                            ">${itemLabel}</td>`);
                     } else {
                         matrixHTML.push(`<td class="next-month 4
                             ${calculatedNextMonthDate.setDate(i + 1) < minDate || calculatedNextMonthDate.setDate(i + 1) > maxDate ? `disabled` : ``}
-                            "> ${i + 1} </td>`);
+                            ">${i + 1}</td>`);
                     }
                 }
 
@@ -489,7 +494,7 @@ class Picker {
                 for (let i = 0; i < remainingSpace; i += 1) {
                     matrixHTML.push(`<td class="next-month 5
                         ${calculatedNextMonthDate.setDate(i + 1) < minDate || calculatedNextMonthDate.setDate(i + 1) > maxDate ? `disabled` : ``}
-                        "> ${i + 1} </td>`);
+                        ">${i + 1}</td>`);
                 }
             }
         }
