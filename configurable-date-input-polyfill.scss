@@ -110,6 +110,9 @@ date-input-polyfill {
           &.current-day {
             border: solid 1px $grey-color;
             background-color: $grey-color;
+            &.disabled {
+              border: solid 1px $white-color;
+            }
           }
 
           &[data-selected] {
@@ -134,7 +137,7 @@ date-input-polyfill {
             color: #d3d3d3;
             &:hover {
               background-color: #808080;
-              border: solid 1px #ffffff;
+              border: solid 1px $white-color;
               color: #d3d3d3;
             }
           }
