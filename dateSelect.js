@@ -61,7 +61,7 @@ export class YearSelect extends DateSelect {
     constructor() {
         super();
         this.dateSelectWrapper.className = 'select-wrapper year-select';
-        this.yearArray = this.createYearRangeArray([1800, 2200]);
+        this.yearArray = this.createYearRangeArray(1800, 2200);
 
         /* start Function */
         for (let i = 0; i < 5; i += 1) {
@@ -121,10 +121,10 @@ export class YearSelect extends DateSelect {
         return this.yearArray;
     }
 
-    createYearRangeArray(givenYearRange) {
+    createYearRangeArray(minYear, maxYear) {
         const yearRangeArray = [];
-        const min = parseInt(givenYearRange[0]);
-        const max = parseInt(givenYearRange[1]);
+        const min = parseInt(minYear);
+        const max = parseInt(maxYear);
 
         for (let i = min; i <= max; i += 1) {
             yearRangeArray.push(i);
