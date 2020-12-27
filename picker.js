@@ -30,24 +30,23 @@ class Picker {
         this.monthSelect.className = 'select-wrapper month-select';
         this.selectWrapper.appendChild(this.monthSelect);
 
-        this.yearSelect = document.createElement('div');
-        this.yearSelect.className = 'select-wrapper year-select';
-        this.selectWrapper.appendChild(this.yearSelect);
+        this.yearSelect = new YearSelect();
+        this.selectWrapper.appendChild(this.yearSelect.returnDateSelectWrapper());
 
         // Polyfill Header
         const dateSelectHeader = document.createElement('div');
         dateSelectHeader.className = 'date-select-header';
 
-        const dateHeaderButton = document.createElement('button');
-        dateHeaderButton.className = 'date-header-button date-header-button-inactive';
-        dateHeaderButton.addEventListener('click', () => {
-            if (dateHeaderButton.classList.contains('date-header-button-inactive')) {
-                dateHeaderButton.classList.add('date-header-button-active');
-                dateHeaderButton.classList.remove('date-header-button-inactive');
+        this.dateHeaderButton = document.createElement('button');
+        this.dateHeaderButton.className = 'date-header-button date-header-button-inactive';
+        this.dateHeaderButton.addEventListener('click', () => {
+            if (this.dateHeaderButton.classList.contains('date-header-button-inactive')) {
+                this.dateHeaderButton.classList.add('date-header-button-active');
+                this.dateHeaderButton.classList.remove('date-header-button-inactive');
                 this.dateSelectWrapper.style.display = 'block';
-            } else if (dateHeaderButton.classList.contains('date-header-button-active')) {
-                dateHeaderButton.classList.add('date-header-button-inactive');
-                dateHeaderButton.classList.remove('date-header-button-active');
+            } else if (this.dateHeaderButton.classList.contains('date-header-button-active')) {
+                this.dateHeaderButton.classList.add('date-header-button-inactive');
+                this.dateHeaderButton.classList.remove('date-header-button-active');
                 this.dateSelectWrapper.style.display = 'none';
 
                 // Refresh dayMatrix here cause performance
@@ -57,7 +56,7 @@ class Picker {
             }
         });
 
-        dateSelectHeader.appendChild(dateHeaderButton);
+        dateSelectHeader.appendChild(this.dateHeaderButton);
 
         this.container.appendChild(dateSelectHeader);
 
@@ -117,7 +116,7 @@ class Picker {
             if (jumpMonth) {
                 this.date.setMonth(this.monthSelect.returnSelectedMonth());
                 this.date.setYear(this.yearSelect.returnSelectedYear());
-                dateHeaderButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
+                this.dateHeaderButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
             }
 
             this.date.setDate(parseInt(targetDay.textContent));
@@ -194,7 +193,7 @@ class Picker {
     hide() {
         this.container.setAttribute('data-open', this.isOpen = false);
 
-        this.container.getElementsByClassName('date-header-button')[0].className = 'date-header-button date-header-button-inactive';
+        this.dateHeaderButton.className = 'date-header-button date-header-button-inactive';
 
         // Close the picker when clicking outside of a date input or picker.
         if (this.input) {
@@ -233,13 +232,6 @@ class Picker {
         // set matrix header and locale
         this.createMatrixHeader();
 
-        // create year select by given values
-        this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper year-select')[0]);
-        this.yearSelect = new YearSelect();
-
-        this.selectWrapper.insertBefore(this.yearSelect.returnDateSelectWrapper(),
-            this.selectWrapper.firstChild);
-
         // create month select by given language
         this.selectWrapper.removeChild(this.selectWrapper.getElementsByClassName('select-wrapper month-select')[0]);
         this.monthSelect = new MonthSelect(this.locale.months);
@@ -261,11 +253,6 @@ class Picker {
             if (currentDate <= maxRange && currentDate >= minRange) {
                 this.date = currentDate;
             } else {
-                /*
-                const defaultYearValueOfGivenRange = minRange
-                    + (Math.round(maxRange - minRange) / 2);
-                this.date.setFullYear(defaultYearValueOfGivenRange);
-                */
                 this.date = minRange;
             }
 
@@ -274,15 +261,13 @@ class Picker {
         }
 
         // Setup click events for the selection Button
-        const selectDateButton = document.getElementsByClassName('date-header-button')[0];
-
-        selectDateButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
+        this.dateHeaderButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
 
         const dateSelectControlls = this.selectWrapper.getElementsByClassName('control');
 
         for (let i = 0; i < dateSelectControlls.length; i += 1) {
             dateSelectControlls[i].addEventListener('click', () => {
-                selectDateButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
+                this.dateHeaderButton.innerHTML = `${this.monthSelect.returnSelectedMonthAsLabel()} ${this.yearSelect.returnSelectedYear()}`;
             });
         }
 
@@ -406,10 +391,9 @@ class Picker {
             // If no days from this month in this column, it will be empty.
             if (i + 1 <= startDay) {
                 const calculatedPrevMonthDate = new Date(year, month - 1, oldDaysInCurrentMonth[i]);
-                const dayTile = `<td class="prev-month
-                    ${calculatedPrevMonthDate < minDate || calculatedPrevMonthDate > maxDate ? `disabled` : ``}">${oldDaysInCurrentMonth[i]}</td>`;
 
-                matrixHTML.push(dayTile);
+                matrixHTML.push(`<td class="prev-month
+                    ${calculatedPrevMonthDate < minDate || calculatedPrevMonthDate > maxDate ? `disabled` : ``}">${oldDaysInCurrentMonth[i]}</td>`);
             } else {
                 // Populate day number.
                 const dayNum = i + 1 - startDay;
@@ -417,7 +401,6 @@ class Picker {
                 const calculatedCurrentDate = new Date(year, month, dayNum);
 
                 // check if current item is current day
-                // TODO maybe sauberer auch die current-day abfrage inline machen?
                 if (lookingAtCurrentMonth && today.getDate() === dayNum) {
                     // highlight the current day
                     matrixHTML.push(`<td data-day ${selected ? `data-selected` : ``} class='current-day
@@ -454,8 +437,10 @@ class Picker {
                         matrixHTML.push(`${i !== 0 ? `</tr>` : ``}<tr>`);
                     }
 
-                    matrixHTML.push(`<td class="next-month 1
-                    ${calculatedNextMonthDate.setDate(i + 1) < minDate || calculatedNextMonthDate.setDate(i + 1) > maxDate ? `disabled` : ``}
+                    calculatedNextMonthDate.setDate(i + 1);
+
+                    matrixHTML.push(`<td class="next-month
+                    ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
                     ">${i + 1}</td>`);
                 }
             }
@@ -467,7 +452,7 @@ class Picker {
                     for (let i = 0; i < existentRowSpace; i += 1) {
                         calculatedNextMonthDate.setDate(i + 1);
 
-                        matrixHTML.push(`<td class="next-month 2
+                        matrixHTML.push(`<td class="next-month
                             ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
                             ">${i + 1}</td>`);
                     }
@@ -482,13 +467,13 @@ class Picker {
                         const itemLabel = nextMonthDaysValue + (i + 1);
 
                         calculatedNextMonthDate.setDate(itemLabel);
-
-                        matrixHTML.push(`<td class="next-month 3
+                        matrixHTML.push(`<td class="next-month
                             ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
                             ">${itemLabel}</td>`);
                     } else {
-                        matrixHTML.push(`<td class="next-month 4
-                            ${calculatedNextMonthDate.setDate(i + 1) < minDate || calculatedNextMonthDate.setDate(i + 1) > maxDate ? `disabled` : ``}
+                        calculatedNextMonthDate.setDate(i + 1);
+                        matrixHTML.push(`<td class="next-month
+                            ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
                             ">${i + 1}</td>`);
                     }
                 }
@@ -498,8 +483,9 @@ class Picker {
 
             if (currentRows > 5) {
                 for (let i = 0; i < remainingSpace; i += 1) {
-                    matrixHTML.push(`<td class="next-month 5
-                        ${calculatedNextMonthDate.setDate(i + 1) < minDate || calculatedNextMonthDate.setDate(i + 1) > maxDate ? `disabled` : ``}
+                    calculatedNextMonthDate.setDate(i + 1);
+                    matrixHTML.push(`<td class="next-month
+                        ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
                         ">${i + 1}</td>`);
                 }
             }
