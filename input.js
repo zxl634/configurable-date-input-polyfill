@@ -21,6 +21,8 @@ export default class Input {
             || document.body.getAttribute('data-date-format')
             || 'yyyy-mm-dd';
 
+        this.dateRange = this.getDateRange();
+
         this.localeLabels = this.getLocaleLabels();
 
         Object.defineProperties(
@@ -59,10 +61,6 @@ export default class Input {
                         this.element.valueAsDate = new Date(val);
                     },
                 },
-                yearRange: {
-                    value: this.getDateRange(),
-                    writable: false,
-                },
             },
         );
 
@@ -72,6 +70,7 @@ export default class Input {
             const elm = this.element;
             elm.firstDayOfWeek = this.firstDayOfWeek;
             elm.locale = this.localeLabels;
+            elm.dateRange = this.dateRange;
             // const didAttach = Picker.attachTo(elm); <-for checking purposes
             Picker.attachTo(elm);
         };
@@ -79,8 +78,8 @@ export default class Input {
         this.element.addEventListener('focus', showPicker);
         this.element.addEventListener('mouseup', showPicker);
 
-        const minDate = this.element.yearRange[0];
-        const maxDate = this.element.yearRange[1];
+        const minDate = this.dateRange[0];
+        const maxDate = this.dateRange[1];
 
         // Update the picker if the date changed manually in the input.
         this.element.addEventListener('keydown', (e) => {
@@ -176,18 +175,18 @@ export default class Input {
         let maxDate;
 
         const minAttribute = this.element.getAttribute('min')
-        || this.element.getAttribute('data-min');
+            || this.element.getAttribute('data-min');
         // If attribute exisits
         if (minAttribute) {
-                const givenDate = new Date(minAttribute);
-                givenDate.setHours(0, 0, 0, 0);
+            const givenDate = new Date(minAttribute);
+            givenDate.setHours(0, 0, 0, 0);
             if (givenDate >= minDateMark && givenDate < maxDateMark) {
                 minDate = givenDate;
             }
         }
 
         const maxAttribute = this.element.getAttribute('max')
-        || this.element.getAttribute('data-max');
+            || this.element.getAttribute('data-max');
         // If attribute exisits
         if (maxAttribute) {
             const givenDate = new Date(maxAttribute);

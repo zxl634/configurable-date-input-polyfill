@@ -240,8 +240,8 @@ class Picker {
             this.selectWrapper.firstChild);
 
         // create new DateRange Object
-        const minRange = new Date(this.input.yearRange[0]);
-        const maxRange = new Date(this.input.yearRange[1]);
+        const minRange = new Date(this.input.dateRange[0]);
+        const maxRange = new Date(this.input.dateRange[1]);
 
         // if current year is in selection range
         if (this.date <= maxRange && this.date >= minRange) {
@@ -378,8 +378,8 @@ class Picker {
             }
         }
 
-        const minDate = this.input.yearRange[0];
-        const maxDate = this.input.yearRange[1];
+        const minDate = this.input.dateRange[0];
+        const maxDate = this.input.dateRange[1];
 
         for (let i = 0; i < maxDays + startDay; i += 1) {
             // Add a row every 7 days.
