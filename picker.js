@@ -417,77 +417,26 @@ class Picker {
 
         // Max days displayed at ones
         const maxDayTiles = 42;
+        // Current displayed Days
+        let currentDisplayedDays = startDay + maxDays;
 
         // fill remaining space with next Month items
-        if (startDay + maxDays < maxDayTiles) {
-            let remainingSpace = maxDayTiles - (startDay + maxDays);
-            let nextMonthDaysValue = 0;
-
-            // TODO find out why  + 2
+        if (currentDisplayedDays < maxDayTiles) {
             const calculatedNextMonthDate = new Date(year, month + 2, 0);
+            let nextMonthDayItemLabel = 1;
+            while (currentDisplayedDays < maxDayTiles) {
+                calculatedNextMonthDate.setDate(nextMonthDayItemLabel);
 
-            const currentDisplayedDays = startDay + maxDays;
-            // TODO mathround macht das kaputt?
-            const currentRows = (startDay + maxDays) / 7;
-
-            if (currentRows <= 4) {
-                for (let i = 0; i < remainingSpace; i += 1) {
-                    // Add a row every 7 days.
-                    if (i % 7 === 0) {
-                        matrixHTML.push(`${i !== 0 ? `</tr>` : ``}<tr>`);
-                    }
-
-                    calculatedNextMonthDate.setDate(i + 1);
-
-                    matrixHTML.push(`<td class="next-month
+                // Add a row every 7 days.
+                if (currentDisplayedDays % 7 === 0) {
+                    matrixHTML.push(`${nextMonthDayItemLabel !== 0 ? `</tr>` : ``}<tr>`);
+                }
+                matrixHTML.push(`<td class="next-month
                     ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
-                    ">${i + 1}</td>`);
-                }
-            }
+                    ">${nextMonthDayItemLabel}</td>`);
 
-            if (currentRows <= 5 && currentRows > 4) {
-                // fill last items of existent row
-                if (currentDisplayedDays < 35) {
-                    const existentRowSpace = 35 - currentDisplayedDays;
-                    for (let i = 0; i < existentRowSpace; i += 1) {
-                        calculatedNextMonthDate.setDate(i + 1);
-
-                        matrixHTML.push(`<td class="next-month
-                            ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
-                            ">${i + 1}</td>`);
-                    }
-                    remainingSpace -= existentRowSpace;
-                    nextMonthDaysValue = existentRowSpace;
-                }
-
-                matrixHTML.push('<tr>');
-
-                for (let i = 0; i < remainingSpace; i += 1) {
-                    if (nextMonthDaysValue > 0) {
-                        const itemLabel = nextMonthDaysValue + (i + 1);
-
-                        calculatedNextMonthDate.setDate(itemLabel);
-                        matrixHTML.push(`<td class="next-month
-                            ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
-                            ">${itemLabel}</td>`);
-                    } else {
-                        calculatedNextMonthDate.setDate(i + 1);
-                        matrixHTML.push(`<td class="next-month
-                            ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
-                            ">${i + 1}</td>`);
-                    }
-                }
-
-                matrixHTML.push('</tr>');
-            }
-
-            if (currentRows > 5) {
-                for (let i = 0; i < remainingSpace; i += 1) {
-                    calculatedNextMonthDate.setDate(i + 1);
-                    matrixHTML.push(`<td class="next-month
-                        ${calculatedNextMonthDate < minDate || calculatedNextMonthDate > maxDate ? `disabled` : ``}
-                        ">${i + 1}</td>`);
-                }
+                nextMonthDayItemLabel += 1;
+                currentDisplayedDays += 1;
             }
         }
 
