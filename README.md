@@ -64,16 +64,16 @@ include it anywhere in your HTML.
 ```
 
 ## Min and Max
-* By setting the `min` and `max` attributes you can change the range of available options. In case you are faced with an input without type date, it is recommended to use `data-min` and `data-max`.
+* By setting the `min` and `max` attributes you can change the range of available date options. In case you are faced with an input without type date, it is recommended to use `data-min` and `data-max`.
 ```html
 <!--default dont need to be specified-->
-<input type="date" min="1800" max="2200"/>
+<input type="date" min="1800-01-01" max="2200-01-01"/>
 
 <!--custom-->
-<input type="date" min="2000" max="2030" />
+<input type="date" min="2015-02-15" max="2030-01-01" />
 
 <!--custom for non type date-->
-<input type="text" class="date-polyfill" data-min="2000" data-max="2030" />
+<input type="text" class="date-polyfill" data-min="2015-02-15" data-max="2030-01-01" />
 ```
 
 ## Formatting
