@@ -74,6 +74,7 @@ class Picker {
         // Click event to set that day as the date.
         // Uses event delegation.
         this.days.addEventListener('click', (e) => {
+          console.log("hey ho")
             const targetDay = e.target;
 
             targetDay.simulated = true
