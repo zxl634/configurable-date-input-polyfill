@@ -76,6 +76,8 @@ class Picker {
         this.days.addEventListener('click', (e) => {
             const targetDay = e.target;
 
+            targetDay.simulated = true
+
             // Check if targetDay is valid
             if (targetDay.textContent.length > 2) {
                 return;
